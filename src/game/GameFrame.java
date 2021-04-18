@@ -17,6 +17,8 @@ public class GameFrame extends JFrame {
         panel = new GamePanel();
         this.setContentPane(panel);
     }
-
+    public int getWidth() {
+    	return panel.getWidth();
+    }
     public GamePanel getPanel() {return panel;}
 }

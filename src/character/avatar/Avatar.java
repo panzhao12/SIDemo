@@ -1,8 +1,10 @@
 package character.avatar;
 
-import character.GameCharacter;
+import java.awt.Rectangle;
 
-public class Avatar extends GameCharacter {
+import character.GameObject;
+
+public class Avatar extends GameObject {
 
     public Avatar(double x, double y, double life) {
         this.x = x;
@@ -15,4 +17,22 @@ public class Avatar extends GameCharacter {
         this.x = x;
         this.y = y;
     }
+    
+    public void shoot(double x, double y) {
+    	this.x = x;
+    	this.y = y;
+    	
+    }
+    public double getX() {
+    	return x;
+    }
+    public double getY() {
+    	return y;
+    }
+    
+    public Rectangle getBounds() {
+    	return new Rectangle((int)x+20, (int)y+20);
+    }
+
+
 }

@@ -1,17 +1,19 @@
 package game;
 
-import character.GameCharacter;
+import character.GameObject;
+import character.avatar.Bullet;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener {
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    public final static int WIDTH = 800;
+    public  final static int HEIGHT = 600;
 
     private BufferedImage imageBuffer;
     private Graphics      graphics;
@@ -23,18 +25,21 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
         graphics = imageBuffer.getGraphics();
     }
 
-    @Override
     public void clear() {
         graphics.setColor(Color.LIGHT_GRAY);
         graphics.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
-    @Override
-    public void draw(GameCharacter character) {
+    public void draw(GameObject character) {
         graphics.setColor(new Color(96,96,100));
         graphics.fillOval((int)character.x, (int)character.y, 20 * 2, 20 * 2);
     }
-
+    public void draw(LinkedList<Bullet> bulletList) {
+    	for (int i=0;i<bulletList.size();i++) {
+    		graphics.setColor(new Color(100,100,50));
+    		graphics.fillRect((int)bulletList.get(i).x, (int)bulletList.get(i).y, 10, 5);
+    	}
+    }
     @Override
     public void redraw() {
         this.getGraphics().drawImage(imageBuffer, 0, 0, this);
@@ -52,7 +57,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+    	
     }
 
     @Override

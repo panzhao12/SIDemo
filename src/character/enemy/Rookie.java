@@ -1,8 +1,10 @@
 package character.enemy;
 
-import character.GameCharacter;
+import java.awt.Rectangle;
 
-public class Rookie extends GameCharacter {
+import character.GameObject;
+
+public class Rookie extends GameObject {
 
     public Rookie(double x, double y, double life, double speed) {
         this.x = x;
@@ -20,4 +22,15 @@ public class Rookie extends GameCharacter {
         this.x = x;
         this.y = y;
     }
+    
+    public double getX() {
+    	return x;
+    }
+    public double getY() {
+    	return y;
+    }
+    public Rectangle getBounds() {
+    	return new Rectangle((int)x, (int)y, 40, 40);
+    }
+
 }
