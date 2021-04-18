@@ -1,7 +1,7 @@
 package character;
 
 
-public abstract class GameCharacter {
+public abstract class GameObject {
 
 
     public double x, y;

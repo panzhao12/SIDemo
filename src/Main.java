@@ -11,5 +11,4 @@ public class Main {
         game.setGraphicPanel(frame.getPanel());
         game.run();
     }
-
 }

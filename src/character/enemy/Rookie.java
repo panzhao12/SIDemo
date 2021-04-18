@@ -1,5 +1,7 @@
 package character.enemy;
 
+import java.awt.Rectangle;
+
 import character.GameCharacter;
 
 public class Rookie extends GameCharacter {
@@ -20,4 +22,15 @@ public class Rookie extends GameCharacter {
         this.x = x;
         this.y = y;
     }
+    
+    public double getX() {
+    	return x;
+    }
+    public double getY() {
+    	return y;
+    }
+    public Rectangle getBounds() {
+    	return new Rectangle((int)x, (int)y, 40, 40);
+    }
+
 }
