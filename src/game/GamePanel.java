@@ -2,6 +2,7 @@ package game;
 
 import character.GameCharacter;
 import character.avatar.Bullet;
+import character.enemy.Rookie;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,13 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
         graphics.setColor(new Color(96,96,100));
         graphics.fillOval((int)character.x, (int)character.y, 20 * 2, 20 * 2);
     }
-    public void draw(LinkedList<Bullet> bulletList) {
+    public void drawRookie(LinkedList<Rookie> rookieList) {
+    	for(int i=0;i < rookieList.size(); i++) {
+            graphics.setColor(new Color(96,96,100));
+            graphics.fillOval((int)rookieList.get(i).x, (int)rookieList.get(i).y, 20 * 2, 20 * 2);
+    	}
+    }
+    public void drawBullet(LinkedList<Bullet> bulletList) {
     	for (int i=0;i<bulletList.size();i++) {
     		graphics.setColor(new Color(100,100,50));
     		graphics.fillRect((int)bulletList.get(i).x, (int)bulletList.get(i).y, 10, 5);

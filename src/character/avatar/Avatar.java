@@ -6,7 +6,7 @@ import character.GameCharacter;
 
 public class Avatar extends GameCharacter {
 
-    public Avatar(double x, double y, double life) {
+    public Avatar(double x, double y, int life) {
         this.x = x;
         this.y = y;
         this.life = life;

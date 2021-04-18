@@ -25,4 +25,8 @@ public class Bullet extends GameCharacter {
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 10, 5);
 	}
+	
+	public int getDamage() {
+		return damage;
+	}
 }
