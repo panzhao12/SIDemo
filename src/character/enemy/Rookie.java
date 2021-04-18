@@ -2,9 +2,9 @@ package character.enemy;
 
 import java.awt.Rectangle;
 
-import character.GameObject;
+import character.GameCharacter;
 
-public class Rookie extends GameObject {
+public class Rookie extends GameCharacter {
 
     public Rookie(double x, double y, double life, double speed) {
         this.x = x;

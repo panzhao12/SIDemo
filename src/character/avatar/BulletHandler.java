@@ -21,9 +21,7 @@ public class BulletHandler {
 			object.get(i).move(diffSeconds);
 			if(object.get(i).x > 800) {
 				removeObject(object.get(i));
-
 			}
 		}
 	}
-
 }

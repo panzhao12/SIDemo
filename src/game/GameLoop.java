@@ -1,6 +1,5 @@
 package game;
 
-import character.GameObject;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import character.avatar.BulletHandler;
@@ -69,10 +68,7 @@ public class GameLoop {
     }
     public void collision(LinkedList<Bullet> a, Rookie b) {
     	for (int i = 0;i<a.size();i++) {
-			System.out.println(a.get(i).getBounds());
-			System.out.println(b.getBounds());
     		if (a.get(i).getBounds().intersects(b.getBounds())) {
-    			System.out.println(a.get(i).getBounds());
     			a.remove(i);
     		}
     	}

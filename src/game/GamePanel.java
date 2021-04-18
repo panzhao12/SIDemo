@@ -1,6 +1,6 @@
 package game;
 
-import character.GameObject;
+import character.GameCharacter;
 import character.avatar.Bullet;
 
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
         graphics.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
-    public void draw(GameObject character) {
+    public void draw(GameCharacter character) {
         graphics.setColor(new Color(96,96,100));
         graphics.fillOval((int)character.x, (int)character.y, 20 * 2, 20 * 2);
     }

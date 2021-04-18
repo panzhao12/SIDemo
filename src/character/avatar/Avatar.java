@@ -2,9 +2,9 @@ package character.avatar;
 
 import java.awt.Rectangle;
 
-import character.GameObject;
+import character.GameCharacter;
 
-public class Avatar extends GameObject {
+public class Avatar extends GameCharacter {
 
     public Avatar(double x, double y, double life) {
         this.x = x;
@@ -18,11 +18,6 @@ public class Avatar extends GameObject {
         this.y = y;
     }
     
-    public void shoot(double x, double y) {
-    	this.x = x;
-    	this.y = y;
-    	
-    }
     public double getX() {
     	return x;
     }
