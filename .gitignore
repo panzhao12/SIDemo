@@ -3,3 +3,11 @@
 out/
 *.iml
 /bin/
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# Binaries
+*.class
