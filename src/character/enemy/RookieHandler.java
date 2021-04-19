@@ -1,9 +1,8 @@
 package character.enemy;
 
-import java.awt.Rectangle;
 import java.util.LinkedList;
 
-import character.avatar.Avatar;
+import character.GameCharacter;
 
 public class RookieHandler {
 	
@@ -24,7 +23,7 @@ public class RookieHandler {
 	public void move(double diffSeconds) {
 		for (int i=0; i<object.size();i++) {
 			object.get(i).move(diffSeconds);
-			if(object.get(i).x < 0) {
+			if(object.get(i).getRemove()) {
 				object.remove(i);
 			}
 		}		
@@ -36,15 +35,13 @@ public class RookieHandler {
     		}
     	}
      }
-    public void collisionCheck(Avatar r) {
+
+    
+    public void collisionCheck(GameCharacter r) {
     	for(int i=0;i<object.size();i++) {
     		if(r.getBounds().intersects(object.get(i).getBounds())) {
     			object.remove(i);
     			r.changeHealth(-1);
-    			if (r.getHealth() <= 0) {
-    				System.out.println("u ded");
-    				//What to do if avatar dies?
-    			}
     		}
     	}
     }

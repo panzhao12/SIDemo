@@ -31,6 +31,9 @@ public class Avatar extends GameCharacter {
     
     public void changeHealth(int health) {
     	this.health += health;
+    	if (dead()) {
+    		System.out.println("u ded lmao");
+    	}
     }
     public int getHealth() {
     	return health;

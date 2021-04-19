@@ -6,6 +6,7 @@ import character.GameCharacter;
 
 public class Rookie extends GameCharacter {
 
+	private boolean remove = false;
     public Rookie(double x, double y, int health, double speed) {
         this.x = x;
         this.y = y;
@@ -15,8 +16,14 @@ public class Rookie extends GameCharacter {
 
     public void move(double diffSeconds) {
         x -= speed * diffSeconds;
+		if(x < 0) {
+			remove = !remove;
+		}
     }
-
+    
+    public boolean getRemove() {
+    	return remove;
+    }
     public void setDestination(double x, double y) {
         this.x = x;
         this.y = y;

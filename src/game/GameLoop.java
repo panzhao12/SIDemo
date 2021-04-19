@@ -1,5 +1,6 @@
 package game;
 
+import character.GameCharacter;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import character.avatar.BulletHandler;
@@ -22,6 +23,7 @@ public class GameLoop {
     public void run() {
     	bulletHandler = new BulletHandler();
     	rookieHandler = new RookieHandler();
+    	
     	rookieHandler.addObject(new Rookie(900, 100, 5, 50));
     	rookieHandler.addObject(new Rookie(900, 300, 5, 50));
     	rookieHandler.addObject(new Rookie(800, 200, 5, 100));
@@ -31,7 +33,6 @@ public class GameLoop {
     	avatar = new Avatar(100, 100, 3);
 
         MouseAdapter mouseAdapter = new MouseAdapter() {
-            @Override
             public void mouseMoved(MouseEvent e) {
                 double x = e.getX();
                 double y = e.getY();
@@ -71,12 +72,12 @@ public class GameLoop {
     }
     
     //checks whether any bullet is making collision with a Rookie
-    public void collisionCheckBullet(LinkedList<Rookie> b) {
-    	for(int i=0;i<b.size();i++) {
-    		bulletHandler.collisionCheck(b.get(i));
+    public void collisionCheckBullet(LinkedList<Rookie> a) {
+    	for(int i=0;i<a.size();i++) {
+    		bulletHandler.collisionCheck(a.get(i));
     	}
     }
-    public void collisionCheckRookie(Avatar a) {
+    public void collisionCheckRookie(GameCharacter a) {
     	rookieHandler.collisionCheck(a);
     	
     }

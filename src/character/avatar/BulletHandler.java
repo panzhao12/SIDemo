@@ -1,8 +1,8 @@
 package character.avatar;
 
-import java.awt.Rectangle;
 import java.util.LinkedList;
 
+import character.GameCharacter;
 import character.enemy.Rookie;
 
 public class BulletHandler {
@@ -22,13 +22,13 @@ public class BulletHandler {
 	public void move(double diffSeconds) {
 		for (int i=0; i<object.size();i++) {
 			object.get(i).move(diffSeconds);
-			if(object.get(i).x > 800) {
+			if(object.get(i).getRemove()) {
 				removeObject(object.get(i));
 			}
 		}
 	}
 
-    public void collisionCheck(Rookie r) {
+    public void collisionCheck(GameCharacter r) {
     	for(int i=0;i<object.size();i++) {
     		if(r.getBounds().intersects(object.get(i).getBounds())) {
     			object.remove(i);
