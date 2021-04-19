@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import character.GameCharacter;
 
 public class Avatar extends GameCharacter {
-
+	
     public Avatar(double x, double y, int health) {
         this.x = x;
         this.y = y;
@@ -31,18 +31,13 @@ public class Avatar extends GameCharacter {
     
     public void changeHealth(int health) {
     	this.health += health;
-    	if (dead()) {
+    	if (this.health <= 0) {
     		System.out.println("u ded lmao");
     	}
     }
     public int getHealth() {
     	return health;
     }
-    public boolean dead() {
-    	if (health <= 0) {
-    		return true;
-    	}
-    	return false;
-    }
+
 
 }

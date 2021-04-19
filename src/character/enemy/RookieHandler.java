@@ -40,8 +40,10 @@ public class RookieHandler {
     public void collisionCheck(GameCharacter r) {
     	for(int i=0;i<object.size();i++) {
     		if(r.getBounds().intersects(object.get(i).getBounds())) {
-    			object.remove(i);
     			r.changeHealth(-1);
+    			object.remove(i);
+
+    			System.out.println(r.getHealth());
     		}
     	}
     }

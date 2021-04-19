@@ -3,7 +3,6 @@ package character.avatar;
 import java.util.LinkedList;
 
 import character.GameCharacter;
-import character.enemy.Rookie;
 
 public class BulletHandler {
 	LinkedList<Bullet> object = new LinkedList<Bullet>();
@@ -31,8 +30,9 @@ public class BulletHandler {
     public void collisionCheck(GameCharacter r) {
     	for(int i=0;i<object.size();i++) {
     		if(r.getBounds().intersects(object.get(i).getBounds())) {
+    			//deal damage based on bullet damage
+    			r.changeHealth(-(object.get(i).damage));
     			object.remove(i);
-    			r.changeHealth(-1);
     		}
     	}
     }

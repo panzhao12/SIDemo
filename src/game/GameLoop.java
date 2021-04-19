@@ -28,6 +28,8 @@ public class GameLoop {
     	rookieHandler.addObject(new Rookie(900, 300, 5, 50));
     	rookieHandler.addObject(new Rookie(800, 200, 5, 100));
     	rookieHandler.addObject(new Rookie(800, 400, 5, 50));
+    	rookieHandler.addObject(new Rookie(800, 380, 5, 50));
+
     	rookieHandler.addObject(new Rookie(1200, 400, 5, 50));
 
     	avatar = new Avatar(100, 100, 3);
