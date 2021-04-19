@@ -6,10 +6,10 @@ import character.GameCharacter;
 
 public class Avatar extends GameCharacter {
 
-    public Avatar(double x, double y, int life) {
+    public Avatar(double x, double y, int health) {
         this.x = x;
         this.y = y;
-        this.life = life;
+        this.health = health;
     }
 
     @Override
@@ -26,8 +26,20 @@ public class Avatar extends GameCharacter {
     }
     
     public Rectangle getBounds() {
-    	return new Rectangle((int)x+20, (int)y+20);
+    	return new Rectangle((int)x, (int)y, 40, 40);
     }
-
+    
+    public void changeHealth(int health) {
+    	this.health += health;
+    }
+    public int getHealth() {
+    	return health;
+    }
+    public boolean dead() {
+    	if (health <= 0) {
+    		return true;
+    	}
+    	return false;
+    }
 
 }

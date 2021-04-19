@@ -5,7 +5,7 @@ public abstract class GameCharacter {
 
 
     public double x, y;
-    protected int life;
+    protected int health;
     protected double speed;
 
     protected abstract void setDestination(double x, double y);

@@ -13,27 +13,22 @@ import java.util.LinkedList;
 public class GameLoop {
 
     private GamePanel panel;
-    private static Avatar avatar;
+    private Avatar avatar;
     private BulletHandler bulletHandler;
     private RookieHandler rookieHandler;
 
     //Initialize resource
-    static {
-        try {
-            avatar = new Avatar(100, 100, 100);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void run() {
     	bulletHandler = new BulletHandler();
     	rookieHandler = new RookieHandler();
     	rookieHandler.addObject(new Rookie(900, 100, 5, 50));
-    	rookieHandler.addObject(new Rookie(900, 50, 5, 50));
-    	rookieHandler.addObject(new Rookie(800, 80, 5, 50));
-    	rookieHandler.addObject(new Rookie(800, 60, 5, 50));
+    	rookieHandler.addObject(new Rookie(900, 300, 5, 50));
+    	rookieHandler.addObject(new Rookie(800, 200, 5, 100));
+    	rookieHandler.addObject(new Rookie(800, 400, 5, 50));
+    	rookieHandler.addObject(new Rookie(1200, 400, 5, 50));
 
+    	avatar = new Avatar(100, 100, 3);
 
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
@@ -43,7 +38,7 @@ public class GameLoop {
                 avatar.setDestination(x-20, y-20);
             } 
             public void mouseClicked(MouseEvent e) {
-            	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
+            	bulletHandler.addObject(new Bullet(avatar.x+40, avatar.y+20, 300, 1));
             }
         };
         panel.addMouseListener(mouseAdapter);
@@ -55,13 +50,13 @@ public class GameLoop {
             long currentTick = System.currentTimeMillis();
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
-
+            //move array of rookies
             rookieHandler.move(diffSeconds);
-//            rookie.move(diffSeconds);
             //move array of bullets
             bulletHandler.move(diffSeconds);
-            collisionCheck(bulletHandler.getList(), rookieHandler.getList());
-            checkHealth(rookieHandler.getList());
+            collisionCheckBullet(rookieHandler.getList());
+            collisionCheckRookie(avatar);
+            rookieHandler.checkHealth();
             panel.clear();
             panel.draw(avatar);
             panel.drawRookie(rookieHandler.getList());
@@ -76,27 +71,13 @@ public class GameLoop {
     }
     
     //checks whether any bullet is making collision with a Rookie
-    public void collisionCheck(LinkedList<Bullet> a, LinkedList<Rookie> b) {
-    	for (int i = 0;i<a.size();i++) {
-    		for (int j=0;j<b.size(); j++) {
-    			//check if the collision boxes of any bullets and rookies overlap
-        		if (a.get(i).getBounds().intersects(b.get(j).getBounds())) {
-        			//first deal damage and then remove bullet from array
-        			b.get(j).setLife((b.get(j).getLife()-a.get(i).getDamage()));
-        			a.remove(i);
-        			return;
-        		}
-
-    		}
-    	
+    public void collisionCheckBullet(LinkedList<Rookie> b) {
+    	for(int i=0;i<b.size();i++) {
+    		bulletHandler.collisionCheck(b.get(i));
     	}
     }
-    //checks whether any Rookies have died and removes them
-    public void checkHealth(LinkedList<Rookie> b) {
-    	for(int i=0; i<b.size(); i++) {
-    		if (b.get(i).death()) {
-    			b.remove(i);
-    		}
-    	}
-     }
+    public void collisionCheckRookie(Avatar a) {
+    	rookieHandler.collisionCheck(a);
+    	
+    }
 }

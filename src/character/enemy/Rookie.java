@@ -6,10 +6,10 @@ import character.GameCharacter;
 
 public class Rookie extends GameCharacter {
 
-    public Rookie(double x, double y, int life, double speed) {
+    public Rookie(double x, double y, int health, double speed) {
         this.x = x;
         this.y = y;
-        this.life = life;
+        this.health = health;
         this.speed = speed;
     }
 
@@ -31,17 +31,11 @@ public class Rookie extends GameCharacter {
     public Rectangle getBounds() {
     	return new Rectangle((int)x, (int)y, 39, 39);
     }
-    public void setLife(int life) {
-    	this.life = life;
+    public void changeHealth(int health) {
+    	this.health += health;
     }
 
-    public int getLife() {
-    	return life;
-    }
-    public boolean death() {
-    	if (life <= 0) {
-    		return true;
-    	}
-		return false;
+    public int getHealth() {
+    	return health;
     }
 }

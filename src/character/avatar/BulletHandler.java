@@ -1,6 +1,9 @@
 package character.avatar;
 
+import java.awt.Rectangle;
 import java.util.LinkedList;
+
+import character.enemy.Rookie;
 
 public class BulletHandler {
 	LinkedList<Bullet> object = new LinkedList<Bullet>();
@@ -24,4 +27,13 @@ public class BulletHandler {
 			}
 		}
 	}
+
+    public void collisionCheck(Rookie r) {
+    	for(int i=0;i<object.size();i++) {
+    		if(r.getBounds().intersects(object.get(i).getBounds())) {
+    			object.remove(i);
+    			r.changeHealth(-1);
+    		}
+    	}
+    }
 }
