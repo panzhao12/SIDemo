@@ -47,6 +47,18 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
     		graphics.fillRect((int)bulletList.get(i).x, (int)bulletList.get(i).y, 10, 5);
     	}
     }
+    
+    public void drawHealth(GameCharacter a) {
+    	int hp = a.getHealth();
+    	int x = 80;
+    	graphics.setColor(new Color(200,0,100));
+    	graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+    	graphics.drawString("Health: ", 10, 40);
+    	for(int i=0; i<hp; i++) {
+    		graphics.drawString("\u2665", x, 40);
+    		x += 20;
+    	}
+    }
     @Override
     public void redraw() {
         this.getGraphics().drawImage(imageBuffer, 0, 0, this);

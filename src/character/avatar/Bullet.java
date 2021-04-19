@@ -7,6 +7,7 @@ import character.GameCharacter;
 public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
+	
 	public Bullet(double x, double y, int speed, int damage) {
 		this.x = x;
 		this.y = y;

@@ -62,6 +62,7 @@ public class GameLoop {
             rookieHandler.checkHealth();
             panel.clear();
             panel.draw(avatar);
+            panel.drawHealth(avatar);
             panel.drawRookie(rookieHandler.getList());
             panel.drawBullet(bulletHandler.getList());
             

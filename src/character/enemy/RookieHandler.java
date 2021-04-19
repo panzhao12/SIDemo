@@ -42,8 +42,6 @@ public class RookieHandler {
     		if(r.getBounds().intersects(object.get(i).getBounds())) {
     			r.changeHealth(-1);
     			object.remove(i);
-
-    			System.out.println(r.getHealth());
     		}
     	}
     }

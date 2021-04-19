@@ -16,7 +16,7 @@ public class Rookie extends GameCharacter {
 
     public void move(double diffSeconds) {
         x -= speed * diffSeconds;
-		if(x < 0) {
+		if(x < -40) {
 			remove = !remove;
 		}
     }
