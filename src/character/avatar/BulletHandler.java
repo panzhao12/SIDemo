@@ -12,6 +12,7 @@ public class BulletHandler {
 	
 	public void removeObject(Bullet bullet) {
 		object.remove(bullet);
+		
 	}
 	
 	public LinkedList<Bullet> getList() {

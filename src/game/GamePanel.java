@@ -50,14 +50,19 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
     
     public void drawHealth(GameCharacter a) {
     	int hp = a.getHealth();
-    	int x = 80;
+    	int x = 100;
     	graphics.setColor(new Color(200,0,100));
     	graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-    	graphics.drawString("Health: ", 10, 40);
+    	graphics.drawString("Health: ", x-70, 40);
     	for(int i=0; i<hp; i++) {
     		graphics.drawString("\u2665", x, 40);
     		x += 20;
     	}
+    }
+    
+    public void drawScore(int score) {
+    	graphics.setColor(new Color(200, 0, 100));
+    	graphics.drawString("Score:" + score, 600, 40);
     }
     @Override
     public void redraw() {

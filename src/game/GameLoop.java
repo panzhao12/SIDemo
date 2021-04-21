@@ -63,9 +63,9 @@ public class GameLoop {
             panel.clear();
             panel.draw(avatar);
             panel.drawHealth(avatar);
+            panel.drawScore(rookieHandler.getScore());
             panel.drawRookie(rookieHandler.getList());
             panel.drawBullet(bulletHandler.getList());
-            
             panel.redraw();
         }
     }
