@@ -2,8 +2,6 @@ package character;
 
 import java.awt.Rectangle;
 
-import game.GamePanel;
-
 public abstract class GameCharacter {
 
     public double x, y;
@@ -17,4 +15,6 @@ public abstract class GameCharacter {
     public abstract void changeHealth(int value);
 
 	public abstract int getHealth();
+
+	public abstract void setRemove();
 }

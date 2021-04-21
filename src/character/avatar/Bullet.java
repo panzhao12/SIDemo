@@ -25,6 +25,9 @@ public class Bullet extends GameCharacter {
 	public boolean getRemove() {
 		return remove;
 	}
+	public void setRemove() {
+		remove = !remove;
+	}
 
 	public void setDestination(double x, double y) {
 		this.x = x;

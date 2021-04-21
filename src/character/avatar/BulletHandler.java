@@ -29,12 +29,15 @@ public class BulletHandler {
 		}
 	}
 
-	public void collisionCheck(GameCharacter r) {
+	public void collisionCheckEnemy(GameCharacter r) {
 		for (int i = 0; i < object.size(); i++) {
 			if (r.getBounds().intersects(object.get(i).getBounds())) {
 				// deal damage based on bullet damage
 				r.changeHealth(-(object.get(i).damage));
 				object.remove(i);
+				if (r.getHealth() <= 0) {
+					r.setRemove();
+				}
 			}
 		}
 	}

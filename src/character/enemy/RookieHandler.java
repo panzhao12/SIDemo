@@ -2,8 +2,6 @@ package character.enemy;
 
 import java.util.LinkedList;
 
-import character.GameCharacter;
-
 public class RookieHandler {
 
 	public RookieHandler() {
@@ -12,6 +10,12 @@ public class RookieHandler {
 		addObject(new Rookie(800, 200, 5, 100));
 		addObject(new Rookie(800, 400, 5, 50));
 		addObject(new Rookie(1200, 400, 5, 50));
+		addObject(new Rookie(1200, 200, 5, 50));
+		addObject(new Rookie(1400, 400, 5, 50));
+		addObject(new Rookie(1600, 600, 5, 50));
+		addObject(new Rookie(1900, 600, 5, 50));
+		addObject(new Rookie(1800, 450, 5, 50));
+
 	}
 
 	LinkedList<Rookie> object = new LinkedList<Rookie>();
@@ -34,23 +38,6 @@ public class RookieHandler {
 		for (int i = 0; i < object.size(); i++) {
 			object.get(i).move(diffSeconds);
 			if (object.get(i).getRemove()) {
-				removeObject(object.get(i));
-			}
-		}
-	}
-
-	public void checkHealth() {
-		for (int i = 0; i < object.size(); i++) {
-			if (object.get(i).getHealth() <= 0) {
-				removeObject(object.get(i));
-			}
-		}
-	}
-
-	public void collisionCheck(GameCharacter r) {
-		for (int i = 0; i < object.size(); i++) {
-			if (r.getBounds().intersects(object.get(i).getBounds())) {
-				r.changeHealth(-1);
 				removeObject(object.get(i));
 			}
 		}

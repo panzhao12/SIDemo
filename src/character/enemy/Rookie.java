@@ -26,6 +26,10 @@ public class Rookie extends GameCharacter {
 		return remove;
 	}
 
+	public void setRemove() {
+		remove = !remove;
+	}
+
 	public void setDestination(double x, double y) {
 		this.x = x;
 		this.y = y;

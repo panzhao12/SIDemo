@@ -1,15 +1,11 @@
 package game;
 
-import character.GameCharacter;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import character.avatar.BulletHandler;
-import character.enemy.Rookie;
 import character.enemy.RookieHandler;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.LinkedList;
 
 public class GameLoop {
 
@@ -17,6 +13,7 @@ public class GameLoop {
 	private Avatar avatar;
 	private BulletHandler bulletHandler;
 	private RookieHandler rookieHandler;
+	private PhysicsSystem physicsSystem;
 
 	// Initialize resource
 
@@ -25,6 +22,7 @@ public class GameLoop {
 		// creates RookieHandler + all rookies specified in the constructor
 		rookieHandler = new RookieHandler();
 		avatar = new Avatar(100, 100, 3);
+		physicsSystem = new PhysicsSystem();
 
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseMoved(MouseEvent e) {
@@ -51,10 +49,8 @@ public class GameLoop {
 			// move array of bullets
 			bulletHandler.move(diffSeconds);
 			// check if any bullets hit rookies
-			collisionCheckBullet(rookieHandler.getList());
-			// check if any rookie hits avatar
-			collisionCheckRookie(avatar);
-			rookieHandler.checkHealth();
+			physicsSystem.collisionCheck(avatar, bulletHandler, rookieHandler);
+//			rookieHandler.checkHealth();
 			panel.clear();
 			panel.draw(avatar);
 			panel.drawHealth(avatar);
@@ -70,18 +66,5 @@ public class GameLoop {
 
 	public void setGraphicPanel(GamePanel panel) {
 		this.panel = panel;
-	}
-
-	// checks whether any bullet is making collision with a Rookie
-	public void collisionCheckBullet(LinkedList<Rookie> a) {
-		for (int i = 0; i < a.size(); i++) {
-			bulletHandler.collisionCheck(a.get(i));
-		}
-	}
-
-	// check whether any rookie hits avatar
-	public void collisionCheckRookie(GameCharacter a) {
-		rookieHandler.collisionCheck(a);
-
 	}
 }
