@@ -7,7 +7,7 @@ import character.GameCharacter;
 public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
-	
+
 	public Bullet(double x, double y, int speed, int damage) {
 		this.x = x;
 		this.y = y;
@@ -16,24 +16,25 @@ public class Bullet extends GameCharacter {
 	}
 
 	public void move(double diffSeconds) {
-		x += speed*diffSeconds;
-		if(x > 800) {
+		x += speed * diffSeconds;
+		if (x > 800) {
 			remove = !remove;
 		}
 	}
-	
+
 	public boolean getRemove() {
 		return remove;
 	}
+
 	public void setDestination(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle((int)x, (int)y, 10, 5);
+		return new Rectangle((int) x, (int) y, 10, 5);
 	}
-	
+
 	public int getDamage() {
 		return damage;
 	}
@@ -41,7 +42,7 @@ public class Bullet extends GameCharacter {
 	@Override
 	public void changeHealth(int value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 package game;
 
 public class ShopSystem {
-    //Shop weapons and stuff
+	// Shop weapons and stuff
 }
