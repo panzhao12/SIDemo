@@ -1,15 +1,18 @@
 package character.avatar;
 
-import java.awt.Rectangle;
+import java.util.LinkedList;
 
 import character.GameCharacter;
+import game.PhysicsSystem;
 
 public class Avatar extends GameCharacter {
+	PhysicsSystem physics = new PhysicsSystem();
 
-	public Avatar(double x, double y, int health) {
+	public Avatar(double x, double y, int health, int radius) {
 		this.x = x;
 		this.y = y;
 		this.health = health;
+		this.radius = radius;
 	}
 
 	@Override
@@ -26,10 +29,6 @@ public class Avatar extends GameCharacter {
 		return y;
 	}
 
-	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) y, 40, 40);
-	}
-
 	public void changeHealth(int health) {
 		this.health += health;
 		if (this.health <= 0) {
@@ -41,17 +40,32 @@ public class Avatar extends GameCharacter {
 		return health;
 	}
 	
-	public void collisionCheck(GameCharacter a) {
-		if(this.getBounds().intersects(a.getBounds())) {
-			changeHealth(-1);
-			a.setRemove();
+	public void collisionCheck(LinkedList<GameCharacter> a) {
+		for(int i=0;i<a.size();i++) {
+			if(physics.checkCollision(a.get(i), this)) {
+				changeHealth(-1);
+				a.remove(i);
+			}
 		}
+
 	}
 
 	@Override
 	public void setRemove() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void move(double diffSeconds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getRemove() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

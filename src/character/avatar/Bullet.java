@@ -1,18 +1,17 @@
 package character.avatar;
 
-import java.awt.Rectangle;
-
 import character.GameCharacter;
 
 public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
 
-	public Bullet(double x, double y, int speed, int damage) {
+	public Bullet(double x, double y, int speed, int damage, int radius) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
 		this.damage = damage;
+		this.radius = radius;
 	}
 
 	public void move(double diffSeconds) {
@@ -32,10 +31,6 @@ public class Bullet extends GameCharacter {
 	public void setDestination(double x, double y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) y, 10, 5);
 	}
 
 	public int getDamage() {

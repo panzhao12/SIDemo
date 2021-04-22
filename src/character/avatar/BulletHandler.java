@@ -3,8 +3,10 @@ package character.avatar;
 import java.util.LinkedList;
 
 import character.GameCharacter;
+import game.PhysicsSystem;
 
 public class BulletHandler {
+	PhysicsSystem physics = new PhysicsSystem();
 	LinkedList<Bullet> object = new LinkedList<Bullet>();
 
 	public void addObject(Bullet bullet) {
@@ -29,15 +31,18 @@ public class BulletHandler {
 		}
 	}
 
-	public void collisionCheckEnemy(GameCharacter r) {
-		for (int i = 0; i < object.size(); i++) {
-			if (r.getBounds().intersects(object.get(i).getBounds())) {
-				// deal damage based on bullet damage
-				r.changeHealth(-(object.get(i).damage));
-				object.remove(i);
-				if (r.getHealth() <= 0) {
-					r.setRemove();
+	public void collisionCheckEnemy(LinkedList<GameCharacter> r) {
+		for (int i=0;i<r.size();i++) {
+			for (int j = 0; j < object.size(); j++) {
+				if (physics.checkCollision(r.get(i), object.get(j))) {
+					// deal damage based on bullet damage
+					r.get(i).changeHealth(-(object.get(j).damage));
+					object.remove(j);
+					if (r.get(i).getHealth() <= 0) {
+						r.get(i).setRemove();
+					}
 				}
+			
 			}
 		}
 	}

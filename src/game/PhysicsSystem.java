@@ -1,21 +1,23 @@
 package game;
 
-import java.util.LinkedList;
-
-import character.avatar.Avatar;
-import character.avatar.BulletHandler;
-import character.enemy.Rookie;
-import character.enemy.RookieHandler;
+import character.GameCharacter;
 
 public class PhysicsSystem {
 
-	public void collisionCheck(Avatar a, BulletHandler bulletHandler, RookieHandler rookieHandler) {
-		LinkedList<Rookie> list = rookieHandler.getList();
-		for (int i = 0; i < list.size(); i++) {
-			bulletHandler.collisionCheckEnemy(list.get(i));
+	public boolean checkCollision(GameCharacter a, GameCharacter b) {
+		if (getDistance(a, b) <= a.getRadius() + b.getRadius()) {
+			return true;
 		}
-		for (int i = 0; i < list.size(); i++) {
-			a.collisionCheck(list.get(i));
-		}
+		return false;
+	}
+
+	public double getDistance(GameCharacter a, GameCharacter b) {
+
+		double x1 = a.x;
+		double x2 = b.x;
+		double y1 = a.y;
+		double y2 = b.y;
+
+		return Math.sqrt((Math.pow(x1 - x2, 2)) + (Math.pow(y1 - y2, 2)));
 	}
 }
