@@ -7,40 +7,44 @@ import character.GameCharacter;
 public class EnemyHandler {
 
 	public EnemyHandler() {
-		addObject(new Rookie(900, 100, 5, 50, 20));
-		addObject(new Rookie(900, 300, 5, 50, 20));
-		addObject(new Rookie(800, 200, 5, 100, 20));
-		addObject(new Rookie(800, 400, 5, 1000, 20));
-		addObject(new Rookie(1200, 400, 5, 80, 20));
-		addObject(new Rookie(1200, 200, 5, 160, 20));
-		addObject(new Rookie(1400, 400, 5, 50, 20));
-		addObject(new Rookie(1600, 600, 5, 50, 20));
-		addObject(new Rookie(500, 500, 50, 0, 20));
-		addObject(new Rookie(1800, 450, 5, 50, 20));
-
+		addObject(new Rookie(900, 100));
+		addObject(new Rookie(900, 300));
+		addObject(new Rookie(800, 200));
+		addObject(new Rookie(800, 400));
+		addObject(new Rookie(1200, 400));
+		addObject(new Rookie(1200, 200));
+		addObject(new Rookie(1400, 400));
+		addObject(new Rookie(1600, 600));
+		addObject(new Rookie(500, 500));
+		addObject(new Rookie(1800, 450));
+		addObject(new Sergeant(250, 300));
+		addObject(new Sergeant(2500, 400));
 	}
 
-	LinkedList<GameCharacter> object = new LinkedList<GameCharacter>();
+	LinkedList<Enemy> object = new LinkedList<Enemy>();
 	private int score = 0;
 
-	public void addObject(GameCharacter gc) {
-		object.add(gc);
+	public void addObject(Enemy e) {
+		object.add(e);
 	}
 
-	public void removeObject(GameCharacter gc) {
-		object.remove(gc);
-		score += 10;
+	public void removeObject(Enemy e) {
+		object.remove(e);
+		if (e.x > e.getRadius()) {
+			score += e.getScore();
+		}
 	}
 
-	public LinkedList<GameCharacter> getList() {
+	public LinkedList<Enemy> getList() {
 		return object;
 	}
 
 	public void move(double diffSeconds) {
 		for (int i = 0; i < object.size(); i++) {
-			object.get(i).move(diffSeconds);
-			if (object.get(i).getRemove()) {
-				removeObject(object.get(i));
+			Enemy e = object.get(i);
+			e.move(diffSeconds);
+			if (e.getRemove()) {
+				removeObject(e);
 			}
 		}
 	}

@@ -14,14 +14,12 @@ public class GameLoop {
 	private BulletHandler bulletHandler;
 	private EnemyHandler enemyHandler;
 
-	// Initialize resource
-
 	public void run() {
 		bulletHandler = new BulletHandler();
 		// creates RookieHandler + all rookies specified in the constructor
 		enemyHandler = new EnemyHandler();
-		avatar = new Avatar(100, 100, 3, 20);
-		
+		avatar = new Avatar(100, 100, 3);
+
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseMoved(MouseEvent e) {
 				double x = e.getX();
@@ -30,7 +28,7 @@ public class GameLoop {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				bulletHandler.addObject(new Bullet(avatar.x+avatar.getRadius(), avatar.y, 300, 1, 5));
+				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));
 			}
 		};
 		panel.addMouseListener(mouseAdapter);
@@ -53,11 +51,11 @@ public class GameLoop {
 			panel.drawHealth(avatar);
 			// gets the int "score" from rookieHandler and draws it
 			panel.drawScore(enemyHandler.getScore());
-			// draws all rookies
-			panel.drawRookie(enemyHandler.getList());
+			// draws all enemies
+			panel.drawEnemy(enemyHandler.getList());
 			// draws all bullets
 			panel.drawBullet(bulletHandler.getList());
-		
+
 			panel.redraw();
 		}
 	}

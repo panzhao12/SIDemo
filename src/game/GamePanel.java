@@ -2,7 +2,7 @@ package game;
 
 import character.GameCharacter;
 import character.avatar.Bullet;
-import character.enemy.Rookie;
+import character.enemy.Enemy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,14 +35,15 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 	public void draw(GameCharacter character) {
 		int radius = character.getRadius();
 		graphics.setColor(new Color(96, 96, 100));
-		graphics.fillOval((int) character.x-radius, (int) character.y-radius, radius*2, radius*2);
+		graphics.fillOval((int) character.x - radius, (int) character.y - radius, radius * 2, radius * 2);
 	}
 
-	public void drawRookie(LinkedList<GameCharacter> linkedList) {
+	public void drawEnemy(LinkedList<Enemy> linkedList) {
 		for (int i = 0; i < linkedList.size(); i++) {
+			System.out.println(linkedList.get(i).getRadius());
 			int radius = linkedList.get(i).getRadius();
 			graphics.setColor(new Color(96, 96, 100));
-			graphics.fillOval((int) linkedList.get(i).x-radius, (int) linkedList.get(i).y-radius, radius*2, radius*2);
+			graphics.fillOval((int) linkedList.get(i).x - radius, (int) linkedList.get(i).y - radius, radius * 2, radius * 2);
 		}
 	}
 
@@ -50,7 +51,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		for (int i = 0; i < bulletList.size(); i++) {
 			int radius = bulletList.get(i).getRadius();
 			graphics.setColor(new Color(100, 100, 50));
-			graphics.fillOval((int) bulletList.get(i).x-radius, (int) bulletList.get(i).y-radius/2, radius*2, radius*2);
+			graphics.fillOval((int) bulletList.get(i).x - radius, (int) bulletList.get(i).y - radius, radius * 2, radius * 2);
 		}
 	}
 
@@ -71,7 +72,6 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 		graphics.drawString("Score:" + score, 600, 40);
 	}
-
 
 	@Override
 	public void redraw() {

@@ -1,20 +1,20 @@
 package character.enemy;
 
-public class Rookie extends Enemy {
+public class Sergeant extends Enemy {
 
 	private boolean remove = false;
-	private int health = 5;
-	private int speed = 100;
-	private int radius = 20;
-	private int score = 10;
-	public Rookie(double x, double y) {
+	private int health = 10;
+	private int speed = 150;
+	private int radius = 40;
+	private int score = 30;
+	public Sergeant(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	public void move(double diffSeconds) {
 		x -= speed * diffSeconds;
-		if (x < -2*radius) {
+		if (x < -40) {
 			remove = !remove;
 		}
 	}
@@ -25,6 +25,11 @@ public class Rookie extends Enemy {
 
 	public void setRemove() {
 		remove = !remove;
+	}
+
+	public void setDestination(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public double getX() {
@@ -42,9 +47,11 @@ public class Rookie extends Enemy {
 	public int getHealth() {
 		return health;
 	}
+
 	public int getRadius() {
 		return radius;
 	}
+
 	public int getScore() {
 		return score;
 	}

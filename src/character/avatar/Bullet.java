@@ -5,13 +5,12 @@ import character.GameCharacter;
 public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
-
-	public Bullet(double x, double y, int speed, int damage, int radius) {
+	int radius = 5;
+	public Bullet(double x, double y, int speed, int damage) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
 		this.damage = damage;
-		this.radius = radius;
 	}
 
 	public void move(double diffSeconds) {
@@ -24,6 +23,7 @@ public class Bullet extends GameCharacter {
 	public boolean getRemove() {
 		return remove;
 	}
+
 	public void setRemove() {
 		remove = !remove;
 	}
@@ -47,5 +47,11 @@ public class Bullet extends GameCharacter {
 	public int getHealth() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getRadius() {
+		// TODO Auto-generated method stub
+		return radius;
 	}
 }
