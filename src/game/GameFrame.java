@@ -8,8 +8,8 @@ public class GameFrame extends JFrame {
 
     public GameFrame() {
         // needed for Keyboard input
-//        this.setFocusable(true);
-//        this.requestFocusInWindow();
+        //this.setFocusable(true);
+        //this.requestFocusInWindow();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(GamePanel.WIDTH, GamePanel.HEIGHT);

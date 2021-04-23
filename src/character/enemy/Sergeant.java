@@ -1,15 +1,13 @@
 package character.enemy;
-
 import character.GameCharacter;
-
-public class Rookie extends GameCharacter {
+public class Sergeant extends GameCharacter {
 
 	private boolean remove = false;
-	private int health = 5;
-	private int speed = 100;
-	private int radius = 20;
-	private int score = 10;
-	public Rookie(double x, double y) {
+	private int health = 10;
+	private int speed = 150;
+	private int radius = 40;
+	private int score = 30;
+	public Sergeant(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -29,6 +27,11 @@ public class Rookie extends GameCharacter {
 		remove = !remove;
 	}
 
+	public void setDestination(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public double getX() {
 		return x;
 	}
@@ -44,9 +47,11 @@ public class Rookie extends GameCharacter {
 	public int getHealth() {
 		return health;
 	}
+
 	public int getRadius() {
 		return radius;
 	}
+
 	public int getScore() {
 		return score;
 	}
