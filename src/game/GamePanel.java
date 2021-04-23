@@ -5,18 +5,21 @@ import character.avatar.Bullet;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener {
+public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener {
 
     public final static int WIDTH = 800;
-    public  final static int HEIGHT = 600;
+    public final static int HEIGHT = 600;
 
     private BufferedImage imageBuffer;
     private Graphics      graphics;
+    
 
     public GamePanel() {
         this.setSize(WIDTH, HEIGHT);
@@ -26,7 +29,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
     }
 
     public void clear() {
-        graphics.setColor(Color.LIGHT_GRAY);
+        graphics.setColor(new Color(184,224,180));
         graphics.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
@@ -47,12 +50,12 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 
     @Override
     public GameControl getUserInput() {
-        return null;
+    	return null;
     }
 
     @Override
-    public void command() {
-
+    public void command(GameCharacter av, GameControl userInput) {
+    	
     }
 
     @Override
@@ -79,4 +82,18 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
     public void mouseExited(MouseEvent e) {
 
     }
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
 }
