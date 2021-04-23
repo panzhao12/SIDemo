@@ -52,40 +52,43 @@ public class GameLoop {
         	public void keyPressed(KeyEvent e) {
         		int key = e.getKeyCode();
 
-                if (key == KeyEvent.VK_LEFT) {
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
                     dx = -0.5;
                 }
 
-                if (key == KeyEvent.VK_RIGHT) {
+                if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
                     dx = 0.5;
                 }
 
-                if (key == KeyEvent.VK_UP) {
+                if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
                     dy = -0.5;
                 }
 
-                if (key == KeyEvent.VK_DOWN) {
+                if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
                     dy = 0.5;
                 }
         		
+                if (key == KeyEvent.VK_SPACE) {
+                	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
+                }
         	}
         	
         	public void keyReleased(KeyEvent e) {
         		int key = e.getKeyCode();
 
-                if (key == KeyEvent.VK_LEFT) {
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
                     dx = 0;
                 }
 
-                if (key == KeyEvent.VK_RIGHT) {
+                if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
                     dx = 0;
                 }
 
-                if (key == KeyEvent.VK_UP) {
+                if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
                     dy = 0;
                 }
 
-                if (key == KeyEvent.VK_DOWN) {
+                if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
                     dy = 0;
                 }
         	}
@@ -102,7 +105,21 @@ public class GameLoop {
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
             
-            avatar.setDestination(avatar.x + dx, avatar.y + dy);
+            // 40 was defined as the avatar's (circle) diameter 
+            // where (x,y) is the upper left corner
+            if(avatar.x >= 0 && avatar.x <= GamePanel.WIDTH - 40 && 
+            		avatar.y >= 0 && avatar.y <= GamePanel.HEIGHT - 40) {
+            	avatar.setDestination(avatar.x + dx, avatar.y + dy);
+            } else if(avatar.x < 0){
+            	avatar.setDestination(0, avatar.y);
+            } else if(avatar.x > GamePanel.WIDTH - 40){
+            	avatar.setDestination(GamePanel.WIDTH - 40, avatar.y);
+            } else if(avatar.y < 0){
+            	avatar.setDestination(avatar.x, 0);
+            } else if(avatar.y > GamePanel.HEIGHT - 40){
+            	avatar.setDestination(avatar.x, GamePanel.HEIGHT - 40);
+            }
+            
            
             rookie.move(diffSeconds);
             bulletHandler.move(diffSeconds);

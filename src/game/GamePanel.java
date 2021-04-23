@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
     
 
     public GamePanel() {
-        this.setSize(WIDTH, HEIGHT);
+    	this.setSize(WIDTH, HEIGHT);
         GraphicsConfiguration graphicsConf = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
         imageBuffer = graphicsConf.createCompatibleImage(this.getWidth(), this.getHeight());
         graphics = imageBuffer.getGraphics();
