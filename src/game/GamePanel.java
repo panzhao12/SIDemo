@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 	}
 
 	public void clear() {
-		graphics.setColor(Color.LIGHT_GRAY);
+		graphics.setColor(new Color(184,224,180));
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 

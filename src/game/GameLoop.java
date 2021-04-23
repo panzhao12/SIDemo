@@ -36,20 +36,24 @@ public class GameLoop {
         	public void keyPressed(KeyEvent e) {
         		int key = e.getKeyCode();
 
-                if (key == KeyEvent.VK_LEFT) {
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
                     dx = -0.5;
                 }
 
-                if (key == KeyEvent.VK_RIGHT) {
+                if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
                     dx = 0.5;
                 }
 
-                if (key == KeyEvent.VK_UP) {
+                if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
                     dy = -0.5;
                 }
 
-                if (key == KeyEvent.VK_DOWN) {
+                if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
                     dy = 0.5;
+                }
+
+                if (key == KeyEvent.VK_SPACE) {
+                	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
                 }
 
         	}
@@ -57,19 +61,19 @@ public class GameLoop {
         	public void keyReleased(KeyEvent e) {
         		int key = e.getKeyCode();
 
-                if (key == KeyEvent.VK_LEFT) {
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
                     dx = 0;
                 }
 
-                if (key == KeyEvent.VK_RIGHT) {
+                if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
                     dx = 0;
                 }
 
-                if (key == KeyEvent.VK_UP) {
+                if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
                     dy = 0;
                 }
 
-                if (key == KeyEvent.VK_DOWN) {
+                if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
                     dy = 0;
                 }
         	}
@@ -78,35 +82,50 @@ public class GameLoop {
 
         panel.setFocusable(true);
         panel.requestFocusInWindow();
+    
+        long lastTick = System.currentTimeMillis();
 
-		long lastTick = System.currentTimeMillis();
+        while (true) {
+            long currentTick = System.currentTimeMillis();
+            double diffSeconds = (currentTick-lastTick) / 1000.0;
+            lastTick = currentTick;
+            
+            // 40 was defined as the avatar's (circle) diameter 
+            // where (x,y) is the upper left corner
+            if(avatar.x >= 0 && avatar.x <= GamePanel.WIDTH - 40 && 
+            		avatar.y >= 0 && avatar.y <= GamePanel.HEIGHT - 40) {
+            	avatar.setDestination(avatar.x + dx, avatar.y + dy);
+            } else if(avatar.x < 0){
+            	avatar.setDestination(0, avatar.y);
+            } else if(avatar.x > GamePanel.WIDTH - 40){
+            	avatar.setDestination(GamePanel.WIDTH - 40, avatar.y);
+            } else if(avatar.y < 0){
+            	avatar.setDestination(avatar.x, 0);
+            } else if(avatar.y > GamePanel.HEIGHT - 40){
+            	avatar.setDestination(avatar.x, GamePanel.HEIGHT - 40);
+            }
+                 
+            // move array of rookies
+            enemyHandler.move(diffSeconds);
+            // move array of bullets
+            bulletHandler.move(diffSeconds);
+            avatar.collisionCheck(enemyHandler.getList());
+            bulletHandler.collisionCheckEnemy(enemyHandler.getList());
+            panel.clear();
+            panel.draw(avatar);
+            panel.drawHealth(avatar);
+            // gets the int "score" from rookieHandler and draws it
+            panel.drawScore(enemyHandler.getScore());
+            // draws all enemies
+            panel.drawEnemy(enemyHandler.getList());
+            // draws all bullets
+            panel.drawBullet(bulletHandler.getList());
 
-		while (true) {
-			long currentTick = System.currentTimeMillis();
-			double diffSeconds = (currentTick - lastTick) / 1000.0;
-			lastTick = currentTick;
-			  avatar.setDestination(avatar.x + dx, avatar.y + dy);
-			// move array of rookies
-			enemyHandler.move(diffSeconds);
-			// move array of bullets
-			bulletHandler.move(diffSeconds);
-			avatar.collisionCheck(enemyHandler.getList());
-			bulletHandler.collisionCheckEnemy(enemyHandler.getList());
-			panel.clear();
-			panel.draw(avatar);
-			panel.drawHealth(avatar);
-			// gets the int "score" from rookieHandler and draws it
-			panel.drawScore(enemyHandler.getScore());
-			// draws all enemies
-			panel.drawEnemy(enemyHandler.getList());
-			// draws all bullets
-			panel.drawBullet(bulletHandler.getList());
-
-			panel.redraw();
-		}
-	}
-
-	public void setGraphicPanel(GamePanel panel) {
-		this.panel = panel;
-	}
+            panel.redraw();
+        }
+    }
+    
+    public void setGraphicPanel(GamePanel panel) {
+        this.panel = panel;
+    }
 }
