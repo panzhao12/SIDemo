@@ -4,12 +4,12 @@ import character.GameCharacter;
 import character.avatar.Bullet;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener  {
 
@@ -86,8 +86,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 	@Override
 	public void command(GameCharacter av, GameControl userInput) {
     	
-
-	}
+    }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -125,6 +124,5 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
 	}
 }

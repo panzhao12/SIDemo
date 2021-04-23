@@ -10,12 +10,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 public class GameLoop {
 
-	private GamePanel panel;
+
+  private GamePanel panel;
 	private Avatar avatar;
 	private BulletHandler bulletHandler;
 	private EnemyHandler enemyHandler;
-	   private double dx;
-	    private double dy;
+	private double dx;
+	private double dy;
 	public void run() {
 		bulletHandler = new BulletHandler();
 		// creates RookieHandler + all rookies specified in the constructor

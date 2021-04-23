@@ -8,5 +8,7 @@ public interface ControlService {
     public GameControl getUserInput();
 
     // interpret UserInput and tell the User Object what to do
- public void command(GameCharacter avatar, GameControl userInput);
+
+    public void command(GameCharacter avatar, GameControl userInput);
+
 }
