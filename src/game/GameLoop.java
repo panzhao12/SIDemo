@@ -3,51 +3,35 @@ package game;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import character.avatar.BulletHandler;
-import character.enemy.Rookie;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import character.enemy.EnemyHandler;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.LinkedList;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class GameLoop {
 
-    private GamePanel panel;
-    private static Avatar avatar;
-    private static Rookie rookie;
-    private BulletHandler bulletHandler;
-    
-    private double dx;
-    private double dy;
 
-    //Initialize resource
-    static {
-        try {
-            avatar = new Avatar(100, 100, 100);
-            rookie = new Rookie(900, 100, 200, 50);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+  private GamePanel panel;
+	private Avatar avatar;
+	private BulletHandler bulletHandler;
+	private EnemyHandler enemyHandler;
+	private double dx;
+	private double dy;
+	public void run() {
+		bulletHandler = new BulletHandler();
+		// creates RookieHandler + all rookies specified in the constructor
+		enemyHandler = new EnemyHandler();
+		avatar = new Avatar(100, 100, 3);
 
-    public void run() {
-    	bulletHandler = new BulletHandler();
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));
+			}
+		};
+		panel.addMouseListener(mouseAdapter);
+		panel.addMouseMotionListener(mouseAdapter);
+		
 
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                double x = e.getX();
-                double y = e.getY();
-                //avatar.setDestination(x-20, y-20);
-            } 
-            public void mouseClicked(MouseEvent e) {
-            	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
-            }
-        };
-        panel.addMouseListener(mouseAdapter);
-        panel.addMouseMotionListener(mouseAdapter);
-        
         KeyAdapter keyAdapter = new KeyAdapter() {
         	public void keyPressed(KeyEvent e) {
         		int key = e.getKeyCode();
@@ -67,12 +51,13 @@ public class GameLoop {
                 if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
                     dy = 0.5;
                 }
-        		
+
                 if (key == KeyEvent.VK_SPACE) {
                 	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
                 }
+
         	}
-        	
+
         	public void keyReleased(KeyEvent e) {
         		int key = e.getKeyCode();
 
@@ -94,10 +79,10 @@ public class GameLoop {
         	}
         };
         panel.addKeyListener(keyAdapter);
-        
+
         panel.setFocusable(true);
         panel.requestFocusInWindow();
-
+    
         long lastTick = System.currentTimeMillis();
 
         while (true) {
@@ -119,30 +104,28 @@ public class GameLoop {
             } else if(avatar.y > GamePanel.HEIGHT - 40){
             	avatar.setDestination(avatar.x, GamePanel.HEIGHT - 40);
             }
-            
-           
-            rookie.move(diffSeconds);
+                 
+            // move array of rookies
+            enemyHandler.move(diffSeconds);
+            // move array of bullets
             bulletHandler.move(diffSeconds);
-            collision(bulletHandler.getList(), rookie);
+            avatar.collisionCheck(enemyHandler.getList());
+            bulletHandler.collisionCheckEnemy(enemyHandler.getList());
             panel.clear();
-            
             panel.draw(avatar);
-            panel.draw(rookie);
-            panel.draw(bulletHandler.getList());
-            
+            panel.drawHealth(avatar);
+            // gets the int "score" from rookieHandler and draws it
+            panel.drawScore(enemyHandler.getScore());
+            // draws all enemies
+            panel.drawEnemy(enemyHandler.getList());
+            // draws all bullets
+            panel.drawBullet(bulletHandler.getList());
+
             panel.redraw();
         }
     }
     
     public void setGraphicPanel(GamePanel panel) {
         this.panel = panel;
-    }
-    public void collision(LinkedList<Bullet> a, Rookie b) {
-    	for (int i = 0;i<a.size();i++) {
-    		if (a.get(i).getBounds().intersects(b.getBounds())) {
-    			a.remove(i);
-    		}
-    	}
-    	
     }
 }
