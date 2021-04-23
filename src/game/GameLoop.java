@@ -53,7 +53,7 @@ public class GameLoop {
                 }
 
                 if (key == KeyEvent.VK_SPACE) {
-                	bulletHandler.addObject(new Bullet(avatar.x+20, avatar.y+20, 200, 1));
+                	bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));
                 }
 
         	}
@@ -84,25 +84,25 @@ public class GameLoop {
         panel.requestFocusInWindow();
     
         long lastTick = System.currentTimeMillis();
-
+        
+    	int r = avatar.getRadius();
+        
         while (true) {
             long currentTick = System.currentTimeMillis();
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
             
-            // 40 was defined as the avatar's (circle) diameter 
-            // where (x,y) is the upper left corner
-            if(avatar.x >= 0 && avatar.x <= GamePanel.WIDTH - 40 && 
-            		avatar.y >= 0 && avatar.y <= GamePanel.HEIGHT - 40) {
+            if(avatar.x > r && avatar.x <= (GamePanel.WIDTH - r) * 0.75 && 
+            		avatar.y > r && avatar.y <= GamePanel.HEIGHT - r) {
             	avatar.setDestination(avatar.x + dx, avatar.y + dy);
-            } else if(avatar.x < 0){
-            	avatar.setDestination(0, avatar.y);
-            } else if(avatar.x > GamePanel.WIDTH - 40){
-            	avatar.setDestination(GamePanel.WIDTH - 40, avatar.y);
-            } else if(avatar.y < 0){
-            	avatar.setDestination(avatar.x, 0);
-            } else if(avatar.y > GamePanel.HEIGHT - 40){
-            	avatar.setDestination(avatar.x, GamePanel.HEIGHT - 40);
+            } else if(avatar.x <= r){
+            	avatar.setDestination(r + 0.5, avatar.y);
+            } else if(avatar.x > (GamePanel.WIDTH - r) * 0.75){
+            	avatar.setDestination((GamePanel.WIDTH - r) * 0.75, avatar.y);
+            } else if(avatar.y <= 20){
+            	avatar.setDestination(avatar.x, r + 0.5);
+            } else if(avatar.y > GamePanel.HEIGHT - r){
+            	avatar.setDestination(avatar.x, GamePanel.HEIGHT - r);
             }
                  
             // move array of rookies
