@@ -1,6 +1,8 @@
 package character.enemy;
 
-public class Rookie extends Enemy {
+import character.GameCharacter;
+
+public class Rookie extends GameCharacter {
 
 	private boolean remove = false;
 	private int health = 5;

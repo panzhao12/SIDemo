@@ -2,7 +2,7 @@ package character.avatar;
 
 import java.util.LinkedList;
 
-import character.enemy.Enemy;
+import character.GameCharacter;
 import game.PhysicsSystem;
 
 public class BulletHandler {
@@ -31,7 +31,7 @@ public class BulletHandler {
 		}
 	}
 
-	public void collisionCheckEnemy(LinkedList<Enemy> enemyList) {
+	public void collisionCheckEnemy(LinkedList<GameCharacter> enemyList) {
 		for (int i = 0; i < enemyList.size(); i++) {
 			for (int j = 0; j < object.size(); j++) {
 				if (physics.checkCollision(enemyList.get(i), object.get(j))) {

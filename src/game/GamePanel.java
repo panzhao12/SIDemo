@@ -2,23 +2,24 @@ package game;
 
 import character.GameCharacter;
 import character.avatar.Bullet;
-import character.enemy.Enemy;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener {
+public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener  {
 
 	public final static int WIDTH = 800;
 	public final static int HEIGHT = 600;
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
-
+	
+	
 	public GamePanel() {
 		this.setSize(WIDTH, HEIGHT);
 		GraphicsConfiguration graphicsConf = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
@@ -32,15 +33,14 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 
-	public void draw(GameCharacter character) {
-		int radius = character.getRadius();
+	public void draw(GameCharacter avatar) {
+		int radius = avatar.getRadius();
 		graphics.setColor(new Color(96, 96, 100));
-		graphics.fillOval((int) character.x - radius, (int) character.y - radius, radius * 2, radius * 2);
+		graphics.fillOval((int) avatar.x - radius, (int) avatar.y - radius, radius * 2, radius * 2);
 	}
 
-	public void drawEnemy(LinkedList<Enemy> linkedList) {
+	public void drawEnemy(LinkedList<GameCharacter> linkedList) {
 		for (int i = 0; i < linkedList.size(); i++) {
-			System.out.println(linkedList.get(i).getRadius());
 			int radius = linkedList.get(i).getRadius();
 			graphics.setColor(new Color(96, 96, 100));
 			graphics.fillOval((int) linkedList.get(i).x - radius, (int) linkedList.get(i).y - radius, radius * 2, radius * 2);
@@ -55,8 +55,8 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		}
 	}
 
-	public void drawHealth(GameCharacter a) {
-		int hp = a.getHealth();
+	public void drawHealth(GameCharacter avatar) {
+		int hp = avatar.getHealth();
 		int x = 100;
 		graphics.setColor(new Color(200, 0, 100));
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
@@ -84,7 +84,8 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 	}
 
 	@Override
-	public void command() {
+	public void command(GameCharacter av, GameControl userInput) {
+    	
 
 	}
 
@@ -110,6 +111,20 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 
 	}
 }

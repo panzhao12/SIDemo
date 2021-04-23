@@ -3,7 +3,6 @@ package character.avatar;
 import java.util.LinkedList;
 
 import character.GameCharacter;
-import character.enemy.Enemy;
 import game.PhysicsSystem;
 
 public class Avatar extends GameCharacter {
@@ -39,7 +38,7 @@ public class Avatar extends GameCharacter {
 		return health;
 	}
 
-	public void collisionCheck(LinkedList<Enemy> linkedList) {
+	public void collisionCheck(LinkedList<GameCharacter> linkedList) {
 		for (int i = 0; i < linkedList.size(); i++) {
 			if (physics.checkCollision(linkedList.get(i), this)) {
 				changeHealth(-1);
@@ -59,6 +58,24 @@ public class Avatar extends GameCharacter {
 
 	public int getRadius() {
 		return radius;
+	}
+
+	@Override
+	public void setRemove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getRemove() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getScore() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

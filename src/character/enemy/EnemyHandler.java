@@ -3,7 +3,6 @@ package character.enemy;
 import java.util.LinkedList;
 
 import character.GameCharacter;
-
 public class EnemyHandler {
 
 	public EnemyHandler() {
@@ -21,27 +20,27 @@ public class EnemyHandler {
 		addObject(new Sergeant(2500, 400));
 	}
 
-	LinkedList<Enemy> object = new LinkedList<Enemy>();
+	LinkedList<GameCharacter> object = new LinkedList<GameCharacter>();
 	private int score = 0;
 
-	public void addObject(Enemy e) {
+	public void addObject(GameCharacter e) {
 		object.add(e);
 	}
 
-	public void removeObject(Enemy e) {
-		object.remove(e);
-		if (e.x > e.getRadius()) {
-			score += e.getScore();
+	public void removeObject(GameCharacter gc) {
+		object.remove(gc);
+		if (gc.x > gc.getRadius()) {
+			score += gc.getScore();
 		}
 	}
 
-	public LinkedList<Enemy> getList() {
+	public LinkedList<GameCharacter> getList() {
 		return object;
 	}
 
 	public void move(double diffSeconds) {
 		for (int i = 0; i < object.size(); i++) {
-			Enemy e = object.get(i);
+			GameCharacter e = object.get(i);
 			e.move(diffSeconds);
 			if (e.getRemove()) {
 				removeObject(e);

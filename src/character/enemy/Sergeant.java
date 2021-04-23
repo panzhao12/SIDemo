@@ -1,6 +1,6 @@
 package character.enemy;
-
-public class Sergeant extends Enemy {
+import character.GameCharacter;
+public class Sergeant extends GameCharacter {
 
 	private boolean remove = false;
 	private int health = 10;
@@ -14,7 +14,7 @@ public class Sergeant extends Enemy {
 
 	public void move(double diffSeconds) {
 		x -= speed * diffSeconds;
-		if (x < -40) {
+		if (x < -2*radius) {
 			remove = !remove;
 		}
 	}

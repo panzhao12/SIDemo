@@ -6,6 +6,7 @@ public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
 	int radius = 5;
+	private int speed;
 	public Bullet(double x, double y, int speed, int damage) {
 		this.x = x;
 		this.y = y;
@@ -23,7 +24,7 @@ public class Bullet extends GameCharacter {
 	public boolean getRemove() {
 		return remove;
 	}
-
+	
 	public void setRemove() {
 		remove = !remove;
 	}
@@ -35,6 +36,11 @@ public class Bullet extends GameCharacter {
 
 	public int getDamage() {
 		return damage;
+	}
+
+	@Override
+	public int getRadius() {
+		return radius;
 	}
 
 	@Override
@@ -50,8 +56,8 @@ public class Bullet extends GameCharacter {
 	}
 
 	@Override
-	public int getRadius() {
+	public int getScore() {
 		// TODO Auto-generated method stub
-		return radius;
+		return 0;
 	}
 }

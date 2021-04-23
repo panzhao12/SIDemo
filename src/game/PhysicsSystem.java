@@ -1,18 +1,16 @@
 package game;
 
 import character.GameCharacter;
-import character.enemy.Enemy;
-
 public class PhysicsSystem {
 
-	public boolean checkCollision(Enemy enemy, GameCharacter b) {
-		if (getDistance(b, enemy) <= enemy.getRadius() + b.getRadius()) {
+	public boolean checkCollision(GameCharacter a, GameCharacter b) {
+		if (getDistance(b, a) <= a.getRadius() + b.getRadius()) {
 			return true;
 		}
 		return false;
 	}
 
-	public double getDistance(GameCharacter a, Enemy b) {
+	public double getDistance(GameCharacter a, GameCharacter b) {
 
 		double x1 = a.x;
 		double x2 = b.x;
