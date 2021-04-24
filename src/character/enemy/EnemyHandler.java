@@ -13,7 +13,7 @@ public class EnemyHandler {
 		addObject(new Rookie(1200, 400));
 		addObject(new Rookie(1200, 200));
 		addObject(new Rookie(1400, 400));
-		addObject(new Rookie(1600, 600));
+		addObject(new Rookie(1600, 500));
 		addObject(new Rookie(500, 500));
 		addObject(new Rookie(1800, 450));
 		addObject(new Sergeant(250, 300));
