@@ -1,20 +1,23 @@
 package character.avatar;
 
 import java.util.LinkedList;
-
 import character.GameCharacter;
 import game.GamePanel;
 import game.KeyInput;
 import game.PhysicsSystem;
 
 public class Avatar extends GameCharacter {
+
 	private PhysicsSystem physics = new PhysicsSystem();
+	private BulletHandler bulletHandler;
+	private GamePanel panel;
+	private KeyInput keyinput;
+
 	private int radius = 20;
 	private int speed = 200;
-	private KeyInput keyinput;
 	private double dy, dx;
-	private BulletHandler bulletHandler;
-	GamePanel panel;
+	private double startTime = 0;
+	private double fireRate = 0.1;
 
 	public Avatar(double x, double y, int health, KeyInput keyinput, BulletHandler bulletHandler, GamePanel panel) {
 		this.x = x;
@@ -57,27 +60,29 @@ public class Avatar extends GameCharacter {
 				;
 			}
 		}
-
 	}
 
-	public void shoot() {
+	public void shoot(double diffSeconds) {
 		if (keyinput.isSpace()) {
-			bulletHandler.addObject(new Bullet(x + radius, y, 300, 1));
-			keyinput.setSpace();
+			startTime += diffSeconds;
+			if (startTime >= fireRate) {
+				bulletHandler.addObject(new Bullet(x + radius, y, 300, 1));
+				startTime = 0;
+			}
 		}
 	}
 
 	@Override
 	public void move(double diffSeconds) {
-		dx = speed*diffSeconds;
-		dy = speed*diffSeconds;
-		
+		dx = speed * diffSeconds;
+		dy = speed * diffSeconds;
+
 		if (keyinput.isLeft() && !keyinput.isRight()) {
-			if (dx + x > 0+radius) {
+			if (dx + x > 0 + radius) {
 				dx = -speed;
 			}
 		} else if (keyinput.isRight() && !keyinput.isLeft()) {
-			if (dx + x < panel.WIDTH*0.75-radius) {
+			if (dx + x < panel.WIDTH * 0.75 - radius) {
 				dx = speed;
 			}
 		} else {
@@ -85,18 +90,18 @@ public class Avatar extends GameCharacter {
 		}
 
 		if (keyinput.isUp() && !keyinput.isDown()) {
-			if ((y - dy) > 0+radius) {
+			if ((y - dy) > 0 + radius) {
 				dy = -speed;
 
-			}			
+			}
 		} else if (keyinput.isDown() && !keyinput.isUp()) {
-			if (y + dy < panel.HEIGHT-radius) {
+			if (y + dy < panel.HEIGHT - radius) {
 				dy = speed;
 			}
 		} else {
 			dy = 0;
 		}
-		
+
 		this.x += dx * diffSeconds;
 		this.y += dy * diffSeconds;
 

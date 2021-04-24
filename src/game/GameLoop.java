@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 public class GameLoop {
 
-
 	private GamePanel panel;
 	private Avatar avatar;
 	private BulletHandler bulletHandler;
@@ -23,8 +22,7 @@ public class GameLoop {
 
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));
-			}
+				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));			}
 		};
 		panel.addMouseListener(mouseAdapter);
         panel.addKeyListener(keyInput);
@@ -37,7 +35,7 @@ public class GameLoop {
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
             avatar.move(diffSeconds);
-            avatar.shoot();
+            avatar.shoot(diffSeconds);
             // move array of rookies
             enemyHandler.move(diffSeconds);
             // move array of bullets
@@ -51,7 +49,7 @@ public class GameLoop {
             panel.drawScore(enemyHandler.getScore());
             // draws all enemies
             panel.drawEnemy(enemyHandler.getList());
-            // draws all bulletsaw
+            // draws all bullets
             panel.drawBullet(bulletHandler.getList());
 
             panel.redraw();
@@ -61,4 +59,5 @@ public class GameLoop {
     public void setGraphicPanel(GamePanel panel) {
         this.panel = panel;
     }
+    
 }
