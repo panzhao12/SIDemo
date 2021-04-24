@@ -3,6 +3,7 @@ package character.avatar;
 import java.util.LinkedList;
 
 import character.GameCharacter;
+import game.GamePanel;
 import game.KeyInput;
 import game.PhysicsSystem;
 
@@ -13,13 +14,15 @@ public class Avatar extends GameCharacter {
 	private KeyInput keyinput;
 	private double dy, dx;
 	private BulletHandler bulletHandler;
+	GamePanel panel;
 
-	public Avatar(double x, double y, int health, KeyInput keyinput, BulletHandler bulletHandler) {
+	public Avatar(double x, double y, int health, KeyInput keyinput, BulletHandler bulletHandler, GamePanel panel) {
 		this.x = x;
 		this.y = y;
 		this.health = health;
 		this.keyinput = keyinput;
 		this.bulletHandler = bulletHandler;
+		this.panel = panel;
 	}
 
 	public void setDestination(double x, double y) {
@@ -56,32 +59,46 @@ public class Avatar extends GameCharacter {
 		}
 
 	}
+
 	public void shoot() {
-		if(keyinput.isSpace()) {
+		if (keyinput.isSpace()) {
 			bulletHandler.addObject(new Bullet(x + radius, y, 300, 1));
 			keyinput.setSpace();
 		}
 	}
+
 	@Override
 	public void move(double diffSeconds) {
-		System.out.println(dx);
-		this.x += dx * diffSeconds;
-		this.y += dy * diffSeconds;
+		dx = speed*diffSeconds;
+		dy = speed*diffSeconds;
+		
 		if (keyinput.isLeft() && !keyinput.isRight()) {
-			dx = -speed;
+			if (dx + x > 0+radius) {
+				dx = -speed;
+			}
 		} else if (keyinput.isRight() && !keyinput.isLeft()) {
-			dx = speed;
+			if (dx + x < panel.WIDTH*0.75-radius) {
+				dx = speed;
+			}
 		} else {
 			dx = 0;
 		}
-		
+
 		if (keyinput.isUp() && !keyinput.isDown()) {
-			dy = -speed;
+			if ((y - dy) > 0+radius) {
+				dy = -speed;
+
+			}			
 		} else if (keyinput.isDown() && !keyinput.isUp()) {
-			dy = speed;
+			if (y + dy < panel.HEIGHT-radius) {
+				dy = speed;
+			}
 		} else {
 			dy = 0;
 		}
+		
+		this.x += dx * diffSeconds;
+		this.y += dy * diffSeconds;
 
 	}
 

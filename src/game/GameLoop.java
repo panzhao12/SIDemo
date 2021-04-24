@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 public class GameLoop {
 
 
-  private GamePanel panel;
+	private GamePanel panel;
 	private Avatar avatar;
 	private BulletHandler bulletHandler;
 	private EnemyHandler enemyHandler;
@@ -19,7 +19,7 @@ public class GameLoop {
 		// creates RookieHandler + all rookies specified in the constructor
 		enemyHandler = new EnemyHandler();
 		keyInput = new KeyInput();
-		avatar = new Avatar(100, 100, 3, keyInput, bulletHandler);
+		avatar = new Avatar(100, 100, 3, keyInput, bulletHandler, panel);
 
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

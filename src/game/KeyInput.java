@@ -10,6 +10,7 @@ public class KeyInput extends KeyAdapter {
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP)
+			
 			up = true;
 
 		if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN)
