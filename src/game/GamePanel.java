@@ -13,8 +13,8 @@ import java.util.LinkedList;
 
 public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener  {
 
-	public final static int WIDTH = 800;
-	public final static int HEIGHT = 600;
+	public final int WIDTH = 800;
+	public final int HEIGHT = 600;
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;

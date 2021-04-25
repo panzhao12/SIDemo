@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame {
 
-    private GamePanel panel = null;
+    private GamePanel panel = new GamePanel();
 
     public GameFrame() {
         // needed for Keyboard input
@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
         this.setContentPane(panel);
         
         // Set the actual dimension for GamePanel
-        this.getContentPane().setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
+        this.getContentPane().setPreferredSize(new Dimension(panel.WIDTH, panel.HEIGHT));
     	this.pack();
     	
     }

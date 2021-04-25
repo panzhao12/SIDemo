@@ -1,5 +1,7 @@
 package game;
 
+import java.util.TimerTask;
+
 import character.GameCharacter;
 public class PhysicsSystem {
 
@@ -18,5 +20,9 @@ public class PhysicsSystem {
 		double y2 = b.y;
 
 		return Math.sqrt((Math.pow(x1 - x2, 2)) + (Math.pow(y1 - y2, 2)));
+	}
+	
+	public void scheduleAtFixedRate(TimerTask task, long delay, long period) {
+		
 	}
 }
