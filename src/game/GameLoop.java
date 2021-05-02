@@ -22,7 +22,7 @@ public class GameLoop {
 
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 300, 1));			}
+				bulletHandler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 1));			}
 		};
 		panel.addMouseListener(mouseAdapter);
         panel.addKeyListener(keyInput);
@@ -45,6 +45,7 @@ public class GameLoop {
             panel.clear();
             panel.draw(avatar);
             panel.drawHealth(avatar);
+
             // gets the int "score" from rookieHandler and draws it
             panel.drawScore(enemyHandler.getScore());
             // draws all enemies

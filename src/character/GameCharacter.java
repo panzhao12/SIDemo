@@ -1,13 +1,25 @@
 package character;
 
+import java.awt.Color;
+
 public abstract class GameCharacter {
-	int score;
+	public int score;
 	boolean remove = false;
 	public int health;
 	public double x,y;
 	public int radius;
-
+	public int speed;
+	public Color color;
 	
+	public GameCharacter(double x, double y, int health, int radius, int score, int speed, Color color) {
+		this.x = x;
+		this.y = y;
+		this.health = health;
+		this.radius = radius;
+		this.score = score;
+		this.speed = speed;
+		this.color = color;
+	}
 	public abstract void changeHealth(int value);
 	
 	public abstract int getHealth();

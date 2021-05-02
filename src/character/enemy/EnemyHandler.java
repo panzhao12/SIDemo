@@ -23,8 +23,8 @@ public class EnemyHandler {
 	LinkedList<GameCharacter> object = new LinkedList<GameCharacter>();
 	private int score = 0;
 
-	public void addObject(GameCharacter e) {
-		object.add(e);
+	public void addObject(GameCharacter gc) {
+		object.add(gc);
 	}
 
 	public void removeObject(GameCharacter gc) {
