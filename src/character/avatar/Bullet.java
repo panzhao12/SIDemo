@@ -1,16 +1,14 @@
 package character.avatar;
 
+import java.awt.Color;
+
 import character.GameCharacter;
 
 public class Bullet extends GameCharacter {
 	int damage;
 	private boolean remove = false;
-	int radius = 5;
-	private int speed;
-	public Bullet(double x, double y, int speed, int damage) {
-		this.x = x;
-		this.y = y;
-		this.speed = speed;
+	public Bullet(double x, double y, int damage) {
+		super(x, y, 0, 5, 0, 400, Color.YELLOW);
 		this.damage = damage;
 	}
 

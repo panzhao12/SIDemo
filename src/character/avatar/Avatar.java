@@ -1,5 +1,6 @@
 package character.avatar;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import character.GameCharacter;
 import game.GamePanel;
@@ -13,16 +14,11 @@ public class Avatar extends GameCharacter {
 	private GamePanel panel;
 	private KeyInput keyinput;
 
-	private int radius = 20;
-	private int speed = 200;
-	private double dy, dx;
 	private double startTime = 0;
-	private double fireRate = 0.1;
+	private double fireRate = 0.2;
 
 	public Avatar(double x, double y, int health, KeyInput keyinput, BulletHandler bulletHandler, GamePanel panel) {
-		this.x = x;
-		this.y = y;
-		this.health = health;
+		super(x, y, 3, 20, 0, 300, Color.GREEN);
 		this.keyinput = keyinput;
 		this.bulletHandler = bulletHandler;
 		this.panel = panel;
@@ -57,7 +53,6 @@ public class Avatar extends GameCharacter {
 			if (physics.checkCollision(linkedList.get(i), this)) {
 				changeHealth(-1);
 				linkedList.get(i).setRemove();
-				;
 			}
 		}
 	}
@@ -66,7 +61,7 @@ public class Avatar extends GameCharacter {
 		if (keyinput.isSpace()) {
 			startTime += diffSeconds;
 			if (startTime >= fireRate) {
-				bulletHandler.addObject(new Bullet(x + radius, y, 300, 1));
+				bulletHandler.addObject(new Bullet(x + radius, y, 1));
 				startTime = 0;
 			}
 		}
@@ -74,37 +69,21 @@ public class Avatar extends GameCharacter {
 
 	@Override
 	public void move(double diffSeconds) {
-		dx = speed * diffSeconds;
-		dy = speed * diffSeconds;
+		double dx = 0, dy = 0;
+		
+		if(keyinput.isUp()) dy--;
+		if(keyinput.isDown()) dy++;
+		if(keyinput.isLeft()) dx--;
+		if(keyinput.isRight()) dx++;
+		
+		if(dx != 0 || dy != 0) {
 
-		if (keyinput.isLeft() && !keyinput.isRight()) {
-			if (dx + x > 0 + radius) {
-				dx = -speed;
-			}
-		} else if (keyinput.isRight() && !keyinput.isLeft()) {
-			if (dx + x < panel.WIDTH * 0.75 - radius) {
-				dx = speed;
-			}
-		} else {
-			dx = 0;
+			if(x+dx < 0 + radius || x+dx > panel.WIDTH*0.75) dx = 0;
+			if(y+dy < 0 + radius || y+dy > panel.HEIGHT-radius) dy = 0;
+			y += dy*speed*diffSeconds;
+			x += dx*speed*diffSeconds;
+
 		}
-
-		if (keyinput.isUp() && !keyinput.isDown()) {
-			if ((y - dy) > 0 + radius) {
-				dy = -speed;
-
-			}
-		} else if (keyinput.isDown() && !keyinput.isUp()) {
-			if (y + dy < panel.HEIGHT - radius) {
-				dy = speed;
-			}
-		} else {
-			dy = 0;
-		}
-
-		this.x += dx * diffSeconds;
-		this.y += dy * diffSeconds;
-
 	}
 
 	public int getRadius() {

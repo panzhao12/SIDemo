@@ -1,15 +1,16 @@
 package character.enemy;
+
+import java.awt.Color;
+
 import character.GameCharacter;
+
 public class Sergeant extends GameCharacter {
 
 	private boolean remove = false;
-	private int health = 10;
-	private int speed = 150;
-	private int radius = 40;
-	private int score = 30;
+
 	public Sergeant(double x, double y) {
-		this.x = x;
-		this.y = y;
+		super(x, y, 10, 40, 30, 150, Color.CYAN);
+
 	}
 
 	public void move(double diffSeconds) {
@@ -25,11 +26,6 @@ public class Sergeant extends GameCharacter {
 
 	public void setRemove() {
 		remove = !remove;
-	}
-
-	public void setDestination(double x, double y) {
-		this.x = x;
-		this.y = y;
 	}
 
 	public double getX() {

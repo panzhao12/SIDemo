@@ -6,8 +6,8 @@ import character.GameCharacter;
 import game.PhysicsSystem;
 
 public class BulletHandler {
-	PhysicsSystem physics = new PhysicsSystem();
-	LinkedList<Bullet> object = new LinkedList<Bullet>();
+	private PhysicsSystem physics = new PhysicsSystem();
+	private LinkedList<Bullet> object = new LinkedList<Bullet>();
 
 	public void addObject(Bullet bullet) {
 		object.add(bullet);

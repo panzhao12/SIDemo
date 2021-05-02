@@ -1,17 +1,14 @@
 package character.enemy;
 
+import java.awt.Color;
+
 import character.GameCharacter;
 
 public class Rookie extends GameCharacter {
 
 	private boolean remove = false;
-	private int health = 5;
-	private int speed = 100;
-	private int radius = 20;
-	private int score = 10;
 	public Rookie(double x, double y) {
-		this.x = x;
-		this.y = y;
+		super(x, y, 5, 20, 10, 100, Color.PINK);
 	}
 
 	public void move(double diffSeconds) {
