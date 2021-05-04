@@ -3,6 +3,7 @@ package character.enemy;
 import java.awt.Color;
 
 import character.GameCharacter;
+import game.A_Const;
 
 public class Rookie extends GameCharacter {
 
@@ -14,7 +15,7 @@ public class Rookie extends GameCharacter {
 	public void move(double diffSeconds) {
 		x -= speed * diffSeconds;
 		if (x < -2*radius) {
-			remove = !remove;
+			setRemove();
 		}
 	}
 
@@ -23,7 +24,7 @@ public class Rookie extends GameCharacter {
 	}
 
 	public void setRemove() {
-		remove = !remove;
+		remove = true;
 	}
 
 	public double getX() {
@@ -36,6 +37,9 @@ public class Rookie extends GameCharacter {
 
 	public void changeHealth(int health) {
 		this.health += health;
+		if(this.health <= 0) {
+			setRemove();
+		}
 	}
 
 	public int getHealth() {
@@ -46,5 +50,10 @@ public class Rookie extends GameCharacter {
 	}
 	public int getScore() {
 		return score;
+	}
+
+	@Override
+	public int type() {
+		return A_Const.TYPE_ENEMY;
 	}
 }

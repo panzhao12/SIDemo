@@ -3,6 +3,7 @@ package character.enemy;
 import java.awt.Color;
 
 import character.GameCharacter;
+import game.A_Const;
 
 public class Sergeant extends GameCharacter {
 
@@ -25,7 +26,7 @@ public class Sergeant extends GameCharacter {
 	}
 
 	public void setRemove() {
-		remove = !remove;
+		remove = true;
 	}
 
 	public double getX() {
@@ -38,6 +39,9 @@ public class Sergeant extends GameCharacter {
 
 	public void changeHealth(int health) {
 		this.health += health;
+		if(this.health <= 0) {
+			setRemove();
+		}
 	}
 
 	public int getHealth() {
@@ -50,5 +54,12 @@ public class Sergeant extends GameCharacter {
 
 	public int getScore() {
 		return score;
+	}
+
+	@Override
+	public int type() {
+		// TODO Auto-generated method stub
+		return A_Const.TYPE_ENEMY;
+
 	}
 }

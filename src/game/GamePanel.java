@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		graphics.drawOval(x, y, d, d);
 	}
 	
-	public void drawEnemy(LinkedList<GameCharacter> linkedList) {
+	public void draw(LinkedList<GameCharacter> linkedList) {
 		for (int i = 0; i < linkedList.size(); i++) {
 			draw(linkedList.get(i));
 		}

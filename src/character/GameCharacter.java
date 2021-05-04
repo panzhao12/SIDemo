@@ -33,4 +33,6 @@ public abstract class GameCharacter {
 	public abstract int getRadius();
 	
 	public abstract int getScore();
+	
+	public abstract int type();
 }
