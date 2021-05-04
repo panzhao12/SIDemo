@@ -82,8 +82,8 @@ public class Avatar extends GameCharacter {
 		
 		if(dx != 0 || dy != 0) {
 
-			if(x+dx < 0 + radius || x+dx > panel.WIDTH*0.75) dx = 0;
-			if(y+dy < 0 + radius || y+dy > panel.HEIGHT-radius) dy = 0;
+			if(x+dx < 0 + radius || x+dx > A_Const.SCREEN_WIDTH*0.75) dx = 0;
+			if(y+dy < 0 + radius || y+dy > A_Const.SCREEN_HEIGHT-radius) dy = 0;
 			y += dy*speed*diffSeconds;
 			x += dx*speed*diffSeconds;
 

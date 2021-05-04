@@ -1,7 +1,6 @@
 package game;
 
 import character.GameCharacter;
-import character.avatar.Bullet;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,8 +12,8 @@ import java.util.LinkedList;
 
 public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener {
 
-	public final int WIDTH = 800;
-	public final int HEIGHT = 600;
+	public final int WIDTH = A_Const.SCREEN_WIDTH;
+	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
@@ -49,11 +48,6 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		}
 	}
 
-	public void drawBullet(LinkedList<Bullet> bulletList) {
-		for (int i = 0; i < bulletList.size(); i++) {
-			draw(bulletList.get(i));
-		}
-	}
 
 	public void drawHealth(GameCharacter avatar) {
 		int hp = avatar.getHealth();

@@ -9,15 +9,12 @@ public class GameLoop {
 
 	private GamePanel panel;
 	private Avatar avatar;
-	//private BulletHandler bulletHandler;
-	//private EnemyHandler enemyHandler;
+
 	private KeyInput keyInput;
 	private CharacterHandler handler;
 	
 	public void run() {
-		//bulletHandler = new BulletHandler();
-		// creates RookieHandler + all rookies specified in the constructor
-		//enemyHandler = new EnemyHandler();
+	
 		keyInput = new KeyInput();
 		handler = new CharacterHandler();
 		avatar = new Avatar(100, 100, 3, keyInput, handler, panel);
@@ -37,28 +34,25 @@ public class GameLoop {
             long currentTick = System.currentTimeMillis();
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
-//            avatar.move(diffSeconds);
-            handler.move(diffSeconds);
-            handler.collisionCheck();
             
+            //moves all GameCharacters
+            handler.move(diffSeconds);
+            //Checks for collisions
+            handler.collisionCheck();
+            //runs the shoot method of the avatar class
             avatar.shoot(diffSeconds);
-            // move array of rookies
-//            enemyHandler.move(diffSeconds);
-            // move array of bullets
-//            bulletHandler.move(diffSeconds);
-//            avatar.collisionCheck(enemyHandler.getList());
-//            bulletHandler.collisionCheck(enemyHandler.getList());
+            
+            
             panel.clear();
-            //panel.draw(avatar);
-            panel.drawHealth(avatar);
 
-            // gets the int "score" from rookieHandler and draws it
+            // gets the int "score" from CharacterHandler and draws it
             panel.drawScore(handler.getScore());
-            // draws all enemies
+            //draws the current health of the player
+            panel.drawHealth(avatar);
+            // draws all GameCharacters
             panel.draw(handler.getList());
-            // draws all bullets
-            //panel.drawBullet(bulletHandler.getList());
 
+            
             panel.redraw();
         }
     }
