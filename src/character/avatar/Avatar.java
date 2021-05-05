@@ -1,36 +1,25 @@
 package character.avatar;
 
 import java.awt.Color;
-import java.util.LinkedList;
 
 import character.CharacterHandler;
 import character.GameCharacter;
 import game.A_Const;
-import game.GamePanel;
 import game.KeyInput;
-import game.PhysicsSystem;
 
 public class Avatar extends GameCharacter {
 
-	private PhysicsSystem physics = new PhysicsSystem();
-	private CharacterHandler bulletHandler;
-	private GamePanel panel;
+	private CharacterHandler handler;
 	private KeyInput keyinput;
 	private boolean remove = false;
 
 	private double startTime = 0;
 	private double fireRate = 0.2;
 
-	public Avatar(double x, double y, int health, KeyInput keyinput, CharacterHandler bulletHandler, GamePanel panel) {
+	public Avatar(double x, double y, int health, KeyInput keyinput, CharacterHandler handler) {
 		super(x, y, 3, 20, 0, 300, Color.GREEN);
 		this.keyinput = keyinput;
-		this.bulletHandler = bulletHandler;
-		this.panel = panel;
-	}
-
-	public void setDestination(double x, double y) {
-		this.x = x;
-		this.y = y;
+		this.handler = handler;
 	}
 
 	public double getX() {
@@ -52,19 +41,11 @@ public class Avatar extends GameCharacter {
 		return health;
 	}
 
-	public void collisionCheck(LinkedList<GameCharacter> enemyList) {
-		LinkedList<GameCharacter> enemyList1 = physics.getCollisions(this, enemyList);
-			for(int i = 0; i<enemyList1.size();i++) {
-				enemyList1.get(i).setRemove();
-				changeHealth(-1);
-		}
-	}
-
 	public void shoot(double diffSeconds) {
 		if (keyinput.isSpace() && !remove) {
 			startTime += diffSeconds;
 			if (startTime >= fireRate) {
-				bulletHandler.addObject(new Bullet(x + radius, y, 1));
+				handler.addObject(new Bullet(x + radius, y, 1));
 				startTime = 0;
 			}
 		}
@@ -117,5 +98,7 @@ public class Avatar extends GameCharacter {
 		return A_Const.TYPE_AVATAR;
 
 	}
-
+	public Color color() {
+		return color;
+	}
 }

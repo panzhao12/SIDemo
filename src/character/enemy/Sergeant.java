@@ -62,4 +62,7 @@ public class Sergeant extends GameCharacter {
 		return A_Const.TYPE_ENEMY;
 
 	}
+	public Color color() {
+		return color;
+	}
 }

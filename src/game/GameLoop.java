@@ -9,7 +9,6 @@ public class GameLoop {
 
 	private GamePanel panel;
 	private Avatar avatar;
-
 	private KeyInput keyInput;
 	private CharacterHandler handler;
 	
@@ -17,12 +16,13 @@ public class GameLoop {
 	
 		keyInput = new KeyInput();
 		handler = new CharacterHandler();
-		avatar = new Avatar(100, 100, 3, keyInput, handler, panel);
+		avatar = new Avatar(100, 100, 3, keyInput, handler);
 		handler.addObject(avatar);
 
 		MouseAdapter mouseAdapter = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				handler.addObject(new Bullet(avatar.x + avatar.getRadius(), avatar.y, 1));			}
+				handler.addObject(new Bullet(avatar.getX() + avatar.getRadius(), avatar.getY(), 1));
+				}
 		};
 		panel.addMouseListener(mouseAdapter);
         panel.addKeyListener(keyInput);
@@ -34,7 +34,6 @@ public class GameLoop {
             long currentTick = System.currentTimeMillis();
             double diffSeconds = (currentTick-lastTick) / 1000.0;
             lastTick = currentTick;
-            
             //moves all GameCharacters
             handler.move(diffSeconds);
             //Checks for collisions

@@ -6,8 +6,10 @@ import character.GameCharacter;
 import game.A_Const;
 
 public class Bullet extends GameCharacter {
-	int damage;
+	
+	private int damage;
 	private boolean remove = false;
+	
 	public Bullet(double x, double y, int damage) {
 		super(x, y, 0, 5, 0, 400, Color.YELLOW);
 		this.damage = damage;
@@ -53,19 +55,31 @@ public class Bullet extends GameCharacter {
 
 	@Override
 	public int getHealth() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getScore() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int type() {
-		// TODO Auto-generated method stub
 		return A_Const.TYPE_BULLET;
+	}
+	
+	@Override
+	public Color color() {
+		return color;
+	}
+
+	@Override
+	public double getX() {
+		return x;
+	}
+
+	@Override
+	public double getY() {
+		return y;
 	}
 }

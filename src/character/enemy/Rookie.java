@@ -7,7 +7,7 @@ import game.A_Const;
 
 public class Rookie extends GameCharacter {
 
-	private boolean remove = false;
+	//private boolean remove = false;
 	public Rookie(double x, double y) {
 		super(x, y, 5, 20, 10, 100, Color.PINK);
 	}
@@ -55,5 +55,8 @@ public class Rookie extends GameCharacter {
 	@Override
 	public int type() {
 		return A_Const.TYPE_ENEMY;
+	}
+	public Color color() {
+		return color;
 	}
 }

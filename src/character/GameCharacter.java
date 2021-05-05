@@ -3,13 +3,13 @@ package character;
 import java.awt.Color;
 
 public abstract class GameCharacter {
-	public int score;
-	boolean remove = false;
-	public int health;
-	public double x,y;
-	public int radius;
-	public int speed;
-	public Color color;
+	protected int score;
+	protected boolean remove = false;
+	protected int health;
+	protected double x,y;
+	protected int radius;
+	protected int speed;
+	protected Color color;
 	
 	public GameCharacter(double x, double y, int health, int radius, int score, int speed, Color color) {
 		this.x = x;
@@ -20,6 +20,13 @@ public abstract class GameCharacter {
 		this.speed = speed;
 		this.color = color;
 	}
+	
+	public abstract double getX();
+	
+	public abstract double getY();
+	
+	public abstract Color color();
+	
 	public abstract void changeHealth(int value);
 	
 	public abstract int getHealth();
