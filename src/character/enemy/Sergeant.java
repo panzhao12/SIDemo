@@ -7,7 +7,6 @@ import game.A_Const;
 
 public class Sergeant extends GameCharacter {
 
-	private boolean remove = false;
 
 	public Sergeant(double x, double y) {
 		super(x, y, 10, 40, 30, 150, Color.CYAN);
@@ -17,7 +16,7 @@ public class Sergeant extends GameCharacter {
 	public void move(double diffSeconds) {
 		x -= speed * diffSeconds;
 		if (x < -2*radius) {
-			remove = !remove;
+			remove = true;
 		}
 	}
 

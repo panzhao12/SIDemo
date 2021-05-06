@@ -8,7 +8,6 @@ import game.A_Const;
 public class Bullet extends GameCharacter {
 	
 	private int damage;
-	private boolean remove = false;
 	
 	public Bullet(double x, double y, int damage) {
 		super(x, y, 0, 5, 0, 400, Color.YELLOW);
@@ -17,7 +16,7 @@ public class Bullet extends GameCharacter {
 
 	public void move(double diffSeconds) {
 		x += speed * diffSeconds;
-		if (x > 800) {
+		if (x > A_Const.SCREEN_WIDTH+radius) {
 			remove = true;
 		}
 	}

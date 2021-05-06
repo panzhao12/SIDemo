@@ -11,8 +11,6 @@ public class Avatar extends GameCharacter {
 
 	private CharacterHandler handler;
 	private KeyInput keyinput;
-	private boolean remove = false;
-
 	private double startTime = 0;
 	private double fireRate = 0.2;
 
@@ -56,15 +54,16 @@ public class Avatar extends GameCharacter {
 	public void move(double diffSeconds) {
 		double dx = 0, dy = 0;
 		
-		if(keyinput.isUp()) dy--;
-		if(keyinput.isDown()) dy++;
-		if(keyinput.isLeft()) dx--;
-		if(keyinput.isRight()) dx++;
+		if	(keyinput.isUp()) dy--;
+		if	(keyinput.isDown()) dy++;
+		if	(keyinput.isLeft()) dx--;
+		if	(keyinput.isRight()) dx++;
 		
-		if(dx != 0 || dy != 0) {
+		if	(dx != 0 || dy != 0) {
 
-			if(x+dx < 0 + radius || x+dx > A_Const.SCREEN_WIDTH*0.75) dx = 0;
-			if(y+dy < 0 + radius || y+dy > A_Const.SCREEN_HEIGHT-radius) dy = 0;
+			if	(x+dx < 0 + radius || x+dx > A_Const.SCREEN_WIDTH*0.75) dx = 0;
+			if	(y+dy < 0 + radius || y+dy > A_Const.SCREEN_HEIGHT-radius) dy = 0;
+			
 			y += dy*speed*diffSeconds;
 			x += dx*speed*diffSeconds;
 

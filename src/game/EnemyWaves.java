@@ -7,6 +7,7 @@ import character.GameCharacter;
 import character.enemy.*;
 
 public class EnemyWaves {
+	
 	LinkedList<LinkedList<GameCharacter>> waves = new LinkedList<LinkedList<GameCharacter>>();
 	LinkedList<GameCharacter> wave;
 	private int counter;
