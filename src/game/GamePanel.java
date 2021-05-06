@@ -49,7 +49,12 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		}
 	}
 
+	public void drawFps(String asd, double frames) {
+		graphics.setColor(Color.BLACK);
+		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 
+		graphics.drawString(asd + frames, 250, 40);
+	}
 	public void drawHealth(GameCharacter avatar) {
 		int hp = avatar.getHealth();
 		int x = 100;

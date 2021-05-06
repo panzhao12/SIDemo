@@ -66,7 +66,6 @@ public class Avatar extends GameCharacter {
 			
 			y += dy*speed*diffSeconds;
 			x += dx*speed*diffSeconds;
-
 		}
 	}
 

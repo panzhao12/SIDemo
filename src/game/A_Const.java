@@ -8,4 +8,5 @@ public final class A_Const {
 	  public static final int TYPE_AVATAR        = 1;
 	  public static final int TYPE_ENEMY         = 2;
 	  public static final int TYPE_BULLET        = 3;
+	  public static final int TYPE_ENEMY_BULLET  = 4;
 }
