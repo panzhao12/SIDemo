@@ -14,6 +14,7 @@ public class CharacterHandler {
 	private LinkedList<GameCharacter> objectList = new LinkedList<GameCharacter>();
 	private int score = 0;
 
+
 	public CharacterHandler() {
 		// initialize EnemyWaves and get the initial wave
 		EnemyWaves waves = new EnemyWaves(this);
@@ -55,44 +56,33 @@ public class CharacterHandler {
 	public void move(double diffSeconds) {
 		for (int i = 0; i < objectList.size(); i++) {
 			GameCharacter gc = objectList.get(i);
+
 			gc.move(diffSeconds);
+			collisionCheck(gc);
 			if (gc.getRemove()) {
 				removeObject(gc);
 			}
 		}
 	}
 
-	public void collisionCheck() {
+	public void collisionCheck(GameCharacter gc) {
 		LinkedList<GameCharacter> enemyListSmall;
-		for (int i = 0; i < objectList.size(); i++) {
-
-			// Checks collisions between bullets and all enemies
-			if (objectList.get(i).type() == A_Const.TYPE_BULLET) {
-				enemyListSmall = physics.getCollisions(objectList.get(i), objectList);
-				for (int j = 0; j < enemyListSmall.size(); j++) {
-					enemyListSmall.get(j).changeHealth(-(((Bullet) objectList.get(i)).getDamage()));
-					objectList.get(i).setRemove();
-				}
+		switch (gc.type()) {
+		case A_Const.TYPE_AVATAR:
+			enemyListSmall = physics.getCollisions(gc, objectList);
+			for (int i = 0; i < enemyListSmall.size(); i++) {
+				enemyListSmall.get(i).setRemove();
+				gc.changeHealth(-1);
 			}
-
-			// Checks collisions between avatar and all enemies
-			if (objectList.get(i).type() == A_Const.TYPE_AVATAR) {
-				enemyListSmall = physics.getCollisions(objectList.get(i), objectList);
-				for (int j = 0; j < enemyListSmall.size(); j++) {
-					enemyListSmall.get(j).setRemove();
-					objectList.get(i).changeHealth(-1);
-				}
-				for (int k = 0; k < objectList.size(); k++) {
-					if (objectList.get(k).type() == A_Const.TYPE_ENEMY_BULLET) {
-						if (physics.checkCollision(objectList.get(k), objectList.get(i))) {
-							objectList.get(i).changeHealth(-1);
-							objectList.get(k).setRemove();
-						}
-					}
-				}
-
+			break;
+		case A_Const.TYPE_BULLET:
+			enemyListSmall = physics.getCollisions(gc, objectList);
+			for (int j = 0; j < enemyListSmall.size(); j++) {
+				enemyListSmall.get(j).changeHealth(-((Bullet) gc).getDamage());
+				gc.setRemove();
 			}
-		}
+			break;
+		}	
 	}
 
 	public int getScore() {

@@ -19,26 +19,40 @@ public class PhysicsSystem {
 		double x2 = b.getX();
 		double y1 = a.getY();
 		double y2 = b.getY();
-		double dx = x1-x2;
-		double dy = y1-y2;
-		return Math.sqrt((dx*dx) + (dy * dy));
+		double dx = x1 - x2;
+		double dy = y1 - y2;
+		return Math.sqrt((dx * dx) + (dy * dy));
 	}
-	
-	//returns a shorter list with all collisions between GameCharacter a and list of enemies
+
+	// returns a shorter list with all collisions between GameCharacter a and list
+	// of enemies
 	public LinkedList<GameCharacter> getCollisions(GameCharacter a, LinkedList<GameCharacter> list) {
 		LinkedList<GameCharacter> collisions = new LinkedList<GameCharacter>();
-		if(a.type() == A_Const.TYPE_AVATAR || a.type() == A_Const.TYPE_BULLET) {
-			for (int i = 0; i< list.size(); i++) {
-				if(list.get(i).type() == A_Const.TYPE_ENEMY) {
-					if(checkCollision(a, list.get(i))) {
-						collisions.add(list.get(i));
+		switch (a.type()) {
+		case A_Const.TYPE_AVATAR:
+			for (int i = 0; i < list.size(); i++) {
+				GameCharacter current = list.get(i);
+				if (current.type() == A_Const.TYPE_ENEMY || current.type() == A_Const.TYPE_ENEMY_BULLET) {
+					if (checkCollision(a, current)) {
+						collisions.add(current);
 					}
 				}
 			}
-		}
+			break;
 
+		case A_Const.TYPE_BULLET:
+			for (int i = 0; i < list.size(); i++) {
+				GameCharacter current = list.get(i);
+				if (current.type() == A_Const.TYPE_ENEMY) {
+					if (checkCollision(a, current)) {
+						collisions.add(current);
+					}
+				}
+			}
+			break;
+		}
 		return collisions;
-		
+
 	}
 
 }

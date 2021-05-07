@@ -19,7 +19,7 @@ public class EnemyWaves {
 		this.handler = handler;
 		//generates a wave with preset enemies and locations
 		LinkedList<GameCharacter> wave1 = new LinkedList<GameCharacter>();
-		wave1.add(new BOSS_1(800, 200, 0.3, handler));
+		wave1.add(new BOSS_1(800, 200, 4, handler));
 		waves.add(wave1);
 
 		LinkedList<GameCharacter> wave2 = new LinkedList<GameCharacter>();

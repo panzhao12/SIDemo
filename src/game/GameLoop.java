@@ -41,11 +41,7 @@ public class GameLoop {
 			fpsCount(diffSeconds);
 			// moves all GameCharacters
 			handler.move(diffSeconds);
-			// Checks for collisions
-			handler.collisionCheck();
-			// runs the shoot method of the avatar class
-			avatar.shoot(diffSeconds);
-
+			
 			panel.clear();
 
 			// gets the int "score" from CharacterHandler and draws it

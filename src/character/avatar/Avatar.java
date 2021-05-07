@@ -12,7 +12,9 @@ public class Avatar extends GameCharacter {
 	private CharacterHandler handler;
 	private KeyInput keyinput;
 	private double startTime = 0;
-	private double fireRate = 0.2;
+	
+	//bullets per second
+	private double fireRate = 3;
 
 	public Avatar(double x, double y, int health, KeyInput keyinput, CharacterHandler handler) {
 		super(x, y, 3, 20, 0, 300, Color.GREEN);
@@ -42,7 +44,7 @@ public class Avatar extends GameCharacter {
 	public void shoot(double diffSeconds) {
 		if (keyinput.isSpace() && !remove) {
 			startTime += diffSeconds;
-			if (startTime >= fireRate) {
+			if (startTime >= 1/fireRate) {
 				handler.addObject(new Bullet(x + radius, y, 1));
 				startTime = 0;
 			}
@@ -58,7 +60,8 @@ public class Avatar extends GameCharacter {
 		if	(keyinput.isDown()) dy++;
 		if	(keyinput.isLeft()) dx--;
 		if	(keyinput.isRight()) dx++;
-		
+		shoot(diffSeconds);
+
 		if	(dx != 0 || dy != 0) {
 
 			if	(x+dx < 0 + radius || x+dx > A_Const.SCREEN_WIDTH*0.75) dx = 0;
@@ -89,7 +92,7 @@ public class Avatar extends GameCharacter {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int type() {
 		// TODO Auto-generated method stub

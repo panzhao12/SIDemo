@@ -54,14 +54,13 @@ public class BOSS_1 extends GameCharacter {
 
 	public void move(double diffSeconds) {
 		
-		if (x+dx > 800-radius) dx = -1;
+		if (x+dx > A_Const.SCREEN_WIDTH-radius) dx = -1;
 		if (x + dx < 600) dx = 1;
 		if (y+dy > A_Const.SCREEN_HEIGHT - radius) dy = -1;
 		if (y + dy < 0+radius) dy = 1;
 		
 		y += dy*speed*diffSeconds;
 		x += dx*speed*diffSeconds;
-		
 		timer += diffSeconds;
 		
 		if(!fireCooldown) shoot(diffSeconds);
@@ -76,7 +75,7 @@ public class BOSS_1 extends GameCharacter {
 
 	public void shoot(double diffSeconds) {
 		startTime += diffSeconds;
-		if (startTime >= fireRate) {
+		if (startTime >= 1/fireRate) {
 			handler.addObject(new EnemyBullet(x - radius, y, 1, Color.blue));
 			startTime = 0;
 		}
