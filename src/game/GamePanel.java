@@ -1,7 +1,8 @@
 package game;
 
 import character.GameCharacter;
-import character.avatar.Bullet;
+import character.avatar.Avatar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,8 +14,9 @@ import java.util.LinkedList;
 
 public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener {
 
-	public final int WIDTH = 800;
-	public final int HEIGHT = 600;
+	private static final long serialVersionUID = 1L;
+	public final int WIDTH = A_Const.SCREEN_WIDTH;
+	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
@@ -33,36 +35,41 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 	}
 
 	public void draw(GameCharacter gc) {
-		int x = (int) (gc.x - gc.radius);
-		int y = (int) (gc.y - gc.radius);
-		int d = (int) (gc.radius * 2);
+		int x = (int) (gc.getX() - gc.getRadius());
+		int y = (int) (gc.getY() - gc.getRadius());
+		int d = (int) (gc.getRadius() * 2);
 		
-		graphics.setColor(gc.color);
+		graphics.setColor(gc.color());
 		graphics.fillOval(x, y, d, d);
 		graphics.setColor(Color.BLACK);
 		graphics.drawOval(x, y, d, d);
 	}
 	
-	public void drawEnemy(LinkedList<GameCharacter> linkedList) {
+	public void draw(LinkedList<GameCharacter> linkedList) {
 		for (int i = 0; i < linkedList.size(); i++) {
 			draw(linkedList.get(i));
 		}
 	}
 
-	public void drawBullet(LinkedList<Bullet> bulletList) {
-		for (int i = 0; i < bulletList.size(); i++) {
-			draw(bulletList.get(i));
-		}
-	}
+	public void drawFps(String asd, int frames) {
+		graphics.setColor(Color.BLACK);
+		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 
-	public void drawHealth(GameCharacter avatar) {
+		graphics.drawString(asd + frames, 250, 40);
+	}
+	public void drawHealth(Avatar avatar) {
 		int hp = avatar.getHealth();
 		int x = 100;
+		int rows = -1;
 		graphics.setColor(new Color(200, 0, 100));
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 		graphics.drawString("Health: ", x - 70, 40);
 		for (int i = 0; i < hp; i++) {
-			graphics.drawString("\u2665", x, 40);
+			if(i % 6 == 0) {
+				rows++;
+				x=100;
+			}
+			graphics.drawString("\u2665", x, 40 + (rows*20));
 			x += 20;
 		}
 	}

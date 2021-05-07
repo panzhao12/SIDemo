@@ -6,15 +6,12 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame {
 
-	private GamePanel panel = new GamePanel();
+	private static final long serialVersionUID = 1L;
+	private GamePanel panel;
 
 	public GameFrame() {
-		// needed for Keyboard input
-		// this.setFocusable(true);
-		// this.requestFocusInWindow();
-
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		// this.setSize(GamePanel.WIDTH, GamePanel.HEIGHT);
 
 		ImageIcon gameIcon = new ImageIcon("src/icon_220.png");
 		setIconImage(gameIcon.getImage());
@@ -26,11 +23,6 @@ public class GameFrame extends JFrame {
 		// Set the actual dimension for GamePanel
 		this.getContentPane().setPreferredSize(new Dimension(panel.WIDTH, panel.HEIGHT));
 		this.pack();
-
-	}
-
-	public int getWidth() {
-		return panel.getWidth();
 	}
 
 	public GamePanel getPanel() {

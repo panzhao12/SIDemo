@@ -3,10 +3,12 @@ package character.avatar;
 import java.awt.Color;
 
 import character.GameCharacter;
+import game.A_Const;
 
 public class Bullet extends GameCharacter {
-	int damage;
-	private boolean remove = false;
+	
+	private int damage;
+	
 	public Bullet(double x, double y, int damage) {
 		super(x, y, 0, 5, 0, 400, Color.YELLOW);
 		this.damage = damage;
@@ -14,8 +16,8 @@ public class Bullet extends GameCharacter {
 
 	public void move(double diffSeconds) {
 		x += speed * diffSeconds;
-		if (x > 800) {
-			remove = !remove;
+		if (x > A_Const.SCREEN_WIDTH+radius) {
+			remove = true;
 		}
 	}
 
@@ -24,7 +26,7 @@ public class Bullet extends GameCharacter {
 	}
 	
 	public void setRemove() {
-		remove = !remove;
+		remove = true;
 	}
 
 	public void setDestination(double x, double y) {
@@ -43,19 +45,35 @@ public class Bullet extends GameCharacter {
 
 	@Override
 	public void changeHealth(int value) {
-		// TODO Auto-generated method stub
+		this.health += value;
+		if(health <= 0) {
+			setRemove();
+		}
 
-	}
-
-	@Override
-	public int getHealth() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
 	public int getScore() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int type() {
+		return A_Const.TYPE_BULLET;
+	}
+	
+	@Override
+	public Color color() {
+		return color;
+	}
+
+	@Override
+	public double getX() {
+		return x;
+	}
+
+	@Override
+	public double getY() {
+		return y;
 	}
 }
