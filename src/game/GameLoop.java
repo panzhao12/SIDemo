@@ -13,9 +13,9 @@ public class GameLoop {
 	private KeyInput keyInput;
 	private CharacterHandler handler;
 
-	double time;
-	int frames;
-	int oldFrames;
+	private double time;
+	private int frames, oldFrames;
+
 	public void run() {
 		keyInput = new KeyInput();
 		handler = new CharacterHandler();
