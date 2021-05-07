@@ -53,11 +53,6 @@ public class Bullet extends GameCharacter {
 	}
 
 	@Override
-	public int getHealth() {
-		return 0;
-	}
-
-	@Override
 	public int getScore() {
 		return 0;
 	}

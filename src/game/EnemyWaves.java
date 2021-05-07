@@ -29,10 +29,10 @@ public class EnemyWaves {
 		waves.add(wave2);
 
 		LinkedList<GameCharacter> wave3 = new LinkedList<GameCharacter>();
-		wave3.add(new Rookie(500, 400));
-		wave3.add(new Rookie(400, 400));
-		wave3.add(new Rookie(600, 400));
-		wave3.add(new Sergeant(200, 400));
+		wave3.add(new Rookie(800, 250));
+		wave3.add(new Rookie(900, 300));
+		wave3.add(new Rookie(800, 400));
+		wave3.add(new Sergeant(1000, 500));
 		waves.add(wave3);
 
 		//generates 10-50 random waves with random number of enemies and spawnlocations
@@ -42,10 +42,10 @@ public class EnemyWaves {
 			int rookies = random.nextInt(10);
 			int sergeants = random.nextInt(3);
 				for (int j = 0; j < rookies; j++) {
-					wave.add(new Rookie(random.nextInt(1000) + A_Const.SCREEN_WIDTH, random.nextInt(A_Const.SCREEN_HEIGHT)));
+					wave.add(new Rookie(random.nextInt(500) + A_Const.SCREEN_WIDTH, random.nextInt(A_Const.SCREEN_HEIGHT-40)+40));
 				}
 				for (int j = 0; j < sergeants; j++) {
-					wave.add(new Sergeant(random.nextInt(1000) + A_Const.SCREEN_WIDTH, random.nextInt(A_Const.SCREEN_HEIGHT)));
+					wave.add(new Sergeant(random.nextInt(1000) + A_Const.SCREEN_WIDTH, random.nextInt(A_Const.SCREEN_HEIGHT-40)+40));
 				}
 			waves.add(wave);
 		}

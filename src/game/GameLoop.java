@@ -13,8 +13,9 @@ public class GameLoop {
 	private KeyInput keyInput;
 	private CharacterHandler handler;
 
-	double diff_average = 0;
-
+	double time;
+	int frames;
+	int oldFrames;
 	public void run() {
 		keyInput = new KeyInput();
 		handler = new CharacterHandler();
@@ -36,8 +37,8 @@ public class GameLoop {
 			long currentTick = System.currentTimeMillis();
 			double diffSeconds = (currentTick - lastTick) / 1000.0;
 			lastTick = currentTick;
-
-			diff_average = 0.98 * diff_average + 0.02 * diffSeconds;
+			//counts the frames per second that you are running at
+			fpsCount(diffSeconds);
 			// moves all GameCharacters
 			handler.move(diffSeconds);
 			// Checks for collisions
@@ -49,16 +50,24 @@ public class GameLoop {
 
 			// gets the int "score" from CharacterHandler and draws it
 			panel.drawScore(handler.getScore());
-			
-			//draws fps on screen, not entirely sure if this is accurate, got it from profs lecture notes
-			panel.drawFps("fps: ", (int) (1.0 / diff_average));;
-
+			//draws fps on screen
+			panel.drawFps("FPS: ", oldFrames);
 			// draws the current health of the player
 			panel.drawHealth(avatar);
 			// draws all GameCharacters
 			panel.draw(handler.getList());
 
 			panel.redraw();
+		}
+	}
+	
+	public void fpsCount(double diffSeconds) {
+		time += diffSeconds;
+		frames++;
+		if (time >= 0.5) {
+			oldFrames = 2*frames;
+			frames = 0;
+			time = 0;
 		}
 	}
 

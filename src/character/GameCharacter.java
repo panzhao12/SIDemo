@@ -29,8 +29,6 @@ public abstract class GameCharacter {
 	
 	public abstract void changeHealth(int value);
 	
-	public abstract int getHealth();
-
 	public abstract void setRemove();
 
 	public abstract void move(double diffSeconds);

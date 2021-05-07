@@ -1,6 +1,7 @@
 package character.enemy;
 
 import java.awt.Color;
+import java.util.Random;
 
 import character.CharacterHandler;
 import character.GameCharacter;
@@ -13,7 +14,11 @@ public class BOSS_1 extends GameCharacter {
 	double dy = 1;
 	double fireRate;
 	double startTime = 0;
+	boolean fireCooldown = false;
+	double timer = 0;
+	Random random = new Random();
 	CharacterHandler handler;
+	int asd;
 	public BOSS_1(double x, double y, double fireRate, CharacterHandler handler) {
 		super(x, y, 50, 40, 100, 150, Color.RED);
 		this.fireRate = fireRate;
@@ -43,11 +48,6 @@ public class BOSS_1 extends GameCharacter {
 	}
 
 	@Override
-	public int getHealth() {
-		return 0;
-	}
-
-	@Override
 	public void setRemove() {
 		remove = true;
 	}
@@ -58,9 +58,20 @@ public class BOSS_1 extends GameCharacter {
 		if (x + dx < 600) dx = 1;
 		if (y+dy > A_Const.SCREEN_HEIGHT - radius) dy = -1;
 		if (y + dy < 0+radius) dy = 1;
+		
 		y += dy*speed*diffSeconds;
 		x += dx*speed*diffSeconds;
-		shoot(diffSeconds);
+		
+		timer += diffSeconds;
+		
+		if(!fireCooldown) shoot(diffSeconds);
+		
+		if (timer >= asd) {
+			fireCooldown = !fireCooldown;
+			timer = 0;
+			asd = random.nextInt(3)+1;
+		}
+		
 	}
 
 	public void shoot(double diffSeconds) {

@@ -19,8 +19,9 @@ public class PhysicsSystem {
 		double x2 = b.getX();
 		double y1 = a.getY();
 		double y2 = b.getY();
-
-		return Math.sqrt((Math.pow(x1 - x2, 2)) + (Math.pow(y1 - y2, 2)));
+		double dx = x1-x2;
+		double dy = y1-y2;
+		return Math.sqrt((dx*dx) + (dy * dy));
 	}
 	
 	//returns a shorter list with all collisions between GameCharacter a and list of enemies

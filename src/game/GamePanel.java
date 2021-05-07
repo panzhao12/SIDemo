@@ -1,6 +1,8 @@
 package game;
 
 import character.GameCharacter;
+import character.avatar.Avatar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -49,13 +51,13 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 		}
 	}
 
-	public void drawFps(String asd, double frames) {
+	public void drawFps(String asd, int frames) {
 		graphics.setColor(Color.BLACK);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 
 		graphics.drawString(asd + frames, 250, 40);
 	}
-	public void drawHealth(GameCharacter avatar) {
+	public void drawHealth(Avatar avatar) {
 		int hp = avatar.getHealth();
 		int x = 100;
 		int rows = -1;

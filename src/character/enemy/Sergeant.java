@@ -43,10 +43,6 @@ public class Sergeant extends GameCharacter {
 		}
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
 	public int getRadius() {
 		return radius;
 	}
