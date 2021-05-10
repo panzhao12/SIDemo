@@ -1,10 +1,6 @@
 package game;
-
 import character.CharacterHandler;
 import character.avatar.Avatar;
-import character.avatar.Bullet;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class GameLoop {
 
@@ -12,22 +8,16 @@ public class GameLoop {
 	private Avatar avatar;
 	private KeyInput keyInput;
 	private CharacterHandler handler;
-
+	
 	private double time;
 	private int frames, oldFrames;
 
 	public void run() {
-		keyInput = new KeyInput();
+		keyInput = panel.getKeyInput();
 		handler = new CharacterHandler();
 		avatar = new Avatar(100, 100, 3, keyInput, handler);
 		handler.addObject(avatar);
-
-		MouseAdapter mouseAdapter = new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				handler.addObject(new Bullet(avatar.getX() + avatar.getRadius(), avatar.getY(), 1));
-			}
-		};
-		panel.addMouseListener(mouseAdapter);
+		panel.addMouseListener(handler.getAvatar().getMouseListener());
 		panel.addKeyListener(keyInput);
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
@@ -37,31 +27,34 @@ public class GameLoop {
 			long currentTick = System.currentTimeMillis();
 			double diffSeconds = (currentTick - lastTick) / 1000.0;
 			lastTick = currentTick;
-			//counts the frames per second that you are running at
-			fpsCount(diffSeconds);
+			
 			// moves all GameCharacters
 			handler.move(diffSeconds);
-			
 			panel.clear();
-
 			// gets the int "score" from CharacterHandler and draws it
-			panel.drawScore(handler.getScore());
+			panel.drawText("Score: " + handler.getScore(), 30, 40);
 			//draws fps on screen
-			panel.drawFps("FPS: ", oldFrames);
+			panel.drawText("FPS: " + oldFrames, 250, 40);
 			// draws the current health of the player
-			panel.drawHealth(avatar);
+			panel.drawHealth(avatar, 30, 80);
+			panel.drawText("Wave: " + handler.getWaveCounter(), 350, 40);
 			// draws all GameCharacters
 			panel.draw(handler.getList());
-
+			
 			panel.redraw();
+			
+			
+			//counts the frames per second that you are running at
+			fpsCount(diffSeconds);
+
 		}
 	}
 	
 	public void fpsCount(double diffSeconds) {
 		time += diffSeconds;
 		frames++;
-		if (time >= 0.5) {
-			oldFrames = 2*frames;
+		if (time >= 1) {
+			oldFrames = frames;
 			frames = 0;
 			time = 0;
 		}

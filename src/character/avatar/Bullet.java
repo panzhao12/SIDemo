@@ -21,59 +21,12 @@ public class Bullet extends GameCharacter {
 		}
 	}
 
-	public boolean getRemove() {
-		return remove;
-	}
-	
-	public void setRemove() {
-		remove = true;
-	}
-
-	public void setDestination(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
-
 	public int getDamage() {
 		return damage;
 	}
 
 	@Override
-	public int getRadius() {
-		return radius;
-	}
-
-	@Override
-	public void changeHealth(int value) {
-		this.health += value;
-		if(health <= 0) {
-			setRemove();
-		}
-
-	}
-
-	@Override
-	public int getScore() {
-		return 0;
-	}
-
-	@Override
 	public int type() {
 		return A_Const.TYPE_BULLET;
-	}
-	
-	@Override
-	public Color color() {
-		return color;
-	}
-
-	@Override
-	public double getX() {
-		return x;
-	}
-
-	@Override
-	public double getY() {
-		return y;
 	}
 }

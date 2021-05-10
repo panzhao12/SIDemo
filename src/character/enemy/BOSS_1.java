@@ -12,46 +12,20 @@ public class BOSS_1 extends GameCharacter {
 	
 	double dx = -1;
 	double dy = 1;
-	double fireRate;
+	double fireRate = 3;
 	double startTime = 0;
 	boolean fireCooldown = false;
 	double timer = 0;
+	int maxHealth;
 	Random random = new Random();
 	CharacterHandler handler;
-	int asd;
-	public BOSS_1(double x, double y, double fireRate, CharacterHandler handler) {
+	int shootingDuration;
+	public BOSS_1(double x, double y, CharacterHandler handler) {
 		super(x, y, 50, 40, 100, 150, Color.RED);
-		this.fireRate = fireRate;
+		this.maxHealth = health;
 		this.handler = handler;
 	}
-
-	@Override
-	public double getX() {
-		return x;
-	}
-
-	@Override
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public Color color() {
-		return color;
-	}
-
-	public void changeHealth(int health) {
-		this.health += health;
-		if(this.health <= 0) {
-			setRemove();
-		}
-	}
-
-	@Override
-	public void setRemove() {
-		remove = true;
-	}
-
+	
 	public void move(double diffSeconds) {
 		
 		if (x+dx > A_Const.SCREEN_WIDTH-radius) dx = -1;
@@ -65,39 +39,31 @@ public class BOSS_1 extends GameCharacter {
 		
 		if(!fireCooldown) shoot(diffSeconds);
 		
-		if (timer >= asd) {
+		if (timer >= shootingDuration) {
 			fireCooldown = !fireCooldown;
 			timer = 0;
-			asd = random.nextInt(3)+1;
+			shootingDuration = random.nextInt(3)+1;
 		}
 		
 	}
-
+	
 	public void shoot(double diffSeconds) {
 		startTime += diffSeconds;
 		if (startTime >= 1/fireRate) {
-			handler.addObject(new EnemyBullet(x - radius, y, 1, Color.blue));
+			handler.addObject(new EnemyBullet(x - radius, y, Math.PI, 400,  1, Color.blue));
 			startTime = 0;
 		}
 	}
-	public boolean getRemove() {
-		return remove;
-	}
 
-	@Override
-	public int getRadius() {
-		return radius;
-	}
-
-	@Override
-	public int getScore() {
-		return score;
+	
+	public int getMaxHealth() {
+		return maxHealth;
 	}
 
 	@Override
 	public int type() {
-		// TODO Auto-generated method stub
-		return A_Const.TYPE_ENEMY;
+		return A_Const.TYPE_BOSS;
 	}
+
 
 }
