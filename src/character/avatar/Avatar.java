@@ -1,31 +1,27 @@
 package character.avatar;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import character.CharacterHandler;
 import character.GameCharacter;
 import game.A_Const;
-import game.KeyInput;
+import game.InputSystem;
 
 public class Avatar extends GameCharacter {
 
 	private CharacterHandler handler;
-	private KeyInput keyinput;
+	private InputSystem keyinput;
 	private double startTime = 0;
-	MouseAdapter mouseAdapter;
 	//bullets per second
 	private double fireRate = 3;
 
-	public Avatar(double x, double y, int health, KeyInput keyinput, CharacterHandler handler) {
+	public Avatar(double x, double y, int health, InputSystem keyinput, CharacterHandler handler) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
 		this.keyinput = keyinput;
 		this.handler = handler;
 	}
 
 	public void shoot(double diffSeconds) {
-		if (keyinput.isSpace() && !remove) {
+		if (keyinput.isSpace() && !remove || keyinput.mousePressed()) {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
 				handler.addObject(new Bullet(x + radius, y, 1));
@@ -58,14 +54,5 @@ public class Avatar extends GameCharacter {
 	public int type() {
 		return A_Const.TYPE_AVATAR;
 
-	}
-
-	public MouseListener getMouseListener() {
-		mouseAdapter = new MouseAdapter() {
-				public void mousePressed(MouseEvent e) {
-					handler.addObject(new Bullet(x + radius, y, 1));
-				}
-		};
-		return mouseAdapter;
 	}
 }

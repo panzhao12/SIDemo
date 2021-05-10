@@ -94,7 +94,7 @@ public class CharacterHandler {
 	public Avatar getAvatar() {
 		return avatar;
 	}
-	protected void setAvatar(Avatar a) {
+	public void setAvatar(Avatar a) {
 		avatar = a;
 	}
 	

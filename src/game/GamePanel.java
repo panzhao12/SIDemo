@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements GraphicService {
 
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
@@ -17,7 +17,7 @@ public class GamePanel extends JPanel {
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
 	//private KeyInput keyInput = new KeyInput();
-	private KeyInput inputSystem = new KeyInput();
+	private InputSystem inputSystem = new InputSystem();
 
 
 	public GamePanel() {
@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
 		imageBuffer = graphicsConf.createCompatibleImage(this.getWidth(), this.getHeight());
 		graphics = imageBuffer.getGraphics();
 		this.addKeyListener(inputSystem);
+		this.addMouseListener(inputSystem);
+		this.addMouseMotionListener(inputSystem);
 	}
 
 	public void clear() {
@@ -76,7 +78,7 @@ public class GamePanel extends JPanel {
 	public void redraw() {
 		this.getGraphics().drawImage(imageBuffer, 0, 0, this);
 	}
-	public final KeyInput getKeyInput() {
+	public final InputSystem getKeyInput() {
 		return inputSystem;
 	}
 	

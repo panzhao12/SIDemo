@@ -2,9 +2,12 @@ package game;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class KeyInput extends KeyAdapter {
-	private boolean up = false, down = false, left = false, right = false, space = false;
+public class InputSystem extends KeyAdapter implements MouseListener, MouseMotionListener {
+	private boolean up = false, down = false, left = false, right = false, space = false, mousePressed;
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -36,6 +39,16 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 
+	@Override
+	public void mousePressed(MouseEvent e) {
+		mousePressed = true;		
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		mousePressed = false;
+	}
+	
 	public boolean isUp() {
 		return up;
 	}
@@ -55,4 +68,35 @@ public class KeyInput extends KeyAdapter {
 	public boolean isSpace() {
 		return space;
 	}
+	
+	public boolean mousePressed() {
+		return mousePressed;
+	}
+	
+	@Override
+	
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+	}
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+	}
+
 }

@@ -6,20 +6,19 @@ public class GameLoop {
 
 	private GamePanel panel;
 	private Avatar avatar;
-	private KeyInput keyInput;
+	private InputSystem inputSystem;
 	private CharacterHandler handler;
 	
 	private double time;
 	private int frames, oldFrames;
 
 	public void run() {
-		keyInput = panel.getKeyInput();
+		inputSystem = panel.getKeyInput();
 		handler = new CharacterHandler();
-		avatar = new Avatar(100, 100, 3, keyInput, handler);
+		avatar = new Avatar(100, 100, 3, inputSystem, handler);
 		handler.setAvatar(avatar);
 		handler.addObject(avatar);
-		panel.addMouseListener(handler.getAvatar().getMouseListener());
-		panel.addKeyListener(keyInput);
+		panel.addKeyListener(inputSystem);
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
 
