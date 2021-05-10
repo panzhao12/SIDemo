@@ -9,19 +9,19 @@ import game.InputSystem;
 public class Avatar extends GameCharacter {
 
 	private CharacterHandler handler;
-	private InputSystem keyinput;
+	private InputSystem inputSystem;
 	private double startTime = 0;
 	//bullets per second
 	private double fireRate = 3;
 
 	public Avatar(double x, double y, int health, InputSystem keyinput, CharacterHandler handler) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
-		this.keyinput = keyinput;
+		this.inputSystem = keyinput;
 		this.handler = handler;
 	}
 
 	public void shoot(double diffSeconds) {
-		if (keyinput.isSpace() && !remove || keyinput.mousePressed()) {
+		if (inputSystem.isSpace() && !remove || inputSystem.mousePressed()) {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
 				handler.addObject(new Bullet(x + radius, y, 1));
@@ -34,10 +34,10 @@ public class Avatar extends GameCharacter {
 	public void move(double diffSeconds) {
 		double dx = 0, dy = 0;
 		
-		if	(keyinput.isUp()) 	 dy--;
-		if	(keyinput.isDown())  dy++;
-		if	(keyinput.isLeft())  dx--;
-		if	(keyinput.isRight()) dx++;
+		if	(inputSystem.isUp()) 	 dy--;
+		if	(inputSystem.isDown())  dy++;
+		if	(inputSystem.isLeft())  dx--;
+		if	(inputSystem.isRight()) dx++;
 		shoot(diffSeconds);
 
 		if	(dx != 0 || dy != 0) {
