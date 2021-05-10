@@ -19,7 +19,6 @@ public class Sergeant extends GameCharacter {
 	}
 
 	public void move(double diffSeconds) {
-		avatar = handler.getAvatar();
 		x -= speed * diffSeconds;
 		if (x < A_Const.SCREEN_WIDTH) shoot(diffSeconds);
 		if (x < -2 * radius) {
@@ -30,6 +29,7 @@ public class Sergeant extends GameCharacter {
 	public void shoot(double diffSeconds) {
 		startTime += diffSeconds;
 		if (startTime >= 1 / fireRate) {
+			avatar = handler.getAvatar();
 			double px = avatar.getX()+radius;
 			double py = avatar.getY();
 			double alfa = Math.atan2(py - y, px - x);

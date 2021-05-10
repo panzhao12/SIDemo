@@ -29,22 +29,16 @@ public class CharacterHandler {
 	}
 
 	public void addObject(GameCharacter gc) {
-		if (gc instanceof Avatar) avatar = (Avatar) gc;
 		objectList.add(gc);
 	}
 
 	public void removeObject(GameCharacter gc) {
 		// if removed object is an enemy, decrement enemyCounter
-		if (gc.type() == A_Const.TYPE_ENEMY) enemyCounter--;
+		if (gc.type() == A_Const.TYPE_ENEMY || gc.type() == A_Const.TYPE_BOSS) enemyCounter--;
 		
 		objectList.remove(gc);
 		
-		// if enemies make it across the screen, score will not increase
-		if (gc.x > gc.getRadius()) {
-			score += gc.getScore();
-		}
-		
-		// if all enemies have died and there are more waves to get, get new wave
+		// if all enemies have died and there is another wave to get, get new wave
 		if (enemyCounter < 1 && waves.getCounter() > 0) {
 			LinkedList<GameCharacter> wave = waves.getNewWave();
 			waveCounter++;
@@ -73,11 +67,8 @@ public class CharacterHandler {
 		case A_Const.TYPE_AVATAR:
 			enemyListSmall = physics.getCollisions(gc, objectList);
 			for (int i = 0; i < enemyListSmall.size(); i++) {
-				gc.changeHealth(-1);
-				if (enemyListSmall.get(i).type() == A_Const.TYPE_BOSS) {
-					enemyListSmall.get(i).changeHealth(-1); continue;
-				}
 				enemyListSmall.get(i).setRemove();
+				gc.changeHealth(-1);
 
 
 			}
@@ -102,6 +93,9 @@ public class CharacterHandler {
 	
 	public Avatar getAvatar() {
 		return avatar;
+	}
+	protected void setAvatar(Avatar a) {
+		avatar = a;
 	}
 	
 	public int getWaveCounter() {

@@ -16,6 +16,7 @@ public class GameLoop {
 		keyInput = panel.getKeyInput();
 		handler = new CharacterHandler();
 		avatar = new Avatar(100, 100, 3, keyInput, handler);
+		handler.setAvatar(avatar);
 		handler.addObject(avatar);
 		panel.addMouseListener(handler.getAvatar().getMouseListener());
 		panel.addKeyListener(keyInput);
@@ -63,4 +64,5 @@ public class GameLoop {
 	public void setGraphicPanel(GamePanel panel) {
 		this.panel = panel;
 	}
+	
 }

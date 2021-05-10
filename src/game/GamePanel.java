@@ -1,7 +1,6 @@
 package game;
 
 import character.GameCharacter;
-import character.avatar.Avatar;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,7 @@ public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
-	private static final Color color   = new Color(200, 0, 100);
+	private static final Color UITextColor   = new Color(200, 0, 100);
 
 
 	private BufferedImage imageBuffer;
@@ -52,10 +51,10 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	public void drawHealth(Avatar avatar, int x, int y) {
+	public void drawHealth(GameCharacter avatar, int x, int y) {
 		int origX = x;
 		int hp = avatar.getHealth();
-		graphics.setColor(color);
+		graphics.setColor(UITextColor);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 		graphics.drawString("Health: ", x, y);
 		for (int i = 1; i-1 < hp; i++) {
@@ -69,7 +68,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void drawText(String string, int x, int y) {
-		graphics.setColor(color);
+		graphics.setColor(UITextColor);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 		graphics.drawString(string, x, y);
 	}
