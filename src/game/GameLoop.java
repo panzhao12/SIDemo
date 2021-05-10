@@ -18,7 +18,6 @@ public class GameLoop {
 		avatar = new Avatar(100, 100, 3, inputSystem, handler);
 		handler.setAvatar(avatar);
 		handler.addObject(avatar);
-		panel.addKeyListener(inputSystem);
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
 
