@@ -1,25 +1,24 @@
 package game;
 
 import character.GameCharacter;
-import character.avatar.Avatar;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-public class GamePanel extends JPanel implements GraphicService, ControlService, MouseListener, KeyListener {
+public class GamePanel extends JPanel implements GraphicService {
 
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
+	private static final Color UITextColor   = new Color(200, 0, 100);
+
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
+	//private KeyInput keyInput = new KeyInput();
+	private InputSystem inputSystem = new InputSystem();
+
 
 	public GamePanel() {
 		this.setSize(WIDTH, HEIGHT);
@@ -27,6 +26,9 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 				.getDefaultConfiguration();
 		imageBuffer = graphicsConf.createCompatibleImage(this.getWidth(), this.getHeight());
 		graphics = imageBuffer.getGraphics();
+		this.addKeyListener(inputSystem);
+		this.addMouseListener(inputSystem);
+		this.addMouseMotionListener(inputSystem);
 	}
 
 	public void clear() {
@@ -50,86 +52,34 @@ public class GamePanel extends JPanel implements GraphicService, ControlService,
 			draw(linkedList.get(i));
 		}
 	}
-
-	public void drawFps(String asd, int frames) {
-		graphics.setColor(Color.BLACK);
-		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-
-		graphics.drawString(asd + frames, 250, 40);
-	}
-	public void drawHealth(Avatar avatar) {
+	
+	public void drawHealth(GameCharacter avatar, int x, int y) {
+		int origX = x;
 		int hp = avatar.getHealth();
-		int x = 100;
-		int rows = -1;
-		graphics.setColor(new Color(200, 0, 100));
+		graphics.setColor(UITextColor);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-		graphics.drawString("Health: ", x - 70, 40);
-		for (int i = 0; i < hp; i++) {
-			if(i % 6 == 0) {
-				rows++;
-				x=100;
+		graphics.drawString("Health: ", x, y);
+		for (int i = 1; i-1 < hp; i++) {
+			graphics.drawString("\u2665", x+70, y);
+			x+=20;
+			if(i % 8 == 0) {
+				y+=20;
+				x=origX;
 			}
-			graphics.drawString("\u2665", x, 40 + (rows*20));
-			x += 20;
 		}
 	}
 
-	public void drawScore(int score) {
-		graphics.setColor(new Color(200, 0, 100));
+	public void drawText(String string, int x, int y) {
+		graphics.setColor(UITextColor);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-		graphics.drawString("Score:" + score, 600, 40);
+		graphics.drawString(string, x, y);
 	}
 
-	@Override
 	public void redraw() {
 		this.getGraphics().drawImage(imageBuffer, 0, 0, this);
 	}
-
-	@Override
-	public GameControl getUserInput() {
-		return null;
+	public final InputSystem getKeyInput() {
+		return inputSystem;
 	}
-
-	@Override
-	public void command(GameCharacter av, GameControl userInput) {
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-	}
+	
 }

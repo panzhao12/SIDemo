@@ -21,23 +21,45 @@ public abstract class GameCharacter {
 		this.color = color;
 	}
 	
-	public abstract double getX();
+	public double getX() {
+		return x;
+	}
 	
-	public abstract double getY();
+	public double getY() {
+		return y;
+	}
 	
-	public abstract Color color();
+	public Color color() {
+		return color;
+	}
 	
-	public abstract void changeHealth(int value);
+	public void changeHealth(int value) {
+		health += value;
+		if (this.health <= 0) {
+			this.setRemove();
+		}
+	}
 	
-	public abstract void setRemove();
-
+	public void setRemove() {
+		remove = true;
+	}
+	
+	public int getHealth() {
+		return health;
+	}	
+	public boolean getRemove() {
+		return remove;
+	}
+	
+	public int getRadius() {
+		return radius;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
 	public abstract void move(double diffSeconds);
-	
-	public abstract boolean getRemove();
-	
-	public abstract int getRadius();
-	
-	public abstract int getScore();
 	
 	public abstract int type();
 }

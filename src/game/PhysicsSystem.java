@@ -24,15 +24,15 @@ public class PhysicsSystem {
 		return Math.sqrt((dx * dx) + (dy * dy));
 	}
 
-	// returns a shorter list with all collisions between GameCharacter a and list
-	// of enemies
+	// returns a shorter list with all collisions between GameCharacter a and list of enemies
 	public LinkedList<GameCharacter> getCollisions(GameCharacter a, LinkedList<GameCharacter> list) {
 		LinkedList<GameCharacter> collisions = new LinkedList<GameCharacter>();
 		switch (a.type()) {
 		case A_Const.TYPE_AVATAR:
 			for (int i = 0; i < list.size(); i++) {
 				GameCharacter current = list.get(i);
-				if (current.type() == A_Const.TYPE_ENEMY || current.type() == A_Const.TYPE_ENEMY_BULLET) {
+				//check if avatar is touching current object
+				if (current.type() == A_Const.TYPE_ENEMY || current.type() == A_Const.TYPE_ENEMY_BULLET || current.type() == A_Const.TYPE_BOSS) {
 					if (checkCollision(a, current)) {
 						collisions.add(current);
 					}
@@ -43,7 +43,8 @@ public class PhysicsSystem {
 		case A_Const.TYPE_BULLET:
 			for (int i = 0; i < list.size(); i++) {
 				GameCharacter current = list.get(i);
-				if (current.type() == A_Const.TYPE_ENEMY) {
+				//check if bullet is touching current object
+				if (current.type() == A_Const.TYPE_ENEMY || current.type() == A_Const.TYPE_BOSS) {
 					if (checkCollision(a, current)) {
 						collisions.add(current);
 					}
@@ -52,7 +53,6 @@ public class PhysicsSystem {
 			break;
 		}
 		return collisions;
-
 	}
 
 }

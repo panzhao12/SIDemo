@@ -1,6 +1,8 @@
 package character;
 
 import java.util.LinkedList;
+
+import character.avatar.Avatar;
 import character.avatar.Bullet;
 import game.A_Const;
 import game.EnemyWaves;
@@ -9,19 +11,19 @@ import game.PhysicsSystem;
 public class CharacterHandler {
 
 	private EnemyWaves waves;
-	private int enemyCounter;
+	private int waveCounter = 0, enemyCounter = 0, score = 0;
 	private PhysicsSystem physics = new PhysicsSystem();
 	private LinkedList<GameCharacter> objectList = new LinkedList<GameCharacter>();
-	private int score = 0;
-
+	private static Avatar avatar;
 
 	public CharacterHandler() {
 		// initialize EnemyWaves and get the initial wave
 		EnemyWaves waves = new EnemyWaves(this);
 		this.waves = waves;
 		LinkedList<GameCharacter> wave = waves.getNewWave();
+		waveCounter++;
 		for (int i = 0; i < wave.size(); i++) {
-			objectList.add(wave.get(i));
+			addObject(wave.get(i));
 			enemyCounter++;
 		}
 	}
@@ -32,25 +34,19 @@ public class CharacterHandler {
 
 	public void removeObject(GameCharacter gc) {
 		// if removed object is an enemy, decrement enemyCounter
-		if (gc.type() == A_Const.TYPE_ENEMY)
-			enemyCounter--;
+		if (gc.type() == A_Const.TYPE_ENEMY || gc.type() == A_Const.TYPE_BOSS) enemyCounter--;
+		
 		objectList.remove(gc);
-		// if enemies make it across the screen, score will not increase
-		if (gc.x > gc.getRadius()) {
-			score += gc.getScore();
-		}
-		// if all enemies have died and there are more waves to get, get new wave
+		
+		// if all enemies have died and there is another wave to get, get new wave
 		if (enemyCounter < 1 && waves.getCounter() > 0) {
 			LinkedList<GameCharacter> wave = waves.getNewWave();
+			waveCounter++;
 			for (int i = 0; i < wave.size(); i++) {
 				objectList.add(wave.get(i));
 				enemyCounter++;
 			}
 		}
-	}
-
-	public LinkedList<GameCharacter> getList() {
-		return objectList;
 	}
 
 	public void move(double diffSeconds) {
@@ -73,6 +69,8 @@ public class CharacterHandler {
 			for (int i = 0; i < enemyListSmall.size(); i++) {
 				enemyListSmall.get(i).setRemove();
 				gc.changeHealth(-1);
+
+
 			}
 			break;
 		case A_Const.TYPE_BULLET:
@@ -82,11 +80,26 @@ public class CharacterHandler {
 				gc.setRemove();
 			}
 			break;
-		}	
+		}
+	}
+	
+	public LinkedList<GameCharacter> getList() {
+		return objectList;
 	}
 
 	public int getScore() {
 		return score;
+	}
+	
+	public Avatar getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(Avatar a) {
+		avatar = a;
+	}
+	
+	public int getWaveCounter() {
+		return waveCounter;
 	}
 
 }
