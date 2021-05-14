@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements GraphicService {
 
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
-	public final int HEIGHT = A_Const.SCREEN_HEIGHT+100;
+	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
 	private static final Color UITextColor   = new Color(200, 0, 100);
 
 
