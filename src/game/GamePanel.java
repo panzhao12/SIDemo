@@ -4,21 +4,20 @@ import character.GameCharacter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements GraphicService {
 
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
-	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
+	public final int HEIGHT = A_Const.SCREEN_HEIGHT+100;
 	private static final Color UITextColor   = new Color(200, 0, 100);
 
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
 	//private KeyInput keyInput = new KeyInput();
-	private InputSystem inputSystem = new InputSystem();
-
+	private InputSystem inputSystem;
 
 	public GamePanel() {
 		this.setSize(WIDTH, HEIGHT);
@@ -26,6 +25,7 @@ public class GamePanel extends JPanel implements GraphicService {
 				.getDefaultConfiguration();
 		imageBuffer = graphicsConf.createCompatibleImage(this.getWidth(), this.getHeight());
 		graphics = imageBuffer.getGraphics();
+		inputSystem = new InputSystem();
 		this.addKeyListener(inputSystem);
 		this.addMouseListener(inputSystem);
 		this.addMouseMotionListener(inputSystem);
@@ -47,9 +47,9 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawOval(x, y, d, d);
 	}
 	
-	public void draw(LinkedList<GameCharacter> linkedList) {
-		for (int i = 0; i < linkedList.size(); i++) {
-			draw(linkedList.get(i));
+	public void draw(ArrayList<GameCharacter> List) {
+		for (int i = 0; i < List.size(); i++) {
+			draw(List.get(i));
 		}
 	}
 	
@@ -74,12 +74,16 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
 		graphics.drawString(string, x, y);
 	}
+	
+	public void drawShop(Rectangle r, Color c) {
+		graphics.setColor(c);
+		graphics.fillRect(r.x, r.y, r.width, r.height);
+	}
 
 	public void redraw() {
 		this.getGraphics().drawImage(imageBuffer, 0, 0, this);
 	}
-	public final InputSystem getKeyInput() {
+	public final InputSystem getInput() {
 		return inputSystem;
 	}
-	
-}
+ }

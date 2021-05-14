@@ -1,6 +1,6 @@
 package game;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import character.GameCharacter;
 
@@ -25,8 +25,8 @@ public class PhysicsSystem {
 	}
 
 	// returns a shorter list with all collisions between GameCharacter a and list of enemies
-	public LinkedList<GameCharacter> getCollisions(GameCharacter a, LinkedList<GameCharacter> list) {
-		LinkedList<GameCharacter> collisions = new LinkedList<GameCharacter>();
+	public ArrayList<GameCharacter> getCollisions(GameCharacter a, ArrayList<GameCharacter> list) {
+		ArrayList<GameCharacter> collisions = new ArrayList<GameCharacter>();
 		switch (a.type()) {
 		case A_Const.TYPE_AVATAR:
 			for (int i = 0; i < list.size(); i++) {
@@ -54,5 +54,4 @@ public class PhysicsSystem {
 		}
 		return collisions;
 	}
-
 }

@@ -1,11 +1,11 @@
 package character;
 
-import java.util.LinkedList;
-
+import java.util.ArrayList;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import game.A_Const;
 import game.EnemyWaves;
+import game.InputSystem;
 import game.PhysicsSystem;
 
 public class CharacterHandler {
@@ -13,19 +13,18 @@ public class CharacterHandler {
 	private EnemyWaves waves;
 	private int waveCounter = 0, enemyCounter = 0, score = 0;
 	private PhysicsSystem physics = new PhysicsSystem();
-	private LinkedList<GameCharacter> objectList = new LinkedList<GameCharacter>();
+	private ArrayList<GameCharacter> objectList = new ArrayList<GameCharacter>();
 	private static Avatar avatar;
+	protected static CharacterHandler handler;
 
-	public CharacterHandler() {
+	public CharacterHandler(InputSystem inputSystem) {
+		handler = this;
+		avatar = new Avatar(100, 100, 3, inputSystem);
+		addObject(avatar);
 		// initialize EnemyWaves and get the initial wave
-		EnemyWaves waves = new EnemyWaves(this);
+		EnemyWaves waves = new EnemyWaves();
 		this.waves = waves;
-		LinkedList<GameCharacter> wave = waves.getNewWave();
-		waveCounter++;
-		for (int i = 0; i < wave.size(); i++) {
-			addObject(wave.get(i));
-			enemyCounter++;
-		}
+		getNewWave();
 	}
 
 	public void addObject(GameCharacter gc) {
@@ -35,17 +34,12 @@ public class CharacterHandler {
 	public void removeObject(GameCharacter gc) {
 		// if removed object is an enemy, decrement enemyCounter
 		if (gc.type() == A_Const.TYPE_ENEMY || gc.type() == A_Const.TYPE_BOSS) enemyCounter--;
-		
+		score += gc.getScore();
 		objectList.remove(gc);
 		
 		// if all enemies have died and there is another wave to get, get new wave
 		if (enemyCounter < 1 && waves.getCounter() > 0) {
-			LinkedList<GameCharacter> wave = waves.getNewWave();
-			waveCounter++;
-			for (int i = 0; i < wave.size(); i++) {
-				objectList.add(wave.get(i));
-				enemyCounter++;
-			}
+			getNewWave();
 		}
 	}
 
@@ -62,7 +56,7 @@ public class CharacterHandler {
 	}
 
 	public void collisionCheck(GameCharacter gc) {
-		LinkedList<GameCharacter> enemyListSmall;
+		ArrayList<GameCharacter> enemyListSmall;
 		switch (gc.type()) {
 		case A_Const.TYPE_AVATAR:
 			enemyListSmall = physics.getCollisions(gc, objectList);
@@ -83,7 +77,16 @@ public class CharacterHandler {
 		}
 	}
 	
-	public LinkedList<GameCharacter> getList() {
+	private void getNewWave() {
+		ArrayList<GameCharacter> wave = waves.getNewWave();
+		waveCounter++;
+		for (int i = 0; i < wave.size(); i++) {
+			addObject(wave.get(i));
+			enemyCounter++;
+		}
+	}
+	
+	public ArrayList<GameCharacter> getList() {
 		return objectList;
 	}
 
@@ -94,12 +97,8 @@ public class CharacterHandler {
 	public Avatar getAvatar() {
 		return avatar;
 	}
-	public void setAvatar(Avatar a) {
-		avatar = a;
-	}
-	
+
 	public int getWaveCounter() {
 		return waveCounter;
 	}
-
 }

@@ -1,7 +1,6 @@
 package character.enemy;
 
 import java.awt.Color;
-import character.CharacterHandler;
 import character.GameCharacter;
 import character.avatar.Avatar;
 import character.avatar.EnemyBullet;
@@ -10,12 +9,9 @@ import game.A_Const;
 public class Sergeant extends GameCharacter {
 	private double startTime = 0;
 	private double fireRate = 0.5;
-	private CharacterHandler handler;
-	private static Avatar avatar;
 
-	public Sergeant(double x, double y, CharacterHandler handler) {
+	public Sergeant(double x, double y) {
 		super(x, y, 10, 40, 30, 100, Color.CYAN);
-		this.handler = handler;
 	}
 
 	public void move(double diffSeconds) {
@@ -29,7 +25,7 @@ public class Sergeant extends GameCharacter {
 	public void shoot(double diffSeconds) {
 		startTime += diffSeconds;
 		if (startTime >= 1 / fireRate) {
-			avatar = handler.getAvatar();
+			Avatar avatar = handler.getAvatar();
 			double px = avatar.getX()+radius;
 			double py = avatar.getY();
 			double alfa = Math.atan2(py - y, px - x);

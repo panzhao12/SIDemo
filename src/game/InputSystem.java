@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -7,7 +8,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class InputSystem extends KeyAdapter implements MouseListener, MouseMotionListener {
-	private boolean up = false, down = false, left = false, right = false, space = false, mousePressed;
+	private boolean up = false, down = false, left = false, right = false, space = false, mousePressed = false, inside = false;
+	private double mouseX, mouseY;
+	private Point mousePoint;
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -38,10 +41,26 @@ public class InputSystem extends KeyAdapter implements MouseListener, MouseMotio
 		case KeyEvent.VK_RIGHT:	right 	= false; break;
 		}
 	}
-
+ 
+	public double MouseX() {
+		return mouseX;
+	}
+	
+	public double MouseY() {
+		return mouseY;
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mousePressed = true;		
+		mousePressed = true;	
+		mousePoint = e.getPoint();
+		mouseX = e.getX();
+		mouseY = e.getY();
+		System.out.println(mousePoint);
+	}
+	
+	public Point mousePoint() {
+		return mousePoint;
 	}
 	
 	@Override
@@ -73,19 +92,20 @@ public class InputSystem extends KeyAdapter implements MouseListener, MouseMotio
 		return mousePressed;
 	}
 	
-	@Override
-	
+	public boolean inside() {
+		return inside;
+	}
 	public void mouseClicked(MouseEvent e) {
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		inside = true;
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		inside = false;
 	}
 
 
