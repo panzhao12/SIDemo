@@ -56,7 +56,6 @@ public class InputSystem extends KeyAdapter implements MouseListener, MouseMotio
 		mousePoint = e.getPoint();
 		mouseX = e.getX();
 		mouseY = e.getY();
-		System.out.println(mousePoint);
 	}
 	
 	public Point mousePoint() {

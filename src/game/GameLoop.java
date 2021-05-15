@@ -1,6 +1,7 @@
 package game;
 
 import character.CharacterHandler;
+import items.MachineGun;
 
 public class GameLoop {
 
@@ -17,14 +18,15 @@ public class GameLoop {
 		panel.requestFocusInWindow();
 		shop = new ShopSystem(inputSystem);
 
-
 		long lastTick = System.currentTimeMillis();
 		while (true) {
 			long currentTick = System.currentTimeMillis();
 			double diffSeconds = (currentTick - lastTick) / 1000.0;
 			lastTick = currentTick;			
 			// moves all GameCharacters
-			handler.move(diffSeconds);
+			if (!shop.openShop()) {
+				handler.move(diffSeconds);
+			}
 			shop.update();
 			panel.clear();
 			// gets the int "score" from CharacterHandler and draws it
@@ -36,7 +38,10 @@ public class GameLoop {
 			panel.drawText("Wave: " + handler.getWaveCounter(), 350, 40);
 			// draws all GameCharacters
 			panel.draw(handler.getList());
-			panel.drawShop(shop.getRect(), shop.getColor());
+			if (shop.openShop()) {
+				panel.drawShop(shop.shopArray);
+			}
+			panel.drawShopBtn(shop.getRect(), shop.getColor());
 			panel.redraw();
 			
 			//counts the frames per second that you are running at

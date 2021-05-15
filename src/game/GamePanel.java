@@ -11,6 +11,7 @@ public class GamePanel extends JPanel implements GraphicService {
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
+	
 	private static final Color UITextColor   = new Color(200, 0, 100);
 
 
@@ -75,9 +76,19 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawString(string, x, y);
 	}
 	
-	public void drawShop(Rectangle r, Color c) {
+	public void drawShopBtn(Rectangle r, Color c) {
 		graphics.setColor(c);
 		graphics.fillRect(r.x, r.y, r.width, r.height);
+	}
+	public void drawShop(ArrayList<Rectangle> rect) {
+		graphics.setColor(Color.gray);
+		Rectangle shopUI = new Rectangle(150,100,500,400);
+		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
+		for (int i=0; i<rect.size(); i++) {
+			Rectangle r = rect.get(i);
+			graphics.setColor(Color.blue);
+			graphics.fillRect(shopUI.x+r.x, shopUI.y+r.y, r.width, r.height);
+		}
 	}
 
 	public void redraw() {
