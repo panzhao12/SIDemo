@@ -1,7 +1,6 @@
 package game;
 
 import character.CharacterHandler;
-import items.MachineGun;
 
 public class GameLoop {
 
@@ -24,7 +23,7 @@ public class GameLoop {
 			double diffSeconds = (currentTick - lastTick) / 1000.0;
 			lastTick = currentTick;			
 			// moves all GameCharacters
-			if (!shop.openShop()) {
+			if (!shop.getOpenShop()) {
 				handler.move(diffSeconds);
 			}
 			shop.update();
@@ -38,7 +37,7 @@ public class GameLoop {
 			panel.drawText("Wave: " + handler.getWaveCounter(), 350, 40);
 			// draws all GameCharacters
 			panel.draw(handler.getList());
-			if (shop.openShop()) {
+			if (shop.getOpenShop()) {
 				panel.drawShop(shop.shopArray);
 			}
 			panel.drawShopBtn(shop.getRect(), shop.getColor());

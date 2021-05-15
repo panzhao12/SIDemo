@@ -1,6 +1,6 @@
 package items;
 
-abstract class Items {
+public abstract class Items {
 
     protected int price;
     protected String name;

@@ -81,13 +81,14 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.fillRect(r.x, r.y, r.width, r.height);
 	}
 	public void drawShop(ArrayList<Rectangle> rect) {
-		graphics.setColor(Color.gray);
 		Rectangle shopUI = new Rectangle(150,100,500,400);
+
+		graphics.setColor(Color.gray);
 		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
 		for (int i=0; i<rect.size(); i++) {
 			Rectangle r = rect.get(i);
 			graphics.setColor(Color.blue);
-			graphics.fillRect(shopUI.x+r.x, shopUI.y+r.y, r.width, r.height);
+			graphics.fillRect(r.x, r.y, r.width, r.height);
 		}
 	}
 
