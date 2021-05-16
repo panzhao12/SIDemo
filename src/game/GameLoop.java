@@ -16,7 +16,7 @@ public class GameLoop {
 		handler = new CharacterHandler(inputSystem);
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
-		shop = new ShopSystem(inputSystem);
+		shop = new ShopSystem(inputSystem, handler);
 
 		long lastTick = System.currentTimeMillis();
 		while (true) {

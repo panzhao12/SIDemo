@@ -4,6 +4,7 @@ import java.awt.Color;
 import character.GameCharacter;
 import game.A_Const;
 import game.InputSystem;
+import items.Gun;
 
 public class Avatar extends GameCharacter {
 
@@ -11,6 +12,7 @@ public class Avatar extends GameCharacter {
 	private double startTime = 0;
 	//bullets per second
 	private double fireRate = 3;
+	private int damage = 1;
 
 	public Avatar(double x, double y, int health, InputSystem inputSystem) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
@@ -21,7 +23,7 @@ public class Avatar extends GameCharacter {
 		if (inputSystem.isSpace() && !remove || inputSystem.mousePressed()) {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
-				handler.addObject(new Bullet(x + radius, y, 1));
+				handler.addObject(new Bullet(x + radius, y, damage));
 				startTime = 0;
 			}
 		}
@@ -50,5 +52,9 @@ public class Avatar extends GameCharacter {
 	public int type() {
 		return A_Const.TYPE_AVATAR;
 
+	}
+	public void setWeapon(Gun gun) {
+		damage = gun.getDamage();
+		fireRate = gun.getFireRate();
 	}
 }

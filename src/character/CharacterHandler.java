@@ -7,11 +7,12 @@ import game.A_Const;
 import game.EnemyWaves;
 import game.InputSystem;
 import game.PhysicsSystem;
+import items.Gun;
 
 public class CharacterHandler {
 
 	private EnemyWaves waves;
-	private int waveCounter = 0, enemyCounter = 0, score = 0;
+	private int waveCounter = 0, enemyCounter = 0, score = 1000;
 	private PhysicsSystem physics = new PhysicsSystem();
 	private ArrayList<GameCharacter> objectList = new ArrayList<GameCharacter>();
 	private static Avatar avatar;
@@ -84,6 +85,11 @@ public class CharacterHandler {
 			addObject(wave.get(i));
 			enemyCounter++;
 		}
+	}
+	
+	public void setNewWeapon(Gun gun) {
+		avatar.setWeapon(gun);
+		score -= gun.getPrice();
 	}
 	
 	public ArrayList<GameCharacter> getList() {

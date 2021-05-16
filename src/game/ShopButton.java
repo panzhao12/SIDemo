@@ -24,17 +24,23 @@ public class ShopButton extends Rectangle {
 		toggleColor = Color.red;
 	}
 	
-	public void toggle() {
+	public boolean clicked() {
 		if (input.mousePressed() && released) {
 			released = false;
 			if (contains(input.mousePoint())) {
-				toggled = !toggled;
-				if (color == iniColor) {
-					color = toggleColor;
-				} else color = iniColor;
+				return true;
 			}
 		}
 		if (!input.mousePressed()) released = true;
+		return false;
+	}
+
+	public void toggle() {
+		toggled = !toggled;
+		if (color == iniColor) {
+			color = toggleColor;
+		} else
+			color = iniColor;
 	}
 
 	public void clear() {

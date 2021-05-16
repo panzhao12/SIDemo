@@ -3,6 +3,8 @@ package game;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import character.CharacterHandler;
+import character.avatar.Avatar;
 import items.Gun;
 import items.Items;
 
@@ -14,12 +16,15 @@ public class ShopSystem {
 	protected boolean openShop;
 	ShopButton shopBtn;
 	ShopButton purchaseBtn;
+	Avatar avatar;
+	CharacterHandler handler;
 
 
 
-	public ShopSystem(InputSystem inputSystem) {
+	public ShopSystem(InputSystem inputSystem, CharacterHandler a) {
 		this.inputSystem = inputSystem;
-		
+		handler = a;
+		avatar = a.getAvatar();
 		//create an item array with items in it
 		itemArray = new ArrayList<Items>();
 		itemArray.add(new Gun("Machine gun", 1000, 1, 5));
@@ -44,20 +49,25 @@ public class ShopSystem {
 	//gets called every frame
 	public void update() {
 		openShop();
-		if (openShop) selectItem();
+		if (openShop) {
+			selectItem();
+			if (selectedItem != null) {
+				purchaseItem();
+			}
+		}
 	}
 
 	//select an item in the shop
 	private void selectItem() {
 		for (int i = 0; i < itemArray.size(); i++) {
-				btnArray.get(i).toggle();
-				if (btnArray.get(i).contains(inputSystem.mousePoint())) {
-					
-					//unselect all other shopButtons
+				if (btnArray.get(i).clicked()) {
+					btnArray.get(i).toggle();
+					//unselect all other shopButtons if some had been pressed
 					for (int j = 0; j < btnArray.size(); j++) {
-						if (btnArray.get(j) == btnArray.get(i)) continue;
-						btnArray.get(j).color = btnArray.get(j).iniColor;
-						btnArray.get(j).toggled = false;
+						if (btnArray.get(j) != btnArray.get(i)) {
+							btnArray.get(j).color = btnArray.get(j).iniColor;
+							btnArray.get(j).toggled = false;
+						}
 					}
 					
 					//set selectedItem as the item being clicked on
@@ -69,14 +79,23 @@ public class ShopSystem {
 	
 	private void purchaseItem() {
 		if (selectedItem != null) {
-			purchaseBtn.toggle();
-			
+			if (purchaseBtn.clicked()) {
+				if (handler.getScore() >= selectedItem.getPrice()) {
+					int index = itemArray.indexOf(selectedItem);
+					purchaseBtn.toggle();
+					handler.setNewWeapon((Gun) selectedItem);
+					selectedItem = null;
+					btnArray.get(index).toggle();
+					purchaseBtn.toggle();
+					removeItem(index);
+				}
+			}
 		}
 	}
 
 	//open or close the shop screen
 	private void openShop() {
-		shopBtn.toggle();
+		if (shopBtn.clicked()) shopBtn.toggle();
 		if (shopBtn.color == shopBtn.iniColor) openShop = false;
 		else openShop = true;
 	}
