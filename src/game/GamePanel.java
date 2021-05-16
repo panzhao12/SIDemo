@@ -1,6 +1,8 @@
 package game;
 
 import character.GameCharacter;
+import items.Items;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +14,7 @@ public class GamePanel extends JPanel implements GraphicService {
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
 	
-	private static final Color UITextColor   = new Color(200, 0, 100);
+	private static final Color UITextColor = new Color(200, 0, 100);
 
 
 	private BufferedImage imageBuffer;
@@ -76,18 +78,20 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawString(string, x, y);
 	}
 	
-	public void drawShopBtn(Rectangle r, Color c) {
-		graphics.setColor(c);
+	public void drawShopBtn(ShopButton r) {
+		graphics.setColor(r.color);
 		graphics.fillRect(r.x, r.y, r.width, r.height);
+		graphics.setColor(UITextColor);
+		graphics.drawString("Shop", r.x, r.y+r.height/2);
 	}
-	public void drawShop(ArrayList<Rectangle> rect) {
+	public void drawShop(ArrayList<ShopButton> rect) {
 		Rectangle shopUI = new Rectangle(150,100,500,400);
 
 		graphics.setColor(Color.gray);
 		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
 		for (int i=0; i<rect.size(); i++) {
-			Rectangle r = rect.get(i);
-			graphics.setColor(Color.blue);
+			ShopButton r = rect.get(i);
+			graphics.setColor(r.color);
 			graphics.fillRect(r.x, r.y, r.width, r.height);
 		}
 	}
@@ -97,5 +101,14 @@ public class GamePanel extends JPanel implements GraphicService {
 	}
 	public final InputSystem getInput() {
 		return inputSystem;
+	}
+
+	public void drawSelectedItem(Items selectedItem, ShopButton pb) {
+		graphics.setColor(UITextColor);
+		graphics.drawString(selectedItem.getName() + " " + "Price: " + selectedItem.getPrice() , 200, 250);
+		graphics.setColor(pb.color);
+		graphics.fillRect(pb.x, pb.y, pb.width, pb.height);
+		graphics.setColor(UITextColor);
+		graphics.drawString("Purchase", 400, 430);
 	}
  }

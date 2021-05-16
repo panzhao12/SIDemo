@@ -1,5 +1,6 @@
 package items;
 
+
 public abstract class Items {
 
     protected int price;
@@ -8,6 +9,7 @@ public abstract class Items {
     public Items(String name, int price) {
     	this.name = name;
     	this.price = price;
+    	 
     }
     
     public int getPrice() {

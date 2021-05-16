@@ -11,6 +11,7 @@ public class InputSystem extends KeyAdapter implements MouseListener, MouseMotio
 	private boolean up = false, down = false, left = false, right = false, space = false, mousePressed = false, inside = false;
 	private double mouseX, mouseY;
 	private Point mousePoint;
+	public boolean mouseClicked;
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -95,6 +96,7 @@ public class InputSystem extends KeyAdapter implements MouseListener, MouseMotio
 		return inside;
 	}
 	public void mouseClicked(MouseEvent e) {
+	
 	}
 
 	@Override

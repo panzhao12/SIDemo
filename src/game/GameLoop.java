@@ -10,6 +10,7 @@ public class GameLoop {
 	private double time;
 	private int frames, fps;
 	private ShopSystem shop;
+	
 	public void run() {
 		inputSystem = panel.getInput();
 		handler = new CharacterHandler(inputSystem);
@@ -23,10 +24,12 @@ public class GameLoop {
 			double diffSeconds = (currentTick - lastTick) / 1000.0;
 			lastTick = currentTick;			
 			// moves all GameCharacters
+			shop.update();
+
 			if (!shop.getOpenShop()) {
 				handler.move(diffSeconds);
 			}
-			shop.update();
+			//shop.update();
 			panel.clear();
 			// gets the int "score" from CharacterHandler and draws it
 			panel.drawText("Score: " + handler.getScore(), 30, 40);
@@ -38,11 +41,13 @@ public class GameLoop {
 			// draws all GameCharacters
 			panel.draw(handler.getList());
 			if (shop.getOpenShop()) {
-				panel.drawShop(shop.shopArray);
+				panel.drawShop(shop.btnArray);
+				if (shop.selectedItem != null) {
+					panel.drawSelectedItem(shop.selectedItem, shop.purchaseBtn);
+				}
 			}
-			panel.drawShopBtn(shop.getRect(), shop.getColor());
+			panel.drawShopBtn(shop.shopBtn);
 			panel.redraw();
-			
 			//counts the frames per second that you are running at
 			fpsCount(diffSeconds);
 		}
