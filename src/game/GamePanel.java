@@ -13,7 +13,9 @@ public class GamePanel extends JPanel implements GraphicService {
 	private static final long serialVersionUID = 1L;
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
-	
+
+	private static final Font  font = new Font("Helvetica",Font.PLAIN,24);
+
 	private static final Color UITextColor = new Color(200, 0, 100);
 
 
@@ -34,10 +36,6 @@ public class GamePanel extends JPanel implements GraphicService {
 		this.addMouseMotionListener(inputSystem);
 	}
 
-	public void clear() {
-		graphics.setColor(new Color(184, 224, 180));
-		graphics.fillRect(0, 0, WIDTH, HEIGHT);
-	}
 
 	public void draw(GameCharacter gc) {
 		int x = (int) (gc.getX() - gc.getRadius());
@@ -60,7 +58,7 @@ public class GamePanel extends JPanel implements GraphicService {
 		int origX = x;
 		int hp = avatar.getHealth();
 		graphics.setColor(UITextColor);
-		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+		graphics.setFont(font);
 		graphics.drawString("Health: ", x, y);
 		for (int i = 1; i-1 < hp; i++) {
 			graphics.drawString("\u2665", x+70, y);
@@ -74,12 +72,12 @@ public class GamePanel extends JPanel implements GraphicService {
 
 	public void drawText(String string, int x, int y) {
 		graphics.setColor(UITextColor);
-		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+		graphics.setFont(font);
 		graphics.drawString(string, x, y);
 	}
 	
 	public void drawShopBtn(ShopButton r) {
-		graphics.setColor(r.color);
+		graphics.setColor(r.getColor());
 		graphics.fillRect(r.x, r.y, r.width, r.height);
 		graphics.setColor(UITextColor);
 		graphics.drawString("Shop", r.x, r.y+r.height/2);
@@ -91,9 +89,23 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
 		for (int i=0; i<rect.size(); i++) {
 			ShopButton r = rect.get(i);
-			graphics.setColor(r.color);
+			graphics.setColor(r.getColor());
 			graphics.fillRect(r.x, r.y, r.width, r.height);
 		}
+	}
+	
+	public void drawSelectedItem(Items selectedItem, ShopButton pb) {
+		graphics.setColor(UITextColor);
+		graphics.drawString(selectedItem.getName() + " " + "Price: " + selectedItem.getPrice() , 200, 250);
+		graphics.setColor(pb.getColor());
+		graphics.fillRect(pb.x, pb.y, pb.width, pb.height);
+		graphics.setColor(UITextColor);
+		graphics.drawString("Purchase", 400, 430);
+	}
+	
+	public void clear() {
+		graphics.setColor(new Color(184, 224, 180));
+		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 
 	public void redraw() {
@@ -103,12 +115,4 @@ public class GamePanel extends JPanel implements GraphicService {
 		return inputSystem;
 	}
 
-	public void drawSelectedItem(Items selectedItem, ShopButton pb) {
-		graphics.setColor(UITextColor);
-		graphics.drawString(selectedItem.getName() + " " + "Price: " + selectedItem.getPrice() , 200, 250);
-		graphics.setColor(pb.color);
-		graphics.fillRect(pb.x, pb.y, pb.width, pb.height);
-		graphics.setColor(UITextColor);
-		graphics.drawString("Purchase", 400, 430);
-	}
  }

@@ -37,7 +37,7 @@ public class GameLoop {
 			panel.drawText("FPS: " + fps, 250, 40);
 			// draws the current health of the player
 			panel.drawHealth(handler.getAvatar(), 30, 80);
-			panel.drawText("Wave: " + handler.getWaveCounter(), 350, 40);
+			panel.drawText("Wave: " + handler.getWaveCounter(), 400, 40);
 			// draws all GameCharacters
 			panel.draw(handler.getList());
 			if (shop.getOpenShop()) {
