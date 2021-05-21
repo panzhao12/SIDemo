@@ -1,30 +1,29 @@
 package character.avatar;
 
 import java.awt.Color;
-import character.CharacterHandler;
 import character.GameCharacter;
 import game.A_Const;
 import game.InputSystem;
+import items.Gun;
 
 public class Avatar extends GameCharacter {
 
-	private CharacterHandler handler;
 	private InputSystem inputSystem;
 	private double startTime = 0;
 	//bullets per second
 	private double fireRate = 3;
+	private int damage = 1;
 
-	public Avatar(double x, double y, int health, InputSystem keyinput, CharacterHandler handler) {
+	public Avatar(double x, double y, int health, InputSystem inputSystem) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
-		this.inputSystem = keyinput;
-		this.handler = handler;
+		this.inputSystem = inputSystem;
 	}
 
 	public void shoot(double diffSeconds) {
 		if (inputSystem.isSpace() && !remove || inputSystem.mousePressed()) {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
-				handler.addObject(new Bullet(x + radius, y, 1));
+				handler.addObject(new Bullet(x + radius, y, damage));
 				startTime = 0;
 			}
 		}
@@ -33,7 +32,6 @@ public class Avatar extends GameCharacter {
 	@Override
 	public void move(double diffSeconds) {
 		double dx = 0, dy = 0;
-		
 		if	(inputSystem.isUp()) 	 dy--;
 		if	(inputSystem.isDown())  dy++;
 		if	(inputSystem.isLeft())  dx--;
@@ -54,5 +52,9 @@ public class Avatar extends GameCharacter {
 	public int type() {
 		return A_Const.TYPE_AVATAR;
 
+	}
+	public void setWeapon(Gun gun) {
+		damage = gun.getDamage();
+		fireRate = gun.getFireRate();
 	}
 }

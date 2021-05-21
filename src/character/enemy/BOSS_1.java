@@ -2,28 +2,20 @@ package character.enemy;
 
 import java.awt.Color;
 import java.util.Random;
-
-import character.CharacterHandler;
 import character.GameCharacter;
 import character.avatar.EnemyBullet;
 import game.A_Const;
 
 public class BOSS_1 extends GameCharacter {
 	
-	double dx = -1;
-	double dy = 1;
-	double fireRate = 3;
-	double startTime = 0;
-	boolean fireCooldown = false;
-	double timer = 0;
-	int maxHealth;
 	Random random = new Random();
-	CharacterHandler handler;
-	int shootingDuration;
-	public BOSS_1(double x, double y, CharacterHandler handler) {
+	double dx = -1, dy = 1, fireRate = 3, startTime = 3, timer = 0;
+	int maxHealth, shootingDuration;
+	boolean fireCooldown = false;
+	
+	public BOSS_1(double x, double y) {
 		super(x, y, 50, 40, 100, 150, Color.RED);
 		this.maxHealth = health;
-		this.handler = handler;
 	}
 	
 	public void move(double diffSeconds) {
@@ -44,7 +36,6 @@ public class BOSS_1 extends GameCharacter {
 			timer = 0;
 			shootingDuration = random.nextInt(3)+1;
 		}
-		
 	}
 	
 	public void shoot(double diffSeconds) {
@@ -55,15 +46,8 @@ public class BOSS_1 extends GameCharacter {
 		}
 	}
 
-	
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
 	@Override
 	public int type() {
 		return A_Const.TYPE_BOSS;
 	}
-
-
 }

@@ -3,14 +3,12 @@ package character;
 import java.awt.Color;
 
 public abstract class GameCharacter {
-	protected int score;
-	protected boolean remove = false;
-	protected int health;
-	protected double x,y;
-	protected int radius;
-	protected int speed;
-	protected Color color;
 	
+	protected int score, health, radius, speed;
+	protected boolean remove = false;
+	protected double x, y;
+	protected Color color;
+	protected CharacterHandler handler;
 	public GameCharacter(double x, double y, int health, int radius, int score, int speed, Color color) {
 		this.x = x;
 		this.y = y;
@@ -19,6 +17,7 @@ public abstract class GameCharacter {
 		this.score = score;
 		this.speed = speed;
 		this.color = color;
+		this.handler = CharacterHandler.handler;
 	}
 	
 	public double getX() {
@@ -62,4 +61,5 @@ public abstract class GameCharacter {
 	public abstract void move(double diffSeconds);
 	
 	public abstract int type();
+	
 }
