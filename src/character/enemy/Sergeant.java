@@ -29,7 +29,7 @@ public class Sergeant extends GameCharacter {
 			double px = avatar.getX()+radius;
 			double py = avatar.getY();
 			double alfa = Math.atan2(py - y, px - x);
-			if (Math.abs(alfa) > 1.3)	handler.addObject(new EnemyBullet(x - radius, y, alfa ,250, 1, Color.blue));
+			if (Math.abs(alfa) > 1.3)	handler.addObject(new EnemyBullet(x - radius, y, alfa ,250, 10, 1, Color.blue));
 			startTime = 0;
 		}
 	}

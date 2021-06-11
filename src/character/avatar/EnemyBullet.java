@@ -7,11 +7,12 @@ import game.A_Const;
 public class EnemyBullet extends Bullet {
 	double angle;
 	int speed;
-	public EnemyBullet(double x, double y, double angle, int speed, int damage, Color color) {
+	public EnemyBullet(double x, double y, double angle, int speed, int radius, int damage, Color color) {
 		super(x, y, damage);
 		super.color = color;
 		this.angle = angle;
 		this.speed = speed;
+		this.radius = radius;
 	}
 	
 	public void move(double diffSeconds) {
