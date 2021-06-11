@@ -49,9 +49,7 @@ public class GamePanel extends JPanel implements GraphicService {
 	}
 	
 	public void draw(ArrayList<GameCharacter> List) {
-		for (int i = 0; i < List.size(); i++) {
-			draw(List.get(i));
-		}
+		for (int i = 0; i < List.size(); i++) draw(List.get(i));	
 	}
 	
 	public void drawHealth(GameCharacter avatar, int x, int y) {

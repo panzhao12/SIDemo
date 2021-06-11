@@ -26,8 +26,13 @@ public class ShopSystem {
 		itemArray.add(new Gun("Revolver", 500, 2, 2));
 		
 		//shop button that opens and closes the shop
-		shopBtn  = new ShopButton(50, 500, 60, 45, Color.blue, inputSystem);
+		shopBtn  = new ShopButton(600, 20, 60, 40, new Color(82,68,58), inputSystem);
+		shopBtn.toggleColor = new Color(48,39,34);
+		
+		//The purchase button
 		purchaseBtn = new ShopButton(400, 400, 100, 50, Color.yellow, inputSystem);
+		
+		//initialize the btnArray
 		btnArray = new ArrayList<ShopButton>();
 		
 		//initial coordinates for the buttons to fit into the "shop screen"
@@ -41,7 +46,7 @@ public class ShopSystem {
 		}
 	}
 	
-	//gets called every frame
+	//gets called every frame by GameLoop
 	public void update() {
 		openShop();
 		if (openShop) {

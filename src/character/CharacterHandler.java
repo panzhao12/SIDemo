@@ -20,7 +20,7 @@ public class CharacterHandler {
 
 	public CharacterHandler(InputSystem inputSystem) {
 		handler = this;
-		avatar = new Avatar(100, 100, 3, inputSystem);
+		avatar = new Avatar(100, 200, 3, inputSystem);
 		addObject(avatar);
 		// initialize EnemyWaves and get the initial wave
 		EnemyWaves waves = new EnemyWaves();

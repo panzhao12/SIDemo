@@ -32,10 +32,12 @@ public class Avatar extends GameCharacter {
 	@Override
 	public void move(double diffSeconds) {
 		double dx = 0, dy = 0;
+		
 		if	(inputSystem.isUp()) 	 dy--;
 		if	(inputSystem.isDown())  dy++;
 		if	(inputSystem.isLeft())  dx--;
 		if	(inputSystem.isRight()) dx++;
+		
 		shoot(diffSeconds);
 
 		if	(dx != 0 || dy != 0) {

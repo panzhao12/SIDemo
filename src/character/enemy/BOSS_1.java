@@ -41,7 +41,7 @@ public class BOSS_1 extends GameCharacter {
 	public void shoot(double diffSeconds) {
 		startTime += diffSeconds;
 		if (startTime >= 1/fireRate) {
-			handler.addObject(new EnemyBullet(x - radius, y, Math.PI, 400,  1, Color.blue));
+			handler.addObject(new EnemyBullet(x - radius, y, Math.PI, 400, 10,  1, Color.blue));
 			startTime = 0;
 		}
 	}
