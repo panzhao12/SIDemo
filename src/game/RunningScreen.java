@@ -49,6 +49,11 @@ public class RunningScreen implements Screen {
 			}
 			panel.drawShopBtn(shop.shopBtn);
 			panel.redraw();
+			
+			if(handler.getAvatar().getHealth() == 0) {
+				break;
+			}
+			
 			//counts the frames per second that you are running at
 			fpsCount(diffSeconds);
 		}
