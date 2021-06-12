@@ -74,6 +74,13 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawString(string, x, y);
 	}
 	
+	public void drawStartBtn(ShopButton r) {
+		graphics.setColor(r.getColor());
+		graphics.fillRect(r.x, r.y, r.width, r.height);
+		graphics.setColor(UITextColor);
+		drawText("Start", r.x+r.width/10, r.y+2*r.height/3);
+	}
+	
 	public void drawShopBtn(ShopButton r) {
 		graphics.setColor(r.getColor());
 		graphics.fillRect(r.x, r.y, r.width, r.height);

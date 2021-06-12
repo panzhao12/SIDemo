@@ -1,23 +1,36 @@
 package game;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class GameLoop {
 
-	private State state = State.RUNNING;
-	private Map<State, Screen> screens = new HashMap<>();
+	//private State state = State.RUNNING;
+	protected State state = State.START;
 	private GamePanel panel;
-
-    public void addScreen(State state, Screen screen)
-    {
-        screens.put(state, screen);
-    }
 
     public void run()
     {
-        Screen screen = screens.get(state);
-        screen.update(panel);
+    	StartScreen startScrn = new StartScreen();
+    	RunningScreen runScrn = new RunningScreen();
+    	GameOverScreen gmOvScrn = new GameOverScreen();
+    	while(true) {
+    		switch(state) {
+            case START:
+                startScrn.update(panel);
+                state = State.RUNNING;
+                break;
+            case RUNNING:
+                runScrn.update(panel);
+                state = State.GAME_OVER;
+                break;
+            case GAME_OVER:
+            	gmOvScrn.update(panel);
+            	state = State.RUNNING;
+            	break;
+            default:
+                throw new RuntimeException("Unknown state: " + state);
+            }
+    	}
+    	
+        
     }
 		
     public void setGraphicPanel(GamePanel panel) {
