@@ -1,6 +1,7 @@
 package character.avatar;
 
 import java.awt.Color;
+
 import character.GameCharacter;
 import game.A_Const;
 import game.InputSystem;
@@ -13,6 +14,7 @@ public class Avatar extends GameCharacter {
 	//bullets per second
 	private double fireRate = 3;
 	private int damage = 1;
+
 
 	public Avatar(double x, double y, int health, InputSystem inputSystem) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
@@ -59,4 +61,36 @@ public class Avatar extends GameCharacter {
 		damage = gun.getDamage();
 		fireRate = gun.getFireRate();
 	}
+	
+	 	
+	  public void healthUp() {
+		++health;
+		
+	} 
+	  
+	  
+	  public void damageUp() {
+		++damage;
+		
+	} 
+	  
+	  public void fireRateUp() {
+		++fireRate;
+		
+	}
+	  
+	  public int getHealth() {
+		  return health;
+	  }
+	  
+	  public int getDamage() {
+		  return damage;
+	  }
+	  
+	  public double getFirerate() {
+		  return fireRate;
+	  }
+	  
+	  
+
 }

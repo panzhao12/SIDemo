@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import character.CharacterHandler;
-import items.Gun;
-import items.Items;
+import items.*;
 
 public class ShopSystem {
 	
@@ -21,12 +20,14 @@ public class ShopSystem {
 
 		this.handler = handler;
 		//create an item array with items in it
+		
 		itemArray = new ArrayList<Items>();
-		itemArray.add(new Gun("Machine gun", 1000, 1, 5));
-		itemArray.add(new Gun("Revolver", 500, 2, 2));
+		itemArray.add(new Damage("Damage Up", 1000));
+		itemArray.add(new Firerate("Firerate Up", 750));
+		itemArray.add(new Health("Health Up", 750));
 		
 		//shop button that opens and closes the shop
-		shopBtn  = new ShopButton(600, 20, 60, 40, new Color(82,68,58), inputSystem);
+		shopBtn  = new ShopButton(600, 20, 60, 40, new Color(72,68,58), inputSystem);
 		shopBtn.toggleColor = new Color(48,39,34);
 		
 		//The purchase button
@@ -53,6 +54,7 @@ public class ShopSystem {
 			selectItem();
 			if (selectedItem != null) {
 				purchaseItem();
+				
 			}
 		}
 	}
@@ -81,15 +83,34 @@ public class ShopSystem {
 				if (handler.getScore() >= selectedItem.getPrice()) {
 					int index = itemArray.indexOf(selectedItem);
 					purchaseBtn.toggle();
-					handler.setNewWeapon((Gun) selectedItem);
-					selectedItem = null;
-					btnArray.get(index).toggle();
-					purchaseBtn.toggle();
-					removeItem(index);
+					
+					if(selectedItem instanceof Damage) {
+						handler.setDamage((Damage) selectedItem );
+						selectedItem = null;
+						btnArray.get(index).toggle();
+						purchaseBtn.toggle();
+					}
+
+					if(selectedItem instanceof Health) {
+							handler.setHealth((Health) selectedItem );
+							selectedItem = null;
+							btnArray.get(index).toggle();
+							purchaseBtn.toggle();
+					}
+					
+					if(selectedItem instanceof Firerate) {
+						handler.setFirerate((Firerate) selectedItem );
+						selectedItem = null;
+						btnArray.get(index).toggle();
+						purchaseBtn.toggle();
+					}
+
+
 				}
 			}
 		}
 	}
+	
 
 	//open or close the shop screen
 	private void openShop() {
@@ -98,11 +119,6 @@ public class ShopSystem {
 		else openShop = true;
 	}
 	
-	private void removeItem(int index) {
-		if (index < 0 || index > itemArray.size()) return;
-		itemArray.remove(index);
-		btnArray.remove(index);
-	}
 
 	public boolean getOpenShop() {
 		return openShop;

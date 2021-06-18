@@ -7,6 +7,7 @@ import game.A_Const;
 
 public class Rookie extends GameCharacter {
 
+	
 	public Rookie(double x, double y) {
 		super(x, y, 5, 20, 10, 100, Color.PINK);
 	}

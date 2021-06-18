@@ -3,7 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-public class ShopButton extends Rectangle {
+public class ShopButton extends Rectangle  {
 
 	private static final long serialVersionUID = 1L;
 

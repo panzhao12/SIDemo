@@ -1,6 +1,7 @@
 package character;
 
 import java.awt.Color;
+import java.awt.Image;
 
 public abstract class GameCharacter {
 	
@@ -57,6 +58,7 @@ public abstract class GameCharacter {
 	public int getScore() {
 		return score;
 	}
+
 	
 	public abstract void move(double diffSeconds);
 	

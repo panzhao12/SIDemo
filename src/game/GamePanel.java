@@ -57,9 +57,9 @@ public class GamePanel extends JPanel implements GraphicService {
 		int hp = avatar.getHealth();
 		graphics.setColor(UITextColor);
 		graphics.setFont(font);
-		graphics.drawString("Health: ", x, y);
+		graphics.drawString("Health:", x, y);
 		for (int i = 1; i-1 < hp; i++) {
-			graphics.drawString("\u2665", x+70, y);
+			graphics.drawString("  \u2665", x+70, y);
 			x+=20;
 			if(i % 8 == 0) {
 				y+=20;
@@ -76,17 +76,25 @@ public class GamePanel extends JPanel implements GraphicService {
 	
 	public void drawStartBtn(ShopButton r) {
 		graphics.setColor(r.getColor());
-		graphics.fillRect(r.x, r.y, r.width, r.height);
+		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
-		drawText("Start", r.x+r.width/10, r.y+2*r.height/3);
+		drawText("Start", r.x+r.width/15, r.y+2*r.height/3);
 	}
 	
 	public void drawShopBtn(ShopButton r) {
 		graphics.setColor(r.getColor());
-		graphics.fillRect(r.x, r.y, r.width, r.height);
+		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
-		graphics.drawString("Shop", r.x, r.y+r.height/2);
+		drawText("Shop",  r.x+r.width/30, r.y+4*r.height/6);
 	}
+	
+	public void drawBtn(ShopButton r, String s) {
+		graphics.setColor(r.getColor());
+		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
+		graphics.setColor(UITextColor);
+		drawText(s,  r.x+r.width/30, r.y+4*r.height/6);
+	}
+	
 	public void drawShop(ArrayList<ShopButton> rect) {
 		Rectangle shopUI = new Rectangle(150,100,500,400);
 
@@ -95,24 +103,33 @@ public class GamePanel extends JPanel implements GraphicService {
 		for (int i=0; i<rect.size(); i++) {
 			ShopButton r = rect.get(i);
 			graphics.setColor(r.getColor());
-			graphics.fillRect(r.x, r.y, r.width, r.height);
+			graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		}
 	}
 	
 	public void drawSelectedItem(Items selectedItem, ShopButton pb) {
 		graphics.setColor(UITextColor);
-		graphics.drawString(selectedItem.getName() + " " + "Price: " + selectedItem.getPrice() , 200, 250);
+		graphics.drawString(selectedItem.getName(), 220, 240);
+		graphics.drawString("Price: " + selectedItem.getPrice() , 220, 390);
 		graphics.setColor(pb.getColor());
-		graphics.fillRect(pb.x, pb.y, pb.width, pb.height);
+		graphics.drawImage(selectedItem.getImage(), 220, 260, null);
+		graphics.fill3DRect(pb.x, pb.y, pb.width + 5, pb.height,true);
 		graphics.setColor(UITextColor);
-		graphics.drawString("Purchase", 400, 430);
+		drawText("Purchase", 401, 433);
 	}
 	
+		public void drawImage(Image img, int x, int y) {
+		
+		graphics.drawImage(img, x, y, null);
+		
+	}
+		
 	public void clear() {
 		graphics.setColor(new Color(184, 224, 180));
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 
+	
 	public void redraw() {
 		this.getGraphics().drawImage(imageBuffer, 0, 0, this);
 	}
