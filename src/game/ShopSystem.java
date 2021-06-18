@@ -73,6 +73,8 @@ public class ShopSystem {
 					//set selectedItem as the item being clicked on
 					if (btnArray.get(i).toggled) selectedItem = itemArray.get(i);
 					else selectedItem = null;
+					Audio.playSound("audio/click.wav");
+
 			}
 		}
 	}
@@ -83,7 +85,7 @@ public class ShopSystem {
 				if (handler.getScore() >= selectedItem.getPrice()) {
 					int index = itemArray.indexOf(selectedItem);
 					purchaseBtn.toggle();
-					
+					Audio.playSound("audio/powerup.wav");
 					if(selectedItem instanceof Damage) {
 						handler.setDamage((Damage) selectedItem );
 						selectedItem = null;
@@ -114,9 +116,16 @@ public class ShopSystem {
 
 	//open or close the shop screen
 	private void openShop() {
-		if (shopBtn.clicked()) shopBtn.toggle();
-		if (shopBtn.color == shopBtn.iniColor) openShop = false;
-		else openShop = true;
+		if (shopBtn.clicked()) {
+			shopBtn.toggle();
+			Audio.playSound("audio/click.wav");
+			if (shopBtn.color == shopBtn.iniColor) {
+				openShop = false;
+			}
+			else if (!openShop){
+				openShop = true;
+			}
+		}
 	}
 	
 

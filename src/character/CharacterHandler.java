@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import character.avatar.Avatar;
 import character.avatar.Bullet;
 import game.A_Const;
+import game.Audio;
 import game.EnemyWaves;
 import game.InputSystem;
 import game.PhysicsSystem;
@@ -34,7 +35,9 @@ public class CharacterHandler {
 
 	public void removeObject(GameCharacter gc) {
 		// if removed object is an enemy, decrement enemyCounter
-		if (gc.type() == A_Const.TYPE_ENEMY || gc.type() == A_Const.TYPE_BOSS) enemyCounter--;
+		if (gc.type() == A_Const.TYPE_ENEMY || gc.type() == A_Const.TYPE_BOSS) {
+			enemyCounter--;
+		}
 		score += gc.getScore();
 		objectList.remove(gc);
 		
@@ -64,6 +67,7 @@ public class CharacterHandler {
 			for (int i = 0; i < enemyListSmall.size(); i++) {
 				enemyListSmall.get(i).setRemove();
 				gc.changeHealth(-1);
+				Audio.playSound("audio/hurt.wav");
 
 
 			}

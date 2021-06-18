@@ -3,6 +3,8 @@ package character;
 import java.awt.Color;
 import java.awt.Image;
 
+import game.Audio;
+
 public abstract class GameCharacter {
 	
 	protected int score, health, radius, speed;

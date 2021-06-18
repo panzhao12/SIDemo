@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import character.GameCharacter;
 import game.A_Const;
+import game.Audio;
 import game.InputSystem;
 import items.Gun;
 
@@ -26,6 +27,8 @@ public class Avatar extends GameCharacter {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
 				handler.addObject(new Bullet(x + radius, y, damage));
+				//Audio.stop();
+				Audio.playSound("audio/bullet.wav");
 				startTime = 0;
 			}
 		}

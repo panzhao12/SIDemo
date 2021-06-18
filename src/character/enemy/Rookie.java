@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import character.GameCharacter;
 import game.A_Const;
+import game.Audio;
 
 public class Rookie extends GameCharacter {
 
@@ -18,7 +19,10 @@ public class Rookie extends GameCharacter {
 			x = A_Const.SCREEN_WIDTH+radius;
 		}
 	}
-
+	public void setRemove() {
+		remove = true;
+		Audio.playSound("audio/explosion_2.wav");
+	}
 	@Override
 	public int type() {
 		return A_Const.TYPE_ENEMY;
