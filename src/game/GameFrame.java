@@ -13,7 +13,7 @@ public class GameFrame extends JFrame {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		ImageIcon gameIcon = new ImageIcon("src/icon_220.png");
+		ImageIcon gameIcon = new ImageIcon("sprites/icon_220.png");
 		setIconImage(gameIcon.getImage());
 
 		setTitle("Space Impact Demo");

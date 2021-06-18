@@ -7,7 +7,7 @@ import game.A_Const;
 import game.EnemyWaves;
 import game.InputSystem;
 import game.PhysicsSystem;
-import items.Gun;
+import items.*;
 
 public class CharacterHandler {
 
@@ -92,6 +92,26 @@ public class CharacterHandler {
 		score -= gun.getPrice();
 	}
 	
+	  public void setHealth(Health health) { 
+		  avatar.healthUp(); 
+		  score -= health.getPrice();
+		
+	} 
+	  
+	  
+	  public void setDamage(Damage damage) { 
+		  avatar.damageUp(); 
+		  score -= damage.getPrice();
+		
+	}   
+	  
+	  
+	  public void setFirerate(Firerate firerate) { 
+		  avatar.fireRateUp(); 
+		  score -= firerate.getPrice();
+		
+	} 
+
 	public ArrayList<GameCharacter> getList() {
 		return objectList;
 	}
