@@ -74,40 +74,40 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawString(string, x, y);
 	}
 	
-	public void drawStartBtn(ShopButton r) {
+	public void drawStartBtn(GameButton r) {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
 		drawText("Start", r.x+r.width/15, r.y+2*r.height/3);
 	}
 	
-	public void drawShopBtn(ShopButton r) {
+	public void drawShopBtn(GameButton r) {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
 		drawText("Shop",  r.x+r.width/30, r.y+4*r.height/6);
 	}
 	
-	public void drawBtn(ShopButton r, String s) {
+	public void drawBtn(GameButton r, String s) {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
 		drawText(s,  r.x+r.width/30, r.y+4*r.height/6);
 	}
 	
-	public void drawShop(ArrayList<ShopButton> rect) {
+	public void drawShop(ArrayList<GameButton> rect) {
 		Rectangle shopUI = new Rectangle(150,100,500,400);
 
 		graphics.setColor(Color.gray);
 		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
 		for (int i=0; i<rect.size(); i++) {
-			ShopButton r = rect.get(i);
+			GameButton r = rect.get(i);
 			graphics.setColor(r.getColor());
 			graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		}
 	}
 	
-	public void drawSelectedItem(Items selectedItem, ShopButton pb) {
+	public void drawSelectedItem(Items selectedItem, GameButton pb) {
 		graphics.setColor(UITextColor);
 		graphics.drawString(selectedItem.getName(), 220, 240);
 		graphics.drawString("Price: " + selectedItem.getPrice() , 220, 390);
