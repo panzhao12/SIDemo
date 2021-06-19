@@ -11,6 +11,8 @@ import items.Gun;
 public class Avatar extends GameCharacter {
 
 	private InputSystem inputSystem;
+	protected String deathSound = "audio/explosion_3.wav";
+	private String shootingSound = "audio/bullet.wav";
 	private double startTime = 0;
 	//bullets per second
 	private double fireRate = 3;
@@ -20,6 +22,7 @@ public class Avatar extends GameCharacter {
 	public Avatar(double x, double y, int health, InputSystem inputSystem) {
 		super(x, y, health, 20, 0, 300, Color.GREEN);
 		this.inputSystem = inputSystem;
+		super.deathSound = deathSound;
 	}
 
 	public void shoot(double diffSeconds) {
@@ -28,7 +31,7 @@ public class Avatar extends GameCharacter {
 			if (startTime >= 1/fireRate) {
 				handler.addObject(new Bullet(x + radius, y, damage));
 				//Audio.stop();
-				Audio.playSound("audio/bullet.wav");
+				Audio.playSound(shootingSound);
 				startTime = 0;
 			}
 		}

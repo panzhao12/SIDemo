@@ -12,6 +12,7 @@ public abstract class GameCharacter {
 	protected double x, y;
 	protected Color color;
 	protected CharacterHandler handler;
+	protected String deathSound;
 	public GameCharacter(double x, double y, int health, int radius, int score, int speed, Color color) {
 		this.x = x;
 		this.y = y;
@@ -44,6 +45,7 @@ public abstract class GameCharacter {
 	
 	public void setRemove() {
 		remove = true;
+		Audio.playSound(deathSound);
 	}
 	
 	public int getHealth() {

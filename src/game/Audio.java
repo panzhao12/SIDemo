@@ -11,7 +11,6 @@ public class Audio {
 		try {
 			File file = new File(sound);
 			AudioInputStream audio = AudioSystem.getAudioInputStream(file);
-			// acquire the audio format and create the Dataline.Info object
 			// obtain the clip
 			clip = AudioSystem.getClip();
 			// open the audio input stream and start playing
@@ -20,18 +19,18 @@ public class Audio {
 		}
 	}
 
-	// a method to stop the song
+	// a method to stop the audio
 	public static void stop() {
 		clip.stop();
 	}
 
-	// a static method to start playing the song
+	// a static method to start playing the audio
 	public static void playSound(String sound) {
 		Audio audio = new Audio(sound);
 		audio.play();
 	}
 
-	// method to start and stop the song
+	// method to start the audio file
 	public void play() {
 		clip.start();
 	}

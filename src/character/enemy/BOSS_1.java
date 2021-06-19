@@ -10,6 +10,8 @@ import game.Audio;
 public class BOSS_1 extends GameCharacter {
 	
 	Random random = new Random();
+	protected String deathSound = "audio/explosion.wav";
+	private String shootingSound = "audio/bosslaser.wav";
 	double dx = -1, dy = 1, fireRate = 3, startTime = 3, timer = 0;
 	int maxHealth, shootingDuration;
 	boolean fireCooldown = false;
@@ -17,6 +19,7 @@ public class BOSS_1 extends GameCharacter {
 	public BOSS_1(double x, double y) {
 		super(x, y, 50, 40, 100, 150, Color.RED);
 		this.maxHealth = health;
+		super.deathSound = deathSound;
 	}
 	
 	public void move(double diffSeconds) {
@@ -43,13 +46,11 @@ public class BOSS_1 extends GameCharacter {
 		startTime += diffSeconds;
 		if (startTime >= 1/fireRate) {
 			handler.addObject(new EnemyBullet(x - radius, y, Math.PI, 400, 10,  1, Color.blue));
+			Audio.playSound(shootingSound);
 			startTime = 0;
 		}
 	}
-	public void setRemove() {
-		remove = true;
-		Audio.playSound("audio/explosion.wav");
-	}
+
 	@Override
 	public int type() {
 		return A_Const.TYPE_BOSS;
