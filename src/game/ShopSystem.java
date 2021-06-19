@@ -9,10 +9,10 @@ import items.*;
 public class ShopSystem {
 	
 	protected ArrayList<Items> itemArray;
-	protected ArrayList<ShopButton> btnArray;
+	protected ArrayList<GameButton> btnArray;
 	protected Items selectedItem;
 	protected boolean openShop;
-	ShopButton shopBtn, purchaseBtn;
+	GameButton shopBtn, purchaseBtn;
 	CharacterHandler handler;
 	
 	
@@ -27,14 +27,14 @@ public class ShopSystem {
 		itemArray.add(new Health("Health Up", 750));
 		
 		//shop button that opens and closes the shop
-		shopBtn  = new ShopButton(600, 20, 60, 40, new Color(72,68,58), inputSystem);
+		shopBtn  = new GameButton(600, 20, 60, 40, new Color(72,68,58), inputSystem);
 		shopBtn.toggleColor = new Color(48,39,34);
 		
 		//The purchase button
-		purchaseBtn = new ShopButton(400, 400, 100, 50, Color.yellow, inputSystem);
+		purchaseBtn = new GameButton(400, 400, 100, 50, Color.yellow, inputSystem);
 		
 		//initialize the btnArray
-		btnArray = new ArrayList<ShopButton>();
+		btnArray = new ArrayList<GameButton>();
 		
 		//initial coordinates for the buttons to fit into the "shop screen"
 		int x = 170;
@@ -42,7 +42,7 @@ public class ShopSystem {
 		
 		//create the buttons for items in the shop
 		for (int i = 0; i < itemArray.size(); i++) {
-			btnArray.add(new ShopButton(x, y, 50, 50, Color.blue, inputSystem));
+			btnArray.add(new GameButton(x, y, 50, 50, Color.blue, inputSystem));
 			x += 80;
 		}
 	}

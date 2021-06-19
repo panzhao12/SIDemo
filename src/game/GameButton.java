@@ -1,9 +1,8 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.*;
 
-public class ShopButton extends Rectangle  {
+public class GameButton extends Rectangle  {
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,7 +11,7 @@ public class ShopButton extends Rectangle  {
 	private boolean released = true;
 	boolean toggled = false;
 	
-	ShopButton(int x, int y, int width, int height, Color color, InputSystem input) {
+	GameButton(int x, int y, int width, int height, Color color, InputSystem input) {
 		super(x, y, width, height);
 		this.color = color;
 		iniColor = color;
@@ -24,7 +23,8 @@ public class ShopButton extends Rectangle  {
 	public boolean clicked() {
 		if (input.mousePressed() && released) {
 			released = false;
-			if (contains(input.mousePoint())) {
+			Point mousePoint = input.mousePoint();
+			if (mousePoint != null && contains(mousePoint)) {
 				return true;
 			}
 		}
