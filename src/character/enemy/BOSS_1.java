@@ -5,6 +5,7 @@ import java.util.Random;
 import character.GameCharacter;
 import character.avatar.EnemyBullet;
 import game.A_Const;
+import game.Audio;
 
 public class BOSS_1 extends GameCharacter {
 	
@@ -45,7 +46,10 @@ public class BOSS_1 extends GameCharacter {
 			startTime = 0;
 		}
 	}
-
+	public void setRemove() {
+		remove = true;
+		Audio.playSound("audio/explosion.wav");
+	}
 	@Override
 	public int type() {
 		return A_Const.TYPE_BOSS;

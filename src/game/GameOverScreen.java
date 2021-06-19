@@ -30,6 +30,7 @@ public class GameOverScreen implements Screen {
 			panel.redraw();
 			
 			if(restartBtn.clicked()) { 
+				Audio.playSound("audio/click.wav");
 				break;
 			}
 			

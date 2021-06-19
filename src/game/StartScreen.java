@@ -33,6 +33,7 @@ public class StartScreen extends GameLoop implements Screen {
 			panel.redraw();
 			
 			if(startBtn.clicked()) { 
+				Audio.playSound("audio/click.wav");
 				break;
 			}
 			
