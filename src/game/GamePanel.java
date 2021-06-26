@@ -83,11 +83,11 @@ public class GamePanel extends JPanel implements GraphicService {
 	}
 	
 	public void drawCenteredBtn(GameButton r, String s) {
-		graphics.setColor(r.getColor());
 		int margin = 10;
 		FontMetrics metrics = graphics.getFontMetrics(font);
-	    int x = (WIDTH - metrics.stringWidth(s)) / 2;
-		graphics.fill3DRect(x - margin, r.y, metrics.stringWidth(s) + 2*margin, r.height, true);
+	    r.setBounds((WIDTH - metrics.stringWidth(s)) / 2 - margin, r.y, metrics.stringWidth(s) + 2*margin, r.height);
+	    graphics.setColor(r.getColor());
+	    graphics.fill3DRect(r.x, r.y, r.width, r.height, true);
 		graphics.setColor(UITextColor);
 		drawCenteredString(s, r.y+2*r.height/3);
 	}

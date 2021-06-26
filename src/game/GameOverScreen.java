@@ -80,7 +80,7 @@ public class GameOverScreen implements Screen {
 		    if (game.RunningScreen.currentScore > highScore)
 		    {    
 		        panel.drawCenteredString("New high score!", restartBtn.y + 100);
-		        panel.drawCenteredString("Your score: " + highScore, restartBtn.y + 150);
+		        panel.drawCenteredString("Your score: " + game.RunningScreen.currentScore, restartBtn.y + 150);
 		    } else if (game.RunningScreen.currentScore == highScore) {
 		    	panel.drawCenteredString("You tied the high score!", restartBtn.y + 100);
 		    	panel.drawCenteredString("Your score: " + highScore, restartBtn.y + 150);
