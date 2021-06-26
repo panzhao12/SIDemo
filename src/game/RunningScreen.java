@@ -9,6 +9,7 @@ public class RunningScreen implements Screen {
 	private int frames, fps;
 	private ShopSystem shop;
 	private InputSystem inputSystem;
+	protected static int currentScore;
 	
 	@Override
 	public void update(GamePanel panel) 
@@ -51,6 +52,7 @@ public class RunningScreen implements Screen {
 			panel.redraw();
 			
 			if(handler.getAvatar().getHealth() == 0) {
+				currentScore = handler.getScore();
 				break;
 			}
 			
