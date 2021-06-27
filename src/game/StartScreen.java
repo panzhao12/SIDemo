@@ -27,8 +27,8 @@ public class StartScreen extends GameLoop implements Screen {
 		while(true) {		
 			panel.clear();
 			panel.setLayout(null);
-			panel.drawStartBtn(startBtn);
-			panel.drawImage(img, 280,100);
+			panel.drawCenteredBtn(startBtn, "Start");
+			panel.drawImage(img, A_Const.SCREEN_WIDTH / 2 - 150, 100);
 			panel.redraw();
 			
 			if(startBtn.clicked()) { 

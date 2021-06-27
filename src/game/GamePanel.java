@@ -74,11 +74,22 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawString(string, x, y);
 	}
 	
-	public void drawStartBtn(GameButton r) {
-		graphics.setColor(r.getColor());
-		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
+	public void drawCenteredString(String string, int y) {
+	    // Draw a horizontally centered string on the screen
+	    FontMetrics metrics = graphics.getFontMetrics(font);
+	    int x = (WIDTH - metrics.stringWidth(string)) / 2;
+	    graphics.setFont(font);
+	    graphics.drawString(string, x, y);
+	}
+	
+	public void drawCenteredBtn(GameButton r, String s) {
+		int margin = 10;
+		FontMetrics metrics = graphics.getFontMetrics(font);
+	    r.setBounds((WIDTH - metrics.stringWidth(s)) / 2 - margin, r.y, metrics.stringWidth(s) + 2*margin, r.height);
+	    graphics.setColor(r.getColor());
+	    graphics.fill3DRect(r.x, r.y, r.width, r.height, true);
 		graphics.setColor(UITextColor);
-		drawText("Start", r.x+r.width/15, r.y+2*r.height/3);
+		drawCenteredString(s, r.y+2*r.height/3);
 	}
 	
 	public void drawShopBtn(GameButton r) {
