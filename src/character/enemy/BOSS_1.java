@@ -3,7 +3,6 @@ package character.enemy;
 import java.awt.Color;
 import java.util.Random;
 import character.GameCharacter;
-import character.avatar.EnemyBullet;
 import game.A_Const;
 import game.Audio;
 

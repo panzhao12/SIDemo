@@ -3,6 +3,7 @@ package character.avatar;
 import java.awt.Color;
 
 import character.GameCharacter;
+import character.bullet.Bullet;
 import game.A_Const;
 import game.Audio;
 import game.InputSystem;
