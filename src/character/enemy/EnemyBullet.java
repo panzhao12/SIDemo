@@ -1,7 +1,8 @@
-package character.avatar;
+package character.enemy;
 
 import java.awt.Color;
 
+import character.bullet.Bullet;
 import game.A_Const;
 
 public class EnemyBullet extends Bullet {

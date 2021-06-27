@@ -2,7 +2,7 @@ package character;
 
 import java.util.ArrayList;
 import character.avatar.Avatar;
-import character.avatar.Bullet;
+import character.bullet.Bullet;
 import game.A_Const;
 import game.Audio;
 import game.EnemyWaves;

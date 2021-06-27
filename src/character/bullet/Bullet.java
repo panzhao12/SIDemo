@@ -1,4 +1,4 @@
-package character.avatar;
+package character.bullet;
 
 import java.awt.Color;
 
