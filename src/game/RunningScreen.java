@@ -1,6 +1,11 @@
 package game;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
+
 import character.CharacterHandler;
+
 
 public class RunningScreen implements Screen {
 	
@@ -18,7 +23,10 @@ public class RunningScreen implements Screen {
 		handler = new CharacterHandler(inputSystem);
 		panel.setFocusable(true);
 		panel.requestFocusInWindow();
+		SpriteHandler sh = new SpriteHandler(4);
 		shop = new ShopSystem(inputSystem, handler);
+		ImageIcon logo = new ImageIcon("sprites/bckgrd.gif");
+		Image img = logo.getImage();
 
 		long lastTick = System.currentTimeMillis();
 		while (true) {
@@ -33,6 +41,7 @@ public class RunningScreen implements Screen {
 			}
 			//shop.update();
 			panel.clear();
+			panel.drawImage(img, 0, 0);
 			// gets the int "score" from CharacterHandler and draws it
 			panel.drawText("Score: " + handler.getScore(), 30, 40);
 			//draws fps on screen
@@ -45,7 +54,7 @@ public class RunningScreen implements Screen {
 			if (shop.getOpenShop()) {
 				panel.drawShop(shop.btnArray);
 				if (shop.selectedItem != null) {
-					panel.drawSelectedItem(shop.selectedItem, shop.purchaseBtn);
+					panel.drawSelectedItem(shop.selectedItem, shop.purchaseBtn, sh);
 				}
 			}
 			panel.drawShopBtn(shop.shopBtn);

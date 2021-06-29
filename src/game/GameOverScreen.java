@@ -72,7 +72,7 @@ public class GameOverScreen implements Screen {
 	    // Display Game Over screen
 		while(true) {		
 			panel.clear();
-			panel.drawImage(img, A_Const.SCREEN_WIDTH / 2 - 200, 40);
+			panel.drawImage(img, A_Const.SCREEN_WIDTH / 2 - 217, 40);
 			panel.drawCenteredBtn(restartBtn,"Retry");
 			
 			

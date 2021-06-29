@@ -1,13 +1,16 @@
 package character.avatar;
 
-import java.awt.Color;
+
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import character.GameCharacter;
 import character.bullet.Bullet;
 import game.A_Const;
 import game.Audio;
 import game.InputSystem;
-import items.Gun;
+import items.*;
 
 public class Avatar extends GameCharacter {
 
@@ -18,10 +21,14 @@ public class Avatar extends GameCharacter {
 	//bullets per second
 	private double fireRate = 3;
 	private int damage = 1;
+	static ImageIcon logo = new ImageIcon("sprites/shipp2.png");
+	static Image img = logo.getImage();
+	
+	
 
 
 	public Avatar(double x, double y, int health, InputSystem inputSystem) {
-		super(x, y, health, 20, 0, 300, Color.GREEN);
+		super(x, y, health, 20, 0, 300,img);
 		this.inputSystem = inputSystem;
 		super.deathSound = deathSound;
 	}
@@ -30,7 +37,7 @@ public class Avatar extends GameCharacter {
 		if (inputSystem.isSpace() && !remove || inputSystem.mousePressed()) {
 			startTime += diffSeconds;
 			if (startTime >= 1/fireRate) {
-				handler.addObject(new Bullet(x + radius, y, damage));
+				handler.addObject(new Bullet(x, y, damage));
 				//Audio.stop();
 				Audio.playSound(shootingSound);
 				startTime = 0;
@@ -42,7 +49,7 @@ public class Avatar extends GameCharacter {
 	public void move(double diffSeconds) {
 		double dx = 0, dy = 0;
 		
-		if	(inputSystem.isUp()) 	 dy--;
+		if	(inputSystem.isUp()) 	dy--;
 		if	(inputSystem.isDown())  dy++;
 		if	(inputSystem.isLeft())  dx--;
 		if	(inputSystem.isRight()) dx++;
@@ -72,6 +79,7 @@ public class Avatar extends GameCharacter {
 	 	
 	  public void healthUp() {
 		++health;
+		
 		
 	} 
 	  

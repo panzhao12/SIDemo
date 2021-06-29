@@ -2,10 +2,11 @@ package game;
 
 import character.GameCharacter;
 import items.Items;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements GraphicService {
@@ -14,10 +15,10 @@ public class GamePanel extends JPanel implements GraphicService {
 	public final int WIDTH = A_Const.SCREEN_WIDTH;
 	public final int HEIGHT = A_Const.SCREEN_HEIGHT;
 
-	private static final Font  font = new Font("Helvetica",Font.PLAIN,24);
+	private static final Font  font = CustomFont();
 
 	private static final Color UITextColor = new Color(200, 0, 100);
-
+	
 
 	private BufferedImage imageBuffer;
 	private Graphics graphics;
@@ -40,12 +41,7 @@ public class GamePanel extends JPanel implements GraphicService {
 	public void draw(GameCharacter gc) {
 		int x = (int) (gc.getX() - gc.getRadius());
 		int y = (int) (gc.getY() - gc.getRadius());
-		int d = (int) (gc.getRadius() * 2);
-		
-		graphics.setColor(gc.color());
-		graphics.fillOval(x, y, d, d);
-		graphics.setColor(Color.BLACK);
-		graphics.drawOval(x, y, d, d);
+		drawImage(gc.getSprite(),x,y);
 	}
 	
 	public void draw(ArrayList<GameCharacter> List) {
@@ -103,12 +99,13 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
-		drawText(s,  r.x+r.width/30, r.y+4*r.height/6);
+		drawText(s,  r.x+r.width, r.y+4*r.height/6);
 	}
 	
 	public void drawShop(ArrayList<GameButton> rect) {
 		Rectangle shopUI = new Rectangle(150,100,500,400);
 
+		
 		graphics.setColor(Color.gray);
 		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
 		for (int i=0; i<rect.size(); i++) {
@@ -118,15 +115,23 @@ public class GamePanel extends JPanel implements GraphicService {
 		}
 	}
 	
-	public void drawSelectedItem(Items selectedItem, GameButton pb) {
+	public void drawSelectedItem(Items selectedItem, GameButton pb, SpriteHandler sh) {
+
 		graphics.setColor(UITextColor);
 		graphics.drawString(selectedItem.getName(), 220, 240);
 		graphics.drawString("Price: " + selectedItem.getPrice() , 220, 390);
 		graphics.setColor(pb.getColor());
-		graphics.drawImage(selectedItem.getImage(), 220, 260, null);
+		graphics.drawImage(selectedItem.getImage(), 240, 280, null);
+		graphics.drawImage(sh.getSub(selectedItem.getLevel()), 450, 245, null);
+		
+		if(selectedItem.getLevel() < 6) {
 		graphics.fill3DRect(pb.x, pb.y, pb.width + 5, pb.height,true);
 		graphics.setColor(UITextColor);
-		drawText("Purchase", 401, 433);
+		drawText("Purchase", 358, 463);
+		} else {
+			drawText("Stat Maxed Out", 320, 463);
+		}
+		
 	}
 	
 		public void drawImage(Image img, int x, int y) {
@@ -134,6 +139,25 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.drawImage(img, x, y, null);
 		
 	}
+		
+		public static Font CustomFont() {
+			 try {
+				 
+				 Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/jrpg.ttf")).deriveFont(22f);
+				 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+				 ge.registerFont(customFont);
+				 return customFont;
+			 	
+			 	} catch (IOException e) {
+				    e.printStackTrace();
+				
+			 	} catch(FontFormatException e) {
+				    e.printStackTrace();
+				}
+			 
+			 return null;
+		
+		}
 		
 	public void clear() {
 		graphics.setColor(new Color(184, 224, 180));

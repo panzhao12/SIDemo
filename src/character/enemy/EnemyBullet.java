@@ -1,6 +1,9 @@
 package character.enemy;
 
-import java.awt.Color;
+
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import character.bullet.Bullet;
 import game.A_Const;
@@ -8,9 +11,10 @@ import game.A_Const;
 public class EnemyBullet extends Bullet {
 	double angle;
 	int speed;
-	public EnemyBullet(double x, double y, double angle, int speed, int radius, int damage, Color color) {
-		super(x, y, damage);
-		super.color = color;
+	static ImageIcon logo = new ImageIcon("sprites/bull2.png");
+	static Image img = logo.getImage();
+	public EnemyBullet(double x, double y, double angle, int speed, int radius, int damage) {
+		super(x, y, damage,img);
 		this.angle = angle;
 		this.speed = speed;
 		this.radius = radius;

@@ -1,16 +1,24 @@
 package character.enemy;
 
-import java.awt.Color;
+
+
+
+
+
+
 
 import character.GameCharacter;
 import game.A_Const;
 import game.Audio;
+import game.SpriteHandler;
 
 public class Rookie extends GameCharacter {
 
-	
-	public Rookie(double x, double y) {
-		super(x, y, 5, 20, 10, 100, Color.PINK);
+	static SpriteHandler sh = new SpriteHandler(1);
+
+	 
+	public Rookie(double x, double y, int r) {
+		super(x, y, 5, 20, 10, 100,sh.getSub(r));
 	}
 
 	public void move(double diffSeconds) {

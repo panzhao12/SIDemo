@@ -2,6 +2,7 @@ package game;
 
 import java.awt.*;
 
+
 public class GameButton extends Rectangle  {
 
 	private static final long serialVersionUID = 1L;
@@ -40,6 +41,7 @@ public class GameButton extends Rectangle  {
 		} else
 			color = iniColor;
 	}
+	
 
 	public Color getColor() {
 		return color;

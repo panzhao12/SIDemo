@@ -11,7 +11,7 @@ public class Damage extends Items {
 	public Damage(String name, int price) {
 		super(name, price);
 		
-		icon = new ImageIcon("sprites/dup.png");
+		icon = new ImageIcon("sprites/stat1.png");
 		img = icon.getImage();
 		
 	

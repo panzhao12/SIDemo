@@ -22,22 +22,23 @@ public class ShopSystem {
 		//create an item array with items in it
 		
 		itemArray = new ArrayList<Items>();
-		itemArray.add(new Damage("Damage Up", 1000));
-		itemArray.add(new Firerate("Firerate Up", 750));
-		itemArray.add(new Health("Health Up", 750));
+		itemArray.add(new Damage("Damage Up", 10));
+		itemArray.add(new Firerate("Firerate Up", 10));
+		itemArray.add(new Health("Health Up", 10));
 		
 		//shop button that opens and closes the shop
 		shopBtn  = new GameButton(600, 20, 60, 40, new Color(72,68,58), inputSystem);
 		shopBtn.toggleColor = new Color(48,39,34);
 		
 		//The purchase button
-		purchaseBtn = new GameButton(400, 400, 100, 50, Color.yellow, inputSystem);
+		
+		purchaseBtn = new GameButton(350, 430, 100, 50, Color.yellow, inputSystem);
 		
 		//initialize the btnArray
 		btnArray = new ArrayList<GameButton>();
 		
 		//initial coordinates for the buttons to fit into the "shop screen"
-		int x = 170;
+		int x = 300;
 		int y = 120;
 		
 		//create the buttons for items in the shop
@@ -86,8 +87,10 @@ public class ShopSystem {
 					int index = itemArray.indexOf(selectedItem);
 					purchaseBtn.toggle();
 					Audio.playSound("audio/powerup.wav");
+					
 					if(selectedItem instanceof Damage) {
 						handler.setDamage((Damage) selectedItem );
+						((Damage) selectedItem).setLevel();
 						selectedItem = null;
 						btnArray.get(index).toggle();
 						purchaseBtn.toggle();
@@ -95,6 +98,7 @@ public class ShopSystem {
 
 					if(selectedItem instanceof Health) {
 							handler.setHealth((Health) selectedItem );
+							((Health) selectedItem).setLevel();
 							selectedItem = null;
 							btnArray.get(index).toggle();
 							purchaseBtn.toggle();
@@ -102,6 +106,7 @@ public class ShopSystem {
 					
 					if(selectedItem instanceof Firerate) {
 						handler.setFirerate((Firerate) selectedItem );
+						((Firerate) selectedItem).setLevel();
 						selectedItem = null;
 						btnArray.get(index).toggle();
 						purchaseBtn.toggle();

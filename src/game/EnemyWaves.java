@@ -36,9 +36,7 @@ public class EnemyWaves {
 		waves.add(wave4);
 
 		ArrayList<GameCharacter> wave5 = new ArrayList<GameCharacter>();
-		wave5 = EnemyFactory.getEnemy("rookie", A_Const.WAVE5_ROOKIE_NUM, wave5);
-		wave5 = EnemyFactory.getEnemy("sergeant", A_Const.WAVE5_SERGEANT_NUM, wave5);
-		wave5 = EnemyFactory.getEnemy("boss1", A_Const.WAVE5_BOSS1_NUM, wave5);
+		wave5 = EnemyFactory.getEnemy("endboss", A_Const.WAVE5_ENDBOSS_NUM, wave5);
 		waves.add(wave5);
 
 		// counter is equal to the amount of waves

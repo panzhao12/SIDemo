@@ -3,7 +3,9 @@ package character.enemy;
 import character.GameCharacter;
 import game.PhysicsSystem;
 
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EnemyFactory {
     //TODO define the area for enemies, need to be more precise
@@ -20,18 +22,26 @@ public class EnemyFactory {
     private static GameCharacter getCharacter(String enemyType, ArrayList<GameCharacter> enemyList) {
         int x = minX + (int)(Math.random() * (maxX - minX + 1));
         int y = minY + (int)(Math.random() * (maxY - minY + 1));
-
+        
+    	Random random = new Random();
+    	int r = random.nextInt(5);
+    	int s = random.nextInt(3);
+    	int b = random.nextInt(2);
+ 
         GameCharacter character;
 
         switch (enemyType) {
             case "boss1":
-                character = new BOSS_1(x, y);
+                character = new BOSS_1(x, y, b);
                 break;
             case "sergeant":
-                character = new Sergeant(x, y);
+                character = new Sergeant(x, y, s);
                 break;
             case "rookie":
-                character = new Rookie(x, y);
+                character = new Rookie(x, y, r);
+                break;
+            case "endboss":
+            	character = new BOSS_1(x, y);
                 break;
             default:
                 character = null;
