@@ -46,4 +46,8 @@ public class GameButton extends Rectangle  {
 	public Color getColor() {
 		return color;
 	}
+
+	public void setReleased(boolean released) {
+		this.released = released;
+	}
 }

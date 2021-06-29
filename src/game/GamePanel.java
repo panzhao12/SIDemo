@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
-		drawText("Shop",  r.x+r.width/30, r.y+4*r.height/6);
+		drawText("Shop",  r.x+r.width/7+1, r.y+4*r.height/6);
 	}
 	
 	public void drawBtn(GameButton r, String s) {
@@ -129,6 +129,7 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.setColor(UITextColor);
 		drawText("Purchase", 358, 463);
 		} else {
+			pb.setReleased(false);
 			drawText("Stat Maxed Out", 320, 463);
 		}
 		
