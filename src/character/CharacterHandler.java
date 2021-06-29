@@ -13,7 +13,7 @@ import items.*;
 public class CharacterHandler {
 
 	private EnemyWaves waves;
-	private int waveCounter = 0, enemyCounter = 0, score = 1000;
+	private int waveCounter = 0, enemyCounter = 0, score = 1000, points = 0;
 	private PhysicsSystem physics = new PhysicsSystem();
 	private ArrayList<GameCharacter> objectList = new ArrayList<GameCharacter>();
 	private static Avatar avatar;
@@ -39,6 +39,7 @@ public class CharacterHandler {
 			enemyCounter--;
 		}
 		score += gc.getScore();
+		points += gc.getScore();
 		objectList.remove(gc);
 		
 		// if all enemies have died and there is another wave to get, get new wave
@@ -122,6 +123,10 @@ public class CharacterHandler {
 
 	public int getScore() {
 		return score;
+	}
+	
+	public int getPoints() {
+		return points;
 	}
 	
 	public Avatar getAvatar() {
