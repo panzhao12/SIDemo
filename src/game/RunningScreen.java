@@ -43,7 +43,7 @@ public class RunningScreen implements Screen {
 			panel.clear();
 			panel.drawImage(img, 0, 0);
 			// gets the int "score" from CharacterHandler and draws it
-			panel.drawText("Score: " + handler.getScore(), 30, 40);
+			panel.drawText("Credits: " + handler.getScore(), 30, 40);
 			//draws fps on screen
 			panel.drawText("FPS: " + fps, 250, 40);
 			// draws the current health of the player

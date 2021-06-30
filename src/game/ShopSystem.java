@@ -91,24 +91,18 @@ public class ShopSystem {
 					if(selectedItem instanceof Damage) {
 						handler.setDamage((Damage) selectedItem );
 						((Damage) selectedItem).setLevel();
-						selectedItem = null;
-						btnArray.get(index).toggle();
 						purchaseBtn.toggle();
 					}
 
 					if(selectedItem instanceof Health) {
 							handler.setHealth((Health) selectedItem );
 							((Health) selectedItem).setLevel();
-							selectedItem = null;
-							btnArray.get(index).toggle();
 							purchaseBtn.toggle();
 					}
 					
 					if(selectedItem instanceof Firerate) {
 						handler.setFirerate((Firerate) selectedItem );
 						((Firerate) selectedItem).setLevel();
-						selectedItem = null;
-						btnArray.get(index).toggle();
 						purchaseBtn.toggle();
 					}
 
