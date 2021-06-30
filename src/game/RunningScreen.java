@@ -61,7 +61,7 @@ public class RunningScreen implements Screen {
 			panel.redraw();
 			
 			if(handler.getAvatar().getHealth() == 0) {
-				currentScore = handler.getScore();
+				currentScore = handler.getPoints();
 				break;
 			}
 			
