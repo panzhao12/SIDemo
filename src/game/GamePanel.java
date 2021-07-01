@@ -24,6 +24,8 @@ public class GamePanel extends JPanel implements GraphicService {
 	private Graphics graphics;
 	//private KeyInput keyInput = new KeyInput();
 	private InputSystem inputSystem;
+	ImageIcon logo = new ImageIcon("sprites/upgrade.png");
+	Image ui = logo.getImage();
 
 	public GamePanel() {
 		this.setSize(WIDTH, HEIGHT);
@@ -92,7 +94,7 @@ public class GamePanel extends JPanel implements GraphicService {
 		graphics.setColor(r.getColor());
 		graphics.fill3DRect(r.x, r.y, r.width, r.height,true);
 		graphics.setColor(UITextColor);
-		drawText("Shop",  r.x+r.width/7+1, r.y+4*r.height/6);
+		drawText("Upgrades",  r.x+r.width/13, r.y+4*r.height/6);
 	}
 	
 	public void drawBtn(GameButton r, String s) {
@@ -103,11 +105,8 @@ public class GamePanel extends JPanel implements GraphicService {
 	}
 	
 	public void drawShop(ArrayList<GameButton> rect) {
-		Rectangle shopUI = new Rectangle(150,100,500,400);
-
 		
-		graphics.setColor(Color.gray);
-		graphics.fillRect(shopUI.x, shopUI.y, shopUI.width, shopUI.height);
+		drawImage(ui,150,100);
 		for (int i=0; i<rect.size(); i++) {
 			GameButton r = rect.get(i);
 			graphics.setColor(r.getColor());
@@ -118,19 +117,20 @@ public class GamePanel extends JPanel implements GraphicService {
 	public void drawSelectedItem(Items selectedItem, GameButton pb, SpriteHandler sh) {
 
 		graphics.setColor(UITextColor);
-		graphics.drawString(selectedItem.getName(), 220, 240);
-		graphics.drawString("Price: " + selectedItem.getPrice() , 220, 390);
+		graphics.drawString(selectedItem.getName(), 295, 255);
+		graphics.drawString("Price: " + selectedItem.getPrice() , 295, 390);
 		graphics.setColor(pb.getColor());
-		graphics.drawImage(selectedItem.getImage(), 240, 280, null);
-		graphics.drawImage(sh.getSub(selectedItem.getLevel()), 450, 245, null);
+		graphics.drawImage(selectedItem.getImage(), 305, 280, null);
+		graphics.drawImage(sh.getSub(selectedItem.getLevel()), 406, 255, null);
 		
 		if(selectedItem.getLevel() < 6) {
 		graphics.fill3DRect(pb.x, pb.y, pb.width + 5, pb.height,true);
 		graphics.setColor(UITextColor);
-		drawText("Purchase", 358, 463);
+		drawText("Purchase", 367, 522);
 		} else {
 			pb.setReleased(false);
-			drawText("Stat Maxed Out", 320, 463);
+			drawText("MAXED", 385, 522);
+			drawText("OUT", 392, 542);
 		}
 		
 	}

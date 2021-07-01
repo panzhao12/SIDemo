@@ -27,23 +27,23 @@ public class ShopSystem {
 		itemArray.add(new Health("Health Up", 10));
 		
 		//shop button that opens and closes the shop
-		shopBtn  = new GameButton(600, 20, 60, 40, new Color(72,68,58), inputSystem);
+		shopBtn  = new GameButton(600, 20, 100, 40, new Color(72,68,58), inputSystem);
 		shopBtn.toggleColor = new Color(48,39,34);
 		
 		//The purchase button
 		
-		purchaseBtn = new GameButton(350, 430, 100, 50, Color.yellow, inputSystem);
+		purchaseBtn = new GameButton(363, 497, 90, 42, Color.yellow, inputSystem);
 		
 		//initialize the btnArray
 		btnArray = new ArrayList<GameButton>();
 		
 		//initial coordinates for the buttons to fit into the "shop screen"
-		int x = 300;
-		int y = 120;
+		int x = 310;
+		int y = 128;
 		
 		//create the buttons for items in the shop
 		for (int i = 0; i < itemArray.size(); i++) {
-			btnArray.add(new GameButton(x, y, 50, 50, Color.blue, inputSystem));
+			btnArray.add(new GameButton(x, y, 45, 45, Color.blue, inputSystem));
 			x += 80;
 		}
 	}
@@ -120,6 +120,7 @@ public class ShopSystem {
 			Audio.playSound("audio/click.wav");
 			if (shopBtn.color == shopBtn.iniColor) {
 				openShop = false;
+				resetShop();
 			}
 			else if (!openShop){
 				openShop = true;
@@ -127,7 +128,16 @@ public class ShopSystem {
 		}
 	}
 	
-
+	public void resetShop() {
+		selectedItem = null;
+		
+		for (int i = 0; i < itemArray.size(); i++) {
+				if(btnArray.get(i).toggled) 
+					btnArray.get(i).toggle();
+		}
+		
+	}
+	
 	public boolean getOpenShop() {
 		return openShop;
 	}
@@ -135,5 +145,10 @@ public class ShopSystem {
 	public Items getSelected() {
 		return selectedItem;
 	}
-	// Shop weapons and stuff
+		// Shop weapons and stuff
+	
+	
+
+	
+
 }
