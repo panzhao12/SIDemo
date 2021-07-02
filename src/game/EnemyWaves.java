@@ -39,6 +39,10 @@ public class EnemyWaves {
 		wave5 = EnemyFactory.getEnemy("endboss", A_Const.WAVE5_ENDBOSS_NUM, wave5);
 		waves.add(wave5);
 
+		//added an empty wave to check when game should end
+		ArrayList<GameCharacter> wave6 = new ArrayList<GameCharacter>();
+		waves.add(wave6);
+		
 		// counter is equal to the amount of waves
 		counter = waves.size();
 	}
