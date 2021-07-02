@@ -11,7 +11,7 @@ public class RunningScreen implements Screen {
 	
 	private CharacterHandler handler;
 	private double time;
-	private int frames, fps;
+	private int frames, fps, maxWaves;
 	private ShopSystem shop;
 	private InputSystem inputSystem;
 	protected static int currentScore;
@@ -27,7 +27,8 @@ public class RunningScreen implements Screen {
 		shop = new ShopSystem(inputSystem, handler);
 		ImageIcon logo = new ImageIcon("sprites/bckgrd.gif");
 		Image img = logo.getImage();
-
+		maxWaves = handler.maxWaves();
+		
 		long lastTick = System.currentTimeMillis();
 		while (true) {
 			long currentTick = System.currentTimeMillis();
@@ -35,7 +36,11 @@ public class RunningScreen implements Screen {
 			lastTick = currentTick;			
 			// moves all GameCharacters
 			shop.update();
-
+			
+			if (maxWaves == handler.getWaveCounter()) {
+				currentScore = handler.getPoints();
+				break;
+			}
 			if (!shop.getOpenShop()) {
 				handler.move(diffSeconds);
 			}

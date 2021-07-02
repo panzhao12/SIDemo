@@ -13,7 +13,7 @@ import items.*;
 public class CharacterHandler {
 
 	private EnemyWaves waves;
-	private int waveCounter = 0, enemyCounter = 0, score = 1000, points = 0;
+	private int waveCounter = 0, enemyCounter = 0, score = 1000, points = 0, maxWaves = 0;
 	private PhysicsSystem physics = new PhysicsSystem();
 	private ArrayList<GameCharacter> objectList = new ArrayList<GameCharacter>();
 	private static Avatar avatar;
@@ -26,6 +26,7 @@ public class CharacterHandler {
 		// initialize EnemyWaves and get the initial wave
 		EnemyWaves waves = new EnemyWaves();
 		this.waves = waves;
+		maxWaves = waves.getCounter();
 		getNewWave();
 	}
 
@@ -133,6 +134,9 @@ public class CharacterHandler {
 		return avatar;
 	}
 
+	public int maxWaves() {
+		return maxWaves;
+	}
 	public int getWaveCounter() {
 		return waveCounter;
 	}
