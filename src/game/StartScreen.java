@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class StartScreen extends GameLoop implements Screen {
+public class StartScreen implements Screen {
 	
 	private InputSystem inputSystem;
 	GameButton startBtn;
